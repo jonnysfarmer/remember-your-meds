@@ -39,6 +39,12 @@ Don't forget your meds! is an app where you can:
 
 **Additional Libraries**
 
+#### Integrations : 3rd party products and APIs
+
+- NHS API for data
+- Twilio for SMS
+- EmailJS for email
+
 
 #### Management : tools used for planning and delivery management
 
@@ -57,9 +63,7 @@ Don't forget your meds! is an app where you can:
 
 ### Flows
 
-<img src="https://github.com/jennikate/remember-your-meds/blob/development/readme-images/flow-overview.png?raw=true" width="200px">
-<img src="https://github.com/jennikate/remember-your-meds/blob/development/readme-images/flow-create.png?raw=true" width="200px">
-<img src="https://github.com/jennikate/remember-your-meds/blob/development/readme-images/flow-remind.png?raw=true" width="200px">
+<img src="https://github.com/jennikate/remember-your-meds/blob/development/readme-images/flow-overview.png?raw=true" width="200px"><img src="https://github.com/jennikate/remember-your-meds/blob/development/readme-images/flow-create.png?raw=true" width="200px"><img src="https://github.com/jennikate/remember-your-meds/blob/development/readme-images/flow-remind.png?raw=true" width="200px">
 
 
 ### Entity Relationship Diagram

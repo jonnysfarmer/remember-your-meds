@@ -6,20 +6,20 @@ from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 from django.apps import apps
 User = get_user_model()
-Post = apps.get_model('posts', 'Post')
+# Post = apps.get_model('posts', 'Post')
 
-class PostSerializer(serializers.ModelSerializer):
+# class PostSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = Post
-        fields = ('id', 'content', 'image')
+#     class Meta:
+#         model = Post
+#         fields = ('id', 'content', 'image')
 
 
 class UserSerializer(serializers.ModelSerializer):
 
     password = serializers.CharField(write_only=True)
     password_confirmation = serializers.CharField(write_only=True)
-    posts = PostSerializer(many=True, required=False)
+    # posts = PostSerializer(many=True, required=False)
 
     def validate(self, data):
 
@@ -39,4 +39,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password', 'password_confirmation', 'profile_image', 'posts')
+        fields = ('username', 'email', 'password', 'password_confirmation')
