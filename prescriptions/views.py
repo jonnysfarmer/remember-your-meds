@@ -50,4 +50,24 @@ class PrescriptionSpecificView(APIView):
         prescription = Prescription.objects.get(pk=pk)
         if prescription.user.id != request.user.id:
             return Response(status=HTTP_401_UNAUTHORIZED)
-        updated_prescription = 
+        updated_prescription = PrescriptionSerializer(prescription, data=request.data)
+        if updated_prescription.is_valid():
+            updated_prescription.save()
+            return Response(updated_prescription.data)
+        return Response(updated_prescription.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+
+    def delete(self, request, pk):
+        prescription = Prescription.objects.get(pk=pk)
+        if prescription.user.id != request.user.id:
+            return Response(status=HTTP_204_NO_CONTENT)
+        prescription.delete()
+        return Response(status=HTTP_204_NO_CONTENT)
+
+class PrescriptionUserView(APIView):
+
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, _request):
+        prescriptions = Prescription.user.all()
+        serializer = PopulatedPrescriptionSerializer(prescriptions, many=True)
+        return Response(serializer.data)
