@@ -7,7 +7,7 @@ User = get_user_model()
 
 class Medicine(models.Model):
     name = models.CharField(max_length=100)
-    url = models.CharField(max_length=100)
+    url = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return f'{self.name}'

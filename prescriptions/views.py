@@ -12,6 +12,13 @@ class MedicineListView(APIView):
         serialized_posts = MedicineSerializer(medicines, many=True)
         return Response(serialized_posts.data)
 
+    def post(self, request):
+        medicine = MedicineSerializer(data=request.data)
+        if medicine.is_valid():
+            medicine.save()
+            return Response(medicine.data, status=HTTP_201_CREATED)
+        return Response(medicine.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+
 class MedicineSpecificView(APIView):
 
     def get(self, _request, pk):
