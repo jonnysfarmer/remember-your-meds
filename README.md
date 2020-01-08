@@ -1,5 +1,8 @@
 # App Name
 
+using Twilio trial account so have to add number to verified numbers there
+not setting up cron job which would be needed to automatically
+
 _logo goes here_
 
 by [JenniKate Wallace](https://github.com/jennikate), [Jonny Farmer](https://github.com/jonnysfarmer)

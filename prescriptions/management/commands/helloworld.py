@@ -1,3 +1,6 @@
+# In production we would set this up with a queuing system such as RabbitMQ to schedule sms and emails to be sent at the right time
+# As this is complex and outside our abilities for this project, we will just trigger the sends manually
+
 from django.core.management.base import BaseCommand
 from django.utils import timezone
 
