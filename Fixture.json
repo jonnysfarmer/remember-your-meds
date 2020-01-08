@@ -382,6 +382,1008 @@
       "name": "Dihydrocodeine",
       "url": "https://www.nhs.uk/medicines/dihydrocodeine/"
     }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 12340,
+    "fields": {
+      "name": "Diphenhydramine",
+      "url": "https://www.nhs.uk/medicines/diphenhydramine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 12341,
+    "fields": {
+      "name": "Dipyridamole",
+      "url": "https://www.nhs.uk/medicines/dipyridamole/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 12342,
+    "fields": {
+      "name": "Docusate",
+      "url": "https://www.nhs.uk/medicines/docusate/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 12343,
+    "fields": {
+      "name": "Domperidone",
+      "url": "https://www.nhs.uk/medicines/domperidone/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 12344,
+    "fields": {
+      "name": "Dosulepin",
+      "url": "https://www.nhs.uk/medicines/dosulepin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 12345,
+    "fields": {
+      "name": "Doxazosin",
+      "url": "https://www.nhs.uk/medicines/doxazosin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 12346,
+    "fields": {
+      "name": "Doxycycline",
+      "url": "https://www.nhs.uk/medicines/doxycycline/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 12347,
+    "fields": {
+      "name": "Duloxetine",
+      "url": "https://www.nhs.uk/medicines/duloxetine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 12348,
+    "fields": {
+      "name": "Edoxaban",
+      "url": "https://www.nhs.uk/medicines/edoxaban/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 12349,
+    "fields": {
+      "name": "Enalapril",
+      "url": "https://www.nhs.uk/medicines/enalapril/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 123410,
+    "fields": {
+      "name": "Erythromycin",
+      "url": "https://www.nhs.uk/medicines/erythromycin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 123411,
+    "fields": {
+      "name": "Escitalopram",
+      "url": "https://www.nhs.uk/medicines/escitalopram/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 123412,
+    "fields": {
+      "name": "Esomeprazole",
+      "url": "https://www.nhs.uk/medicines/esomeprazole/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 123413,
+    "fields": {
+      "name": "Ezetimibe",
+      "url": "https://www.nhs.uk/medicines/ezetimibe/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 123414,
+    "fields": {
+      "name": "Felodipine",
+      "url": "https://www.nhs.uk/medicines/felodipine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 123415,
+    "fields": {
+      "name": "Ferrous fumarate",
+      "url": "https://www.nhs.uk/medicines/ferrous-fumarate/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 123416,
+    "fields": {
+      "name": "Ferrous sulfate",
+      "url": "https://www.nhs.uk/medicines/ferrous-sulfate/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 123417,
+    "fields": {
+      "name": "Fexofenadine",
+      "url": "https://www.nhs.uk/medicines/fexofenadine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 123418,
+    "fields": {
+      "name": "Flucloxacillin",
+      "url": "https://www.nhs.uk/medicines/flucloxacillin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 123419,
+    "fields": {
+      "name": "Fluoxetine (including Prozac)",
+      "url": "https://www.nhs.uk/medicines/fluoxetine-prozac/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 123420,
+    "fields": {
+      "name": "Folic acid",
+      "url": "https://www.nhs.uk/medicines/folic-acid/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 123421,
+    "fields": {
+      "name": "Furosemide",
+      "url": "https://www.nhs.uk/medicines/furosemide/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 123422,
+    "fields": {
+      "name": "Fusidic acid",
+      "url": "https://www.nhs.uk/medicines/fusidic-acid/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 123423,
+    "fields": {
+      "name": "Fybogel (ispaghula husk)",
+      "url": "https://www.nhs.uk/medicines/fybogel-ispaghula-husk/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 123424,
+    "fields": {
+      "name": "Gabapentin",
+      "url": "https://www.nhs.uk/medicines/gabapentin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 120,
+    "fields": {
+      "name": "Gaviscon (alginic acid)",
+      "url": "https://www.nhs.uk/medicines/gaviscon/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 121,
+    "fields": {
+      "name": "Gliclazide",
+      "url": "https://www.nhs.uk/medicines/gliclazide/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 122,
+    "fields": {
+      "name": "Glimepiride",
+      "url": "https://www.nhs.uk/medicines/glimepiride/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 123,
+    "fields": {
+      "name": "Heparinoid",
+      "url": "https://www.nhs.uk/medicines/heparinoid/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 124,
+    "fields": {
+      "name": "Hydrocortisone",
+      "url": "https://www.nhs.uk/medicines/hydrocortisone/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 125,
+    "fields": {
+      "name": "Hydrocortisone buccal tablets",
+      "url": "https://www.nhs.uk/medicines/hydrocortisone-buccal-tablets/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 126,
+    "fields": {
+      "name": "Hydrocortisone for piles and itchy bottom",
+      "url": "https://www.nhs.uk/medicines/hydrocortisone-for-piles-and-itchy-bottom/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 127,
+    "fields": {
+      "name": "Hydrocortisone injections",
+      "url": "https://www.nhs.uk/medicines/hydrocortisone-injections/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 128,
+    "fields": {
+      "name": "Hydrocortisone rectal foam",
+      "url": "https://www.nhs.uk/medicines/hydrocortisone-rectal-foam/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 129,
+    "fields": {
+      "name": "Hydrocortisone skin creams",
+      "url": "https://www.nhs.uk/medicines/hydrocortisone-skin-cream/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1210,
+    "fields": {
+      "name": "Hydrocortisone tablets",
+      "url": "https://www.nhs.uk/medicines/hydrocortisone-tablets/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1211,
+    "fields": {
+      "name": "Hydroxocobalamin",
+      "url": "https://www.nhs.uk/medicines/hydroxocobalamin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1212,
+    "fields": {
+      "name": "Hyoscine hydrobromide (Kwells and Joy-Rides)",
+      "url": "https://www.nhs.uk/medicines/hyoscine-hydrobromide/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1213,
+    "fields": {
+      "name": "Ibuprofen and codeine (including Nurofen Plus)",
+      "url": "https://www.nhs.uk/medicines/ibuprofen-and-codeine-nurofen-plus/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1214,
+    "fields": {
+      "name": "Ibuprofen for adults (including Nurofen)",
+      "url": "https://www.nhs.uk/medicines/ibuprofen-for-adults/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1215,
+    "fields": {
+      "name": "Ibuprofen for children",
+      "url": "https://www.nhs.uk/medicines/ibuprofen-for-children/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1216,
+    "fields": {
+      "name": "Indapamide",
+      "url": "https://www.nhs.uk/medicines/indapamide/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1217,
+    "fields": {
+      "name": "Irbesartan",
+      "url": "https://www.nhs.uk/medicines/irbesartan/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1218,
+    "fields": {
+      "name": "Isotretinoin capsules (Roaccutane)",
+      "url": "https://www.nhs.uk/medicines/isotretinoin-capsules/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1219,
+    "fields": {
+      "name": "Isotretinoin gel (Isotrex)",
+      "url": "https://www.nhs.uk/medicines/isotretinoin-gel/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1220,
+    "fields": {
+      "name": "Labetalol",
+      "url": "https://www.nhs.uk/medicines/labetalol/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1221,
+    "fields": {
+      "name": "Lactulose",
+      "url": "https://www.nhs.uk/medicines/lactulose/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1222,
+    "fields": {
+      "name": "Lamotrigine",
+      "url": "https://www.nhs.uk/medicines/lamotrigine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1223,
+    "fields": {
+      "name": "Lansoprazole",
+      "url": "https://www.nhs.uk/medicines/lansoprazole/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1224,
+    "fields": {
+      "name": "Lercanidipine",
+      "url": "https://www.nhs.uk/medicines/lercanidipine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 150,
+    "fields": {
+      "name": "Levetiracetam",
+      "url": "https://www.nhs.uk/medicines/levetiracetam/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 151,
+    "fields": {
+      "name": "Levothyroxine",
+      "url": "https://www.nhs.uk/medicines/levothyroxine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 152,
+    "fields": {
+      "name": "Lidocaine for mouth and throat",
+      "url": "https://www.nhs.uk/medicines/lidocaine-for-mouth-and-throat/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 153,
+    "fields": {
+      "name": "Lidocaine for piles and itchy bottom",
+      "url": "https://www.nhs.uk/medicines/lidocaine-for-piles-and-itchy-bottom/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 154,
+    "fields": {
+      "name": "Lidocaine skin cream",
+      "url": "https://www.nhs.uk/medicines/lidocaine-for-skin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 155,
+    "fields": {
+      "name": "Linagliptin",
+      "url": "https://www.nhs.uk/medicines/linagliptin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 156,
+    "fields": {
+      "name": "Lisinopril",
+      "url": "https://www.nhs.uk/medicines/lisinopril/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 157,
+    "fields": {
+      "name": "Loperamide (including Imodium)",
+      "url": "https://www.nhs.uk/medicines/loperamide/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 158,
+    "fields": {
+      "name": "Loratadine (including Clarityn)",
+      "url": "https://www.nhs.uk/medicines/loratadine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 159,
+    "fields": {
+      "name": "Lorazepam",
+      "url": "https://www.nhs.uk/medicines/lorazepam/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1510,
+    "fields": {
+      "name": "Losartan",
+      "url": "https://www.nhs.uk/medicines/losartan/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1511,
+    "fields": {
+      "name": "Low-dose aspirin",
+      "url": "https://www.nhs.uk/medicines/low-dose-aspirin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1512,
+    "fields": {
+      "name": "Lymecycline",
+      "url": "https://www.nhs.uk/medicines/lymecycline/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1513,
+    "fields": {
+      "name": "Macrogol",
+      "url": "https://www.nhs.uk/medicines/macrogol/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1514,
+    "fields": {
+      "name": "Mebendazole",
+      "url": "https://www.nhs.uk/medicines/mebendazole/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1515,
+    "fields": {
+      "name": "Mebeverine",
+      "url": "https://www.nhs.uk/medicines/mebeverine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1516,
+    "fields": {
+      "name": "Melatonin",
+      "url": "https://www.nhs.uk/medicines/melatonin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1517,
+    "fields": {
+      "name": "Metformin",
+      "url": "https://www.nhs.uk/medicines/metformin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1518,
+    "fields": {
+      "name": "Metoprolol",
+      "url": "https://www.nhs.uk/medicines/metoprolol/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1519,
+    "fields": {
+      "name": "Metronidazole",
+      "url": "https://www.nhs.uk/medicines/metronidazole/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1520,
+    "fields": {
+      "name": "Mirtazapine",
+      "url": "https://www.nhs.uk/medicines/mirtazapine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1521,
+    "fields": {
+      "name": "Morphine",
+      "url": "https://www.nhs.uk/medicines/morphine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1522,
+    "fields": {
+      "name": "Naproxen",
+      "url": "https://www.nhs.uk/medicines/naproxen/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1523,
+    "fields": {
+      "name": "Nefopam",
+      "url": "https://www.nhs.uk/medicines/nefopam/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1524,
+    "fields": {
+      "name": "Nicorandil",
+      "url": "https://www.nhs.uk/medicines/nicorandil/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 160,
+    "fields": {
+      "name": "Nifedipine",
+      "url": "https://www.nhs.uk/medicines/nifedipine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 161,
+    "fields": {
+      "name": "Nitrofurantoin",
+      "url": "https://www.nhs.uk/medicines/nitrofurantoin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 162,
+    "fields": {
+      "name": "Olmesartan",
+      "url": "https://www.nhs.uk/medicines/olmesartan/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 163,
+    "fields": {
+      "name": "Omeprazole",
+      "url": "https://www.nhs.uk/medicines/omeprazole/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 164,
+    "fields": {
+      "name": "Oxycodone",
+      "url": "https://www.nhs.uk/medicines/oxycodone/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 165,
+    "fields": {
+      "name": "Pantoprazole",
+      "url": "https://www.nhs.uk/medicines/pantoprazole/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 166,
+    "fields": {
+      "name": "Paracetamol for adults",
+      "url": "https://www.nhs.uk/medicines/paracetamol-for-adults/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 167,
+    "fields": {
+      "name": "Paracetamol for children (including Calpol)",
+      "url": "https://www.nhs.uk/medicines/paracetamol-for-children/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 168,
+    "fields": {
+      "name": "Paroxetine",
+      "url": "https://www.nhs.uk/medicines/paroxetine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 169,
+    "fields": {
+      "name": "Pepto-Bismol",
+      "url": "https://www.nhs.uk/medicines/pepto-bismol/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1610,
+    "fields": {
+      "name": "Perindopril",
+      "url": "https://www.nhs.uk/medicines/perindopril/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1611,
+    "fields": {
+      "name": "Phenoxymethylpenicillin",
+      "url": "https://www.nhs.uk/medicines/phenoxymethylpenicillin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1612,
+    "fields": {
+      "name": "Phenytoin",
+      "url": "https://www.nhs.uk/medicines/phenytoin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1613,
+    "fields": {
+      "name": "Pioglitazone",
+      "url": "https://www.nhs.uk/medicines/pioglitazone/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1614,
+    "fields": {
+      "name": "Pravastatin",
+      "url": "https://www.nhs.uk/medicines/pravastatin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1615,
+    "fields": {
+      "name": "Prednisolone",
+      "url": "https://www.nhs.uk/medicines/prednisolone/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1616,
+    "fields": {
+      "name": "Pregabalin",
+      "url": "https://www.nhs.uk/medicines/pregabalin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1617,
+    "fields": {
+      "name": "Promethazine (including Phenergan)",
+      "url": "https://www.nhs.uk/medicines/promethazine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1618,
+    "fields": {
+      "name": "Propranolol",
+      "url": "https://www.nhs.uk/medicines/propranolol/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1619,
+    "fields": {
+      "name": "Pseudoephedrine (including Sudafed)",
+      "url": "https://www.nhs.uk/medicines/pseudoephedrine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1620,
+    "fields": {
+      "name": "Rabeprazole",
+      "url": "https://www.nhs.uk/medicines/rabeprazole/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1621,
+    "fields": {
+      "name": "Ramipril",
+      "url": "https://www.nhs.uk/medicines/ramipril/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1622,
+    "fields": {
+      "name": "Ranitidine",
+      "url": "https://www.nhs.uk/medicines/ranitidine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1623,
+    "fields": {
+      "name": "Risedronate",
+      "url": "https://www.nhs.uk/medicines/risedronate/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1624,
+    "fields": {
+      "name": "Rivaroxaban",
+      "url": "https://www.nhs.uk/medicines/rivaroxaban/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 170,
+    "fields": {
+      "name": "Rosuvastatin",
+      "url": "https://www.nhs.uk/medicines/rosuvastatin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 171,
+    "fields": {
+      "name": "Salbutamol inhaler",
+      "url": "https://www.nhs.uk/medicines/salbutamol-inhaler/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 172,
+    "fields": {
+      "name": "Saxagliptin",
+      "url": "https://www.nhs.uk/medicines/saxagliptin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 173,
+    "fields": {
+      "name": "Senna (including Senokot)",
+      "url": "https://www.nhs.uk/medicines/senna/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 174,
+    "fields": {
+      "name": "Sertraline",
+      "url": "https://www.nhs.uk/medicines/sertraline/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 175,
+    "fields": {
+      "name": "Sildenafil (including Viagra)",
+      "url": "https://www.nhs.uk/medicines/sildenafil-viagra/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 176,
+    "fields": {
+      "name": "Simeticone",
+      "url": "https://www.nhs.uk/medicines/simeticone/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 177,
+    "fields": {
+      "name": "Simvastatin",
+      "url": "https://www.nhs.uk/medicines/simvastatin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 178,
+    "fields": {
+      "name": "Sitagliptin",
+      "url": "https://www.nhs.uk/medicines/sitagliptin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 179,
+    "fields": {
+      "name": "Sodium valproate",
+      "url": "https://www.nhs.uk/medicines/sodium-valproate/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1710,
+    "fields": {
+      "name": "Sotalol",
+      "url": "https://www.nhs.uk/medicines/sotalol/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1711,
+    "fields": {
+      "name": "Sumatriptan",
+      "url": "https://www.nhs.uk/medicines/sumatriptan/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1712,
+    "fields": {
+      "name": "Tadalafil",
+      "url": "https://www.nhs.uk/medicines/tadalafil/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1713,
+    "fields": {
+      "name": "Tamsulosin",
+      "url": "https://www.nhs.uk/medicines/tamsulosin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1714,
+    "fields": {
+      "name": "Temazepam",
+      "url": "https://www.nhs.uk/medicines/temazepam/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1715,
+    "fields": {
+      "name": "Thiamine (vitamin B1)",
+      "url": "https://www.nhs.uk/medicines/thiamine-vitamin-b1/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1716,
+    "fields": {
+      "name": "Ticagrelor",
+      "url": "https://www.nhs.uk/medicines/ticagrelor/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1717,
+    "fields": {
+      "name": "Topiramate",
+      "url": "https://www.nhs.uk/medicines/topiramate/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1718,
+    "fields": {
+      "name": "Tramadol",
+      "url": "https://www.nhs.uk/medicines/tramadol/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1719,
+    "fields": {
+      "name": "Trazodone",
+      "url": "https://www.nhs.uk/medicines/trazodone/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1720,
+    "fields": {
+      "name": "Trimethoprim",
+      "url": "https://www.nhs.uk/medicines/trimethoprim/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1721,
+    "fields": {
+      "name": "Valproic acid",
+      "url": "https://www.nhs.uk/medicines/valproic-acid/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1722,
+    "fields": {
+      "name": "Valsartan",
+      "url": "https://www.nhs.uk/medicines/valsartan/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1723,
+    "fields": {
+      "name": "Venlafaxine",
+      "url": "https://www.nhs.uk/medicines/venlafaxine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1724,
+    "fields": {
+      "name": "Warfarin",
+      "url": "https://www.nhs.uk/medicines/warfarin/"
+    }
   }
+  
+
   ]
   
