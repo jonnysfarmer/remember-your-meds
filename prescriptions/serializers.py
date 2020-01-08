@@ -8,7 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'email')
+        fields = ('id', 'username', 'email', 'mobile')
 
 class MedicineSerializer(serializers.ModelSerializer):
 
@@ -16,13 +16,47 @@ class MedicineSerializer(serializers.ModelSerializer):
         model = Medicine
         fields = ('id', 'name', 'url')
 
+
+class DoctorSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Doctor
+        fields = ('id', 'name', 'url_fragment')
+
+
+
 class PrescriptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Prescription
         fields = ('id', 'user', 'medicine', 'number_doses', 'doses_per_day', 'number_repeats', 'doctor')
 
+class PrescriptionPutSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Prescription
+        fields = '__all__'
+        extra_kwargs = {'id' : {'required': False}, 'user' : {'required': False}, 'medicine' : {'required': False}, 'number_doses' : {'required': False}, 'doses_per_day' : {'required': False}, 'number_repeats' : {'required': False}, 'doctor' : {'required': False}}
+
 class PopulatedPrescriptionSerializer(PrescriptionSerializer):
 
     user = UserSerializer()
     medicine = MedicineSerializer()
+
+class ReminderSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer()
+    prescription = PopulatedPrescriptionSerializer()
+    doctor = DoctorSerializer()
+
+    class Meta:
+        model = Reminder
+        fields = ('id', 'user', 'prescription', 'doctor', 'due_time', 'reminder_time', 'reminder_type', 'active')
+
+class ReminderPutSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Reminder
+        fields = ('id', 'due_time', 'reminder_time', 'reminder_type', 'active')
+        extra_kwargs = {'id' : {'required': False}, 'due_time' : {'required': False}, 'reminder_time' : {'required': False}, 'reminder_type' : {'required': False}, 'active' : {'required': False}}
+
