@@ -2,9 +2,6 @@ from django.core.management.base import BaseCommand
 import yagmail
 import requests
 
-
-
-
 class Command(BaseCommand):
     help = 'Sends user a reminder email'
 
