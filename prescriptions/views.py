@@ -5,6 +5,9 @@ from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTIT
 from .models import Medicine, Doctor, Prescription, Reminder
 from .serializers import MedicineSerializer, ReminderSerializer, PrescriptionSerializer, PopulatedPrescriptionSerializer, ReminderPutSerializer, PrescriptionPutSerializer
 
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+
 class MedicineListView(APIView):
 
     def get(self, _request):
@@ -125,3 +128,10 @@ class PrescriptionUserView(APIView):
         prescriptions = Prescription.objects.filter(user=request.user.id)
         serializer = PopulatedPrescriptionSerializer(prescriptions, many=True)
         return Response(serializer.data)
+
+class SMSView(APIView):
+
+    def sms(self, request):
+        twiml = '<Response><Message>Hello from your Django app!</Message></Response>'
+        return HttpResponse(twiml, content_type='text/xml')
+
