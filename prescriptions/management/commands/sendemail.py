@@ -28,7 +28,7 @@ class Command(BaseCommand):
             receiver_email = email
             subject = (f'REMINDER! {reminder_type} {medicine}')
 
-            try: 
+            try:
                 yag = yagmail.SMTP(user=sender_email)
 
                 contents = [
