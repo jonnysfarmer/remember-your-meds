@@ -5,6 +5,11 @@ from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTIT
 from .models import Medicine, Doctor, Prescription, Reminder
 from .serializers import MedicineSerializer, ReminderSerializer, PrescriptionSerializer, PopulatedPrescriptionSerializer, ReminderPutSerializer, PrescriptionPutSerializer
 
+
+from django.conf import settings                                                                                                                                                       
+from django.http import HttpResponse
+from twilio.rest import Client
+
 class MedicineListView(APIView):
 
     def get(self, _request):
@@ -124,3 +129,15 @@ class PrescriptionUserView(APIView):
         prescriptions = Prescription.objects.filter(user=request.user.id)
         serializer = PopulatedPrescriptionSerializer(prescriptions, many=True)
         return Response(serializer.data)
+
+
+def broadcast_sms(request):
+    message_to_broadcast = ("Have you played the incredible TwilioQuest ")
+    client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+    for recipient in settings.SMS_BROADCAST_TO_NUMBERS:
+        if recipient:
+            client.messages.create(to=recipient,
+                                   from_=settings.TWILIO_NUMBER,
+                                   body=message_to_broadcast)
+    return HttpResponse("messages sent!", 200)
+
