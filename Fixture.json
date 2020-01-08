@@ -1,6 +1,6 @@
 [
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 1,
     "fields": {
       "name": "Aciclovir (including Zovirax)",
@@ -8,7 +8,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 2,
     "fields": {
       "name": "Acrivastine",
@@ -16,7 +16,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 3,
     "fields": {
       "name": "Adalimumab",
@@ -24,7 +24,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 4,
     "fields": {
       "name": "Alendronic acid",
@@ -32,7 +32,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 5,
     "fields": {
       "name": "Allopurinol",
@@ -40,7 +40,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 6,
     "fields": {
       "name": "Alogliptin",
@@ -48,7 +48,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 7,
     "fields": {
       "name": "Amitriptyline",
@@ -56,7 +56,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 8,
     "fields": {
       "name": "Amlodipine",
@@ -64,7 +64,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 9,
     "fields": {
       "name": "Amoxicillin",
@@ -72,7 +72,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 10,
     "fields": {
       "name": "Apixaban",
@@ -80,7 +80,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 11,
     "fields": {
       "name": "Aspirin for pain relief",
@@ -88,7 +88,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 12,
     "fields": {
       "name": "Atenolol",
@@ -96,7 +96,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 13,
     "fields": {
       "name": "Atorvastatin",
@@ -104,7 +104,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 14,
     "fields": {
       "name": "Azithromycin",
@@ -112,7 +112,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 15,
     "fields": {
       "name": "Bendroflumethiazide",
@@ -120,7 +120,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 16,
     "fields": {
       "name": "Benzoyl peroxide",
@@ -128,7 +128,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 17,
     "fields": {
       "name": "Betahistine",
@@ -136,7 +136,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 18,
     "fields": {
       "name": "Bisacodyl",
@@ -144,7 +144,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 19,
     "fields": {
       "name": "Bisoprolol",
@@ -152,7 +152,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 20,
     "fields": {
       "name": "Bumetanide",
@@ -160,7 +160,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 21,
     "fields": {
       "name": "Buscopan (hyoscine butylbromide)",
@@ -168,7 +168,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 22,
     "fields": {
       "name": "Candesartan",
@@ -176,7 +176,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 23,
     "fields": {
       "name": "Carbamazepine",
@@ -184,7 +184,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 24,
     "fields": {
       "name": "Cetirizine",
@@ -192,7 +192,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 25,
     "fields": {
       "name": "Chloramphenicol",
@@ -200,7 +200,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 26,
     "fields": {
       "name": "Chlorphenamine (including Piriton)",
@@ -208,7 +208,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 27,
     "fields": {
       "name": "Cinnarizine",
@@ -216,7 +216,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 28,
     "fields": {
       "name": "Ciprofloxacin",
@@ -224,7 +224,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 29,
     "fields": {
       "name": "Citalopram",
@@ -232,7 +232,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 30,
     "fields": {
       "name": "Clarithromycin",
@@ -240,7 +240,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 31,
     "fields": {
       "name": "Clobetasol",
@@ -248,7 +248,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 32,
     "fields": {
       "name": "Clobetasone",
@@ -256,7 +256,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 33,
     "fields": {
       "name": "Clonazepam",
@@ -264,7 +264,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 34,
     "fields": {
       "name": "Clopidogrel",
@@ -272,7 +272,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 35,
     "fields": {
       "name": "Clotrimazole",
@@ -280,7 +280,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 36,
     "fields": {
       "name": "Co-amoxiclav",
@@ -288,7 +288,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 37,
     "fields": {
       "name": "Co-codamol for adults",
@@ -296,7 +296,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 38,
     "fields": {
       "name": "Co-codamol for children",
@@ -304,7 +304,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 39,
     "fields": {
       "name": "Co-codaprin (aspirin and codeine)",
@@ -312,7 +312,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 40,
     "fields": {
       "name": "Co-dydramol",
@@ -320,7 +320,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 41,
     "fields": {
       "name": "Codeine",
@@ -328,7 +328,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 42,
     "fields": {
       "name": "Colchicine",
@@ -336,7 +336,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 43,
     "fields": {
       "name": "Cyclizine",
@@ -344,7 +344,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 44,
     "fields": {
       "name": "Dabigatran",
@@ -352,7 +352,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 45,
     "fields": {
       "name": "Dapagliflozin",
@@ -360,7 +360,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 46,
     "fields": {
       "name": "Diazepam",
@@ -368,7 +368,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 47,
     "fields": {
       "name": "Diclofenac",
@@ -376,7 +376,7 @@
     }
   },
   {
-    "model": "cats.cat",
+    "model": "prescriptions.medicine",
     "pk": 48,
     "fields": {
       "name": "Dihydrocodeine",
