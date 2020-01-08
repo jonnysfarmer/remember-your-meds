@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_204_NO_CONTENT, HTTP_401_UNAUTHORIZED
 from .models import Medicine, Doctor, Prescription, Reminder
-from .serializers import MedicineSerializer, ReminderSerializer, PrescriptionSerializer, PopulatedPrescriptionSerializer
+from .serializers import MedicineSerializer, ReminderSerializer, PrescriptionSerializer, PopulatedPrescriptionSerializer, ReminderPutSerializer, PrescriptionPutSerializer
 
 class MedicineListView(APIView):
 
@@ -29,7 +29,7 @@ class MedicineSpecificView(APIView):
 class ReminderListView(APIView):
 
     def get(self, _request):
-        reminders = Reminder.object.all()
+        reminders = Reminder.objects.all()
         serialized = ReminderSerializer(reminders, many=True)
         return Response(serialized.data)
 
@@ -55,9 +55,9 @@ class ReminderSpecificView(APIView):
         request.data['user'] = request.user.id
 
         reminder = Reminder.objects.get(pk=pk)
-        if reminder.owner.id != request.user.id:
+        if reminder.user.id != request.user.id:
             return Response(status=HTTP_401_UNAUTHORIZED)
-        updated_reminder = ReminderSerializer(reminder, data=request.data)
+        updated_reminder = ReminderPutSerializer(reminder, data=request.data)
         if updated_reminder.is_valid():
             updated_reminder.save()
             return Response(updated_reminder.data)
@@ -67,7 +67,7 @@ class ReminderUserView(APIView):
 
     permission_classes = (IsAuthenticated, )
 
-    def get(self, _request):
+    def get(self, request):
         request.data['user'] = request.user.id
         reminders = Reminder.objects.filter(user=request.user.id)
         serializer = ReminderSerializer(reminders, many=True)
@@ -104,7 +104,7 @@ class PrescriptionSpecificView(APIView):
         prescription = Prescription.objects.get(pk=pk)
         if prescription.user.id != request.user.id:
             return Response(status=HTTP_401_UNAUTHORIZED)
-        updated_prescription = PrescriptionSerializer(prescription, data=request.data)
+        updated_prescription = PrescriptionPutSerializer(prescription, data=request.data)
         if updated_prescription.is_valid():
             updated_prescription.save()
             return Response(updated_prescription.data)
