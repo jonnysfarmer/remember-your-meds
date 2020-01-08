@@ -8,10 +8,36 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'email')
+        fields = ('id', 'username', 'email', 'mobile')
 
 class MedicineSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Medicine
         fields = ('id', 'name', 'url')
+
+
+
+
+
+
+
+
+
+
+class DoctorSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Doctor
+        fields = ('id', 'name', 'url_fragment')
+
+class ReminderSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer()
+    perscription = PerscriptionSerializer()
+    doctor = DoctorSerializer()
+
+    class Meta:
+        model = Reminder
+        fields = ('id', 'user', 'prescription', 'doctor', 'due_time', 'reminder_time', 'reminder_type', 'active')
+
