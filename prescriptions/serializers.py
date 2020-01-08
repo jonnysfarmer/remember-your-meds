@@ -17,14 +17,6 @@ class MedicineSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'url')
 
 
-
-
-
-
-
-
-
-
 class DoctorSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -41,3 +33,13 @@ class ReminderSerializer(serializers.ModelSerializer):
         model = Reminder
         fields = ('id', 'user', 'prescription', 'doctor', 'due_time', 'reminder_time', 'reminder_type', 'active')
 
+class PrescriptionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Prescription
+        fields = ('id', 'user', 'medicine', 'number_doses', 'doses_per_day', 'number_repeats', 'doctor')
+
+class PopulatedPrescriptionSerializer(PrescriptionSerializer):
+
+    user = UserSerializer()
+    medicine = MedicineSerializer()

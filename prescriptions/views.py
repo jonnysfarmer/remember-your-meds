@@ -3,14 +3,14 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_204_NO_CONTENT, HTTP_401_UNAUTHORIZED
 from .models import Medicine, Doctor, Prescription, Reminder
-from .serializers import MedicineSerializer, ReminderSerializer
+from .serializers import MedicineSerializer, ReminderSerializer, PrescriptionSerializer, PopulatedPrescriptionSerializer
 
 class MedicineListView(APIView):
 
     def get(self, _request):
         medicines = Medicine.objects.all()
-        serialized_posts = MedicineSerializer(medicines, many=True)
-        return Response(serialized_posts.data)
+        serializer = MedicineSerializer(medicines, many=True)
+        return Response(serializer.data)
 
     def post(self, request):
         medicine = MedicineSerializer(data=request.data)
@@ -67,7 +67,61 @@ class ReminderUserView(APIView):
 
     permission_classes = (IsAuthenticated, )
 
-    def get(self, _request, user):
-        reminders = Reminder.objects.get(user=user)
-        serialized = ReminderSerializer(reminders)
-        return Response(serialized.data)
+    def get(self, _request):
+        request.data['user'] = request.user.id
+        reminders = Reminder.objects.filter(user=request.user.id)
+        serializer = ReminderSerializer(reminders, many=True)
+        return Response(serializer.data)
+
+class PrescriptionListView(APIView):
+
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, _request):
+        prescriptions = Prescription.objects.all()
+        serializer = PopulatedPrescriptionSerializer(prescriptions, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        request.data['user'] = request.user.id
+        prescription = PrescriptionSerializer(data=request.data)
+        if prescription.is_valid():
+            prescription.save()
+            return Response(prescription.data, status=HTTP_201_CREATED)
+        return Response(prescription.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+
+class PrescriptionSpecificView(APIView):
+
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, _request, pk):
+        prescription = Prescription.objects.get(pk=pk)
+        serializer = PopulatedPrescriptionSerializer(prescription)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        request.data['user'] = request.user.id
+        prescription = Prescription.objects.get(pk=pk)
+        if prescription.user.id != request.user.id:
+            return Response(status=HTTP_401_UNAUTHORIZED)
+        updated_prescription = PrescriptionSerializer(prescription, data=request.data)
+        if updated_prescription.is_valid():
+            updated_prescription.save()
+            return Response(updated_prescription.data)
+        return Response(updated_prescription.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+
+    def delete(self, request, pk):
+        prescription = Prescription.objects.get(pk=pk)
+        if prescription.user.id != request.user.id:
+            return Response(status=HTTP_204_NO_CONTENT)
+        prescription.delete()
+        return Response(status=HTTP_204_NO_CONTENT)
+
+class PrescriptionUserView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        request.data['user'] = request.user.id
+        prescriptions = Prescription.objects.filter(user=request.user.id)
+        serializer = PopulatedPrescriptionSerializer(prescriptions, many=True)
+        return Response(serializer.data)
