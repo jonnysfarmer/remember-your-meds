@@ -43,7 +43,6 @@ class ReminderListView(APIView):
 
 class ReminderSpecificView(APIView):
 
-
     def get(self, _request, pk):
         reminders = Reminder.objects.get(pk=pk)
         serialized = ReminderSerializer(reminders)
