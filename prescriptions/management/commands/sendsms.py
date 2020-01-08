@@ -3,8 +3,6 @@ import requests
 from twilio.rest import Client
 from django.conf import settings
 
-
-
 class Command(BaseCommand):
     help = 'Sends user a reminder sms'
 

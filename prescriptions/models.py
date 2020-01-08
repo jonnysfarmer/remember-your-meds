@@ -40,8 +40,8 @@ class Reminder(models.Model):
     # setup the reminder types
     REMINDER_TYPE_CHOICES = [
         ('take', 'Take medicine'),
-        ('prescription', 'Order prescription'),
-        ('appointment', 'Make doctors appointment')
+        ('order a prescription for', 'Order prescription'),
+        ('make an appointment for', 'Make doctors appointment')
     ]
     # one user can have many reminders, but one reminder can only have one user
     user = models.ForeignKey(User, related_name='reminder', on_delete=models.CASCADE)
@@ -51,7 +51,7 @@ class Reminder(models.Model):
     doctor = models.ForeignKey(Doctor, related_name='reminder', on_delete=models.CASCADE, blank=True, null=True)
     due_time = models.DateTimeField()
     reminder_time = models.DateTimeField()
-    reminder_type = models.CharField(max_length=15, choices=REMINDER_TYPE_CHOICES)
+    reminder_type = models.CharField(max_length=30, choices=REMINDER_TYPE_CHOICES)
     active = models.BooleanField(default=False)
 
     def __str__(self):

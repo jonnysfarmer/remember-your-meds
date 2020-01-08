@@ -1,7 +1,9 @@
 # App Name
 
 using Twilio trial account so have to add number to verified numbers there
-not setting up cron job which would be needed to automatically
+not setting up cron job/tasking system like RabbitMQ which would be needed to schedule the reminders
+so have them set as management commands so we can run them on command
+can we setup that to trigger on a button click :think:
 
 _logo goes here_
 
