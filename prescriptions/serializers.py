@@ -15,3 +15,14 @@ class MedicineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Medicine
         fields = ('id', 'name', 'url')
+
+class PrescriptionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Prescription
+        fields = ('id', 'user', 'medicine', 'number_doses', 'doses_per_day', 'number_repeats', 'doctor')
+
+class PopulatedPrescriptionSerializer(PrescriptionSerializer):
+
+    user = UserSerializer()
+    medicine = MedicineSerializer()
