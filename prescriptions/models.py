@@ -44,11 +44,11 @@ class Reminder(models.Model):
         ('appointment', 'Make doctors appointment')
     ]
     # one user can have many reminders, but one reminder can only have one user
-    user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='reminder', on_delete=models.CASCADE)
     # one prescription can have many reminders, but one reminder can only have one prescription
-    prescription = models.ForeignKey(Prescription, related_name='prescription', on_delete=models.CASCADE)
+    prescription = models.ForeignKey(Prescription, related_name='reminder', on_delete=models.CASCADE)
     # including optional doctor id in case we get to stretch goals
-    doctor = models.ForeignKey(Doctor, related_name='doctor', on_delete=models.CASCADE, blank=True, null=True)
+    doctor = models.ForeignKey(Doctor, related_name='reminder', on_delete=models.CASCADE, blank=True, null=True)
     due_time = models.DateTimeField()
     reminder_time = models.DateTimeField()
     reminder_type = models.CharField(max_length=15, choices=REMINDER_TYPE_CHOICES)

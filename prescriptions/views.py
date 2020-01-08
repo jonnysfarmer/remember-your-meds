@@ -63,11 +63,12 @@ class PrescriptionSpecificView(APIView):
         prescription.delete()
         return Response(status=HTTP_204_NO_CONTENT)
 
-class PrescriptionUserView(APIView):
+# class PrescriptionUserView(APIView):
 
-    permission_classes = (IsAuthenticated,)
+#     permission_classes = (IsAuthenticated,)
 
-    def get(self, _request):
-        prescriptions = Prescription.user.all()
-        serializer = PopulatedPrescriptionSerializer(prescriptions, many=True)
-        return Response(serializer.data)
+#     def get(self, request, user):
+#         request.data['user'] = request.user.id
+#         prescriptions = Prescription.user(user=request.user.id)
+#         serializer = PopulatedPrescriptionSerializer(prescriptions, many=True)
+#         return Response(serializer.data)
