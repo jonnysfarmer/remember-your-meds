@@ -10,6 +10,8 @@ django = "*"
 djangorestframework = "*"
 pyjwt = "*"
 psycopg2-binary = "*"
+yagmail = "*"
+keyring = "*"
 
 [requires]
 python_version = "3.7"
