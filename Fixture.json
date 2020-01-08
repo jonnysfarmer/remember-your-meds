@@ -1,0 +1,387 @@
+[
+  {
+    "model": "prescriptions.medicine",
+    "pk": 1,
+    "fields": {
+      "name": "Aciclovir (including Zovirax)",
+      "url": "https://www.nhs.uk/medicines/aciclovir/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 2,
+    "fields": {
+      "name": "Acrivastine",
+      "url": "https://www.nhs.uk/medicines/acrivastine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 3,
+    "fields": {
+      "name": "Adalimumab",
+      "url": "https://www.nhs.uk/medicines/adalimumab/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 4,
+    "fields": {
+      "name": "Alendronic acid",
+      "url": "https://www.nhs.uk/medicines/alendronic-acid/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 5,
+    "fields": {
+      "name": "Allopurinol",
+      "url": "https://www.nhs.uk/medicines/allopurinol/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 6,
+    "fields": {
+      "name": "Alogliptin",
+      "url": "https://www.nhs.uk/medicines/alogliptin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 7,
+    "fields": {
+      "name": "Amitriptyline",
+      "url": "https://www.nhs.uk/medicines/amitriptyline-for-pain/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 8,
+    "fields": {
+      "name": "Amlodipine",
+      "url": "https://www.nhs.uk/medicines/amlodipine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 9,
+    "fields": {
+      "name": "Amoxicillin",
+      "url": "https://www.nhs.uk/medicines/amoxicillin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 10,
+    "fields": {
+      "name": "Apixaban",
+      "url": "https://www.nhs.uk/medicines/apixaban/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 11,
+    "fields": {
+      "name": "Aspirin for pain relief",
+      "url": "https://www.nhs.uk/medicines/aspirin-for-pain-relief/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 12,
+    "fields": {
+      "name": "Atenolol",
+      "url": "https://www.nhs.uk/medicines/atenolol/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 13,
+    "fields": {
+      "name": "Atorvastatin",
+      "url": "https://www.nhs.uk/medicines/atorvastatin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 14,
+    "fields": {
+      "name": "Azithromycin",
+      "url": "https://www.nhs.uk/medicines/azithromycin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 15,
+    "fields": {
+      "name": "Bendroflumethiazide",
+      "url": "https://www.nhs.uk/medicines/bendroflumethiazide/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 16,
+    "fields": {
+      "name": "Benzoyl peroxide",
+      "url": "https://www.nhs.uk/medicines/benzoyl-peroxide/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 17,
+    "fields": {
+      "name": "Betahistine",
+      "url": "https://www.nhs.uk/medicines/betahistine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 18,
+    "fields": {
+      "name": "Bisacodyl",
+      "url": "https://www.nhs.uk/medicines/bisacodyl/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 19,
+    "fields": {
+      "name": "Bisoprolol",
+      "url": "https://www.nhs.uk/medicines/bisoprolol/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 20,
+    "fields": {
+      "name": "Bumetanide",
+      "url": "https://www.nhs.uk/medicines/bumetanide/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 21,
+    "fields": {
+      "name": "Buscopan (hyoscine butylbromide)",
+      "url": "https://www.nhs.uk/medicines/buscopan-hyoscine-butylbromide/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 22,
+    "fields": {
+      "name": "Candesartan",
+      "url": "https://www.nhs.uk/medicines/candesartan/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 23,
+    "fields": {
+      "name": "Carbamazepine",
+      "url": "https://www.nhs.uk/medicines/carbamazepine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 24,
+    "fields": {
+      "name": "Cetirizine",
+      "url": "https://www.nhs.uk/medicines/cetirizine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 25,
+    "fields": {
+      "name": "Chloramphenicol",
+      "url": "https://www.nhs.uk/medicines/chloramphenicol/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 26,
+    "fields": {
+      "name": "Chlorphenamine (including Piriton)",
+      "url": "https://www.nhs.uk/medicines/chlorphenamine-including-piriton/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 27,
+    "fields": {
+      "name": "Cinnarizine",
+      "url": "https://www.nhs.uk/medicines/cinnarizine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 28,
+    "fields": {
+      "name": "Ciprofloxacin",
+      "url": "https://www.nhs.uk/medicines/ciprofloxacin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 29,
+    "fields": {
+      "name": "Citalopram",
+      "url": "https://www.nhs.uk/medicines/citalopram/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 30,
+    "fields": {
+      "name": "Clarithromycin",
+      "url": "https://www.nhs.uk/medicines/clarithromycin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 31,
+    "fields": {
+      "name": "Clobetasol",
+      "url": "https://www.nhs.uk/medicines/clobetasol/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 32,
+    "fields": {
+      "name": "Clobetasone",
+      "url": "https://www.nhs.uk/medicines/clobetasone/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 33,
+    "fields": {
+      "name": "Clonazepam",
+      "url": "https://www.nhs.uk/medicines/clonazepam/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 34,
+    "fields": {
+      "name": "Clopidogrel",
+      "url": "https://www.nhs.uk/medicines/clopidogrel/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 35,
+    "fields": {
+      "name": "Clotrimazole",
+      "url": "https://www.nhs.uk/medicines/clotrimazole/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 36,
+    "fields": {
+      "name": "Co-amoxiclav",
+      "url": "https://www.nhs.uk/medicines/co-amoxiclav/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 37,
+    "fields": {
+      "name": "Co-codamol for adults",
+      "url": "https://www.nhs.uk/medicines/co-codamol-adults/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 38,
+    "fields": {
+      "name": "Co-codamol for children",
+      "url": "https://www.nhs.uk/medicines/co-codamol-for-children/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 39,
+    "fields": {
+      "name": "Co-codaprin (aspirin and codeine)",
+      "url": "https://www.nhs.uk/medicines/co-codaprin-aspirin-and-codeine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 40,
+    "fields": {
+      "name": "Co-dydramol",
+      "url": "https://www.nhs.uk/medicines/co-dydramol/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 41,
+    "fields": {
+      "name": "Codeine",
+      "url": "https://www.nhs.uk/medicines/codeine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 42,
+    "fields": {
+      "name": "Colchicine",
+      "url": "https://www.nhs.uk/medicines/colchicine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 43,
+    "fields": {
+      "name": "Cyclizine",
+      "url": "https://www.nhs.uk/medicines/cyclizine/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 44,
+    "fields": {
+      "name": "Dabigatran",
+      "url": "https://www.nhs.uk/medicines/dabigatran/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 45,
+    "fields": {
+      "name": "Dapagliflozin",
+      "url": "https://www.nhs.uk/medicines/dapagliflozin/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 46,
+    "fields": {
+      "name": "Diazepam",
+      "url": "https://www.nhs.uk/medicines/diazepam/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 47,
+    "fields": {
+      "name": "Diclofenac",
+      "url": "https://www.nhs.uk/medicines/diclofenac/"
+    }
+  },
+  {
+    "model": "prescriptions.medicine",
+    "pk": 48,
+    "fields": {
+      "name": "Dihydrocodeine",
+      "url": "https://www.nhs.uk/medicines/dihydrocodeine/"
+    }
+  }
+  ]
+  
