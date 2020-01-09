@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -9,19 +9,24 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import { green } from '@material-ui/core/colors'
-import {
-  ThemeProvider,
-  makeStyles,
-  createMuiTheme
-} from '@material-ui/core/styles'
+import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import Visibility from '@material-ui/icons/Visibility'
+import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import IconButton from '@material-ui/core/IconButton'
 
-// This basically Creates the copywrite document
+
+
+import axios from 'axios'
+
+// This basically Creates the copywrite document, need to add URL
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit">
+
         Takeyourmedicine
       </Link>{' '}
       {new Date().getFullYear()}
@@ -62,9 +67,45 @@ const theme = createMuiTheme({
   }
 })
 
-const Register = () => {
+const registerform = {
+  username: '',
+  email: '',
+  password: '',
+  password_confirmation: '',
+  mobile: ''
+}
+
+const Register = (props) => {
 
   const classes = useStyles()
+
+  const [registerInfo, setRegisterInfo] = useState(registerform)
+  const [error, setErrors] = useState({})
+  const [showPassword, setShowPassword] = useState(false)
+
+  const handleClickShowPassword = () => {
+    setShowPassword( !showPassword )
+  }
+  const handleMouseDownPassword = event => {
+    event.preventDefault()
+  }
+
+
+  const handleChange = (e) => {
+    setRegisterInfo({ ...registerInfo, [e.target.name]: e.target.value })
+    setErrors({})
+    console.log(registerInfo)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    axios.post('/api/register/', registerInfo)
+      .then(() => console.log('registered'))
+      .catch((err) => {
+        setErrors(err.response.data)
+        // console.log(err.response.data.password)
+      })
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -73,33 +114,99 @@ const Register = () => {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h4">
           Register
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
           <ThemeProvider theme={theme}>
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              // id="email"
-              label="Email Address"
+              id="username"
+              label={error.username ? 'Error' : 'Username'}
+              name="username"
+              autoComplete="email"
+              helperText={error.username}
+              autoFocus
+              onChange={(e) => handleChange(e)}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label={error.password ? 'Error' : 'Email Address'}
+              helperText={error.email}
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(e) => handleChange(e)}
             />
-
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
               name="password"
-              label="Password"
-              type="password"
+              label={error.password ? 'Error' : 'Password'}
+              type={showPassword ? 'text' : 'password'}
               id="password"
               autoComplete="current-password"
+              helperText={error.password}
+              onChange={(e) => handleChange(e)}
+              InputProps={{ endAdornment: 
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password_confirmation"
+              label="Password Confirmation"
+              type={showPassword ? 'text' : 'password'}
+              id="password_confirmation"
+              autoComplete="confirmation-password"
+              onChange={(e) => handleChange(e)}
+              InputProps={{ endAdornment: 
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              name="mobile"
+              label="Mobile Number"
+              type="mobile"
+              id="mobile"
+              autoComplete="current-password"
+              onChange={(e) => handleChange(e)}
+              InputProps={{
+                startAdornment: <InputAdornment position="start">+44</InputAdornment>
+              }}
             />
           </ThemeProvider>
           <Button
