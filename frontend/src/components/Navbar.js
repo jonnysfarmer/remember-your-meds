@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-// import Auth from '../lib/auth'
 
 //Material UI Styling
 import PropTypes from 'prop-types'
@@ -16,57 +15,12 @@ import ListItemText from '@material-ui/core/ListItemText'
 import SvgIcon from '@material-ui/core/SvgIcon'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import { green } from '@material-ui/core/colors'
+import { ThemeProvider } from '@material-ui/core/styles'
 
+import { useStyles, theme } from '../styles/styles'
 
-//NAV STYLING
-const drawerWidth = 200
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    '& > svg': {
-      margin: theme.spacing(2)
-    }
-  },
-  drawer: {
-    [theme.breakpoints.up('sm')]: {
-      width: drawerWidth,
-      flexShrink: 0
-    }
-  },
-  appBar: {
-    [theme.breakpoints.up('sm')]: {
-      // width: `calc(100% - ${drawerWidth}px)`,
-      // marginLeft: drawerWidth,
-      // the below sets the header to be 100% width on desktop, with the menu appearing below
-      zIndex: theme.zIndex.drawer + 1,
-      colorPrimary: theme.palette.success.main
-    }
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none'
-    }
-  },
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3)
-  }
-}))
 
 function ResponsiveDrawer(props) {
-  const theme = createMuiTheme({
-    palette: {
-      primary: green
-    }
-  })
 
   //SVG icons
   function MenuIcon(props) {
@@ -98,10 +52,8 @@ function ResponsiveDrawer(props) {
     )
   }
 
-
   const { container } = props
   const classes = useStyles()
-  // const theme = useTheme()
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
   const handleDrawerToggle = () => {
@@ -114,11 +66,11 @@ function ResponsiveDrawer(props) {
       <Divider />
       <List>
         {['prescriptions', 'profile', 'logout'].map((elem, i) => (
-          <Link to={elem} onClick={() => handleDrawerToggle()} key={i}>
-            <ListItem button>
-              {elem === 'prescriptions' && <PrescriptionIcon htmlColor='green' fontSize='large' />}
-              {elem === 'profile' && <ProfileIcon htmlColor='green' fontSize='large' />}
-              {elem === 'logout' && <LogoutIcon htmlColor='green' fontSize='large' />}
+          <Link to={elem} key={i} className={classes.iconColor}>
+            <ListItem>
+              {elem === 'prescriptions' && <PrescriptionIcon fontSize='large' />}
+              {elem === 'profile' && <ProfileIcon fontSize='large' />}
+              {elem === 'logout' && <LogoutIcon fontSize='large' />}
               <ListItemText>{elem}</ListItemText>
             </ListItem>
           </Link>
@@ -147,52 +99,39 @@ function ResponsiveDrawer(props) {
             </Typography>
           </Toolbar>
         </AppBar>
+        <nav className={classes.drawer} aria-label="mailbox folders">
+          <Hidden smUp implementation="css">
+            <Drawer
+              container={container}
+              variant="temporary"
+              anchor={theme.direction === 'ltr' ? 'left' : 'right'}
+              open={mobileOpen}
+              onClick={handleDrawerToggle}
+              classes={{
+                paper: classes.drawerPaper
+              }}
+              ModalProps={{
+                keepMounted: true // Better open performance on mobile.
+              }}
+            >
+              {drawer}
+            </Drawer>
+          </Hidden>
+          <Hidden xsDown implementation="css">
+            <Drawer
+              classes={{
+                paper: classes.drawerPaper
+              }}
+              variant="permanent"
+              open
+            >
+              {drawer}
+            </Drawer>
+          </Hidden>
+        </nav>
       </ThemeProvider>
-      <nav className={classes.drawer} aria-label="mailbox folders">
-        <Hidden smUp implementation="css">
-          <Drawer
-            container={container}
-            variant="temporary"
-            anchor={theme.direction === 'ltr' ? 'left' : 'right'}
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper
-            }}
-            ModalProps={{
-              keepMounted: true // Better open performance on mobile.
-            }}
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-        <Hidden xsDown implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper
-            }}
-            variant="permanent"
-            open
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-      </nav>
-
-
-      {/* <main className={classes.content}>
-        <div className={classes.toolbar} />
-      </main> */}
     </div>
   )
-}
-
-ResponsiveDrawer.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  container: PropTypes.instanceOf(typeof Element === 'undefined' ? Object : Element)
 }
 
 export default ResponsiveDrawer

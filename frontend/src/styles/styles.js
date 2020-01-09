@@ -2,9 +2,63 @@
 import { green } from '@material-ui/core/colors'
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles'
 
-// These are the styles for the form
+//================================
+// SETTINGS
+//================================
+const drawerWidth = 200
 
+
+//================================
+// THEME
+//================================
+const theme = createMuiTheme({
+  palette: {
+    primary: green //#4caf50
+  }
+})
+
+//================================
+// STYLES
+//================================
 const useStyles = makeStyles(theme => ({
+  //===== FOR NAV =====
+  iconColor: {
+    color: '#4caf50' //set to be same as theme
+  },
+  root: {
+    display: 'flex',
+    '& > svg': {
+      margin: theme.spacing(2)
+    }
+  },
+  drawer: {
+    [theme.breakpoints.up('sm')]: {
+      width: drawerWidth,
+      flexShrink: 0
+    }
+  },
+  appBar: {
+    [theme.breakpoints.up('sm')]: {
+      // the below sets the header to be 100% width on desktop, with the menu appearing below
+      zIndex: theme.zIndex.drawer + 1,
+      colorPrimary: theme.palette.success.main
+    }
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      display: 'none'
+    }
+  },
+  toolbar: theme.mixins.toolbar,
+  drawerPaper: {
+    width: drawerWidth
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3)
+  },
+  //===== FOR PAGES =====
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -22,17 +76,10 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
     backgroundColor: theme.palette.success.main
-
   }
 }))
 
-// this is Themse for the form palette
 
-const theme = createMuiTheme({
-  palette: {
-    primary: green
-  }
-})
 
 export {
   useStyles,
