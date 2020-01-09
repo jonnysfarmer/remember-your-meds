@@ -4,14 +4,19 @@ import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
-import { green } from '@material-ui/core/colors'
-import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles'
+import Avatar from '@material-ui/core/Avatar'
+import LocalPharmacyOutlinedIcon from '@material-ui/icons/LocalPharmacyOutlined';
+
+
+import { useStyles, theme } from '../styles/styles'
 
 import axios from 'axios'
 import Auth from '../lib/auth'
 
 
 const Prescriptions = () => {
+
+  const classes = useStyles()
 
   const [data, setData] = useState([])
   const [errors, setErrors] = useState([])
@@ -31,11 +36,24 @@ const Prescriptions = () => {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <Typography component="h1" variant="h4">
-        My Prescriptions
-      </Typography>
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LocalPharmacyOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h4">
+          My Prescriptions
+        </Typography>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+        >
+          Create new Prescription
+        </Button>
 
-
+      </div>
     </Container>
   )
 
