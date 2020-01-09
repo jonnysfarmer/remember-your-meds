@@ -8,8 +8,6 @@ import Box from '@material-ui/core/Box'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
-// import { green } from '@material-ui/core/colors'
-// import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/core/styles'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Visibility from '@material-ui/icons/Visibility'
@@ -44,6 +42,7 @@ const registerform = {
   mobile: ''
 }
 
+// eslint-disable-next-line no-unused-vars
 const Register = (props) => {
 
   const classes = useStyles()
