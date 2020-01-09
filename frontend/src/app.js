@@ -1,21 +1,25 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { Switch, Route, HashRouter } from 'react-router-dom'
 
 import ResponsiveDrawer from './components/Navbar'
 import Home from './components/Home'
 import Register from './components/Register'
 
+
+//STYLES FOR OVERWRITING MATERIAL UI
+import './styles/main.css'
+
 const App = () => {
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ResponsiveDrawer />
       <Switch>
         <Route exact path="/1" component={Home} />
         <Route exact path="/register" component={Register} />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

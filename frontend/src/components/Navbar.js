@@ -1,4 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+// import Auth from '../lib/auth'
+
+//Material UI Styling
 import PropTypes from 'prop-types'
 import AppBar from '@material-ui/core/AppBar'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -9,19 +13,14 @@ import IconButton from '@material-ui/core/IconButton'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
-
-import MenuIcon from '@material-ui/icons/Menu'
 import SvgIcon from '@material-ui/core/SvgIcon'
-
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { green } from '@material-ui/core/colors'
 
-// this is Themse for the form palette
 
-
-
+//NAV STYLING
 const drawerWidth = 200
 
 const useStyles = makeStyles(theme => ({
@@ -114,13 +113,15 @@ function ResponsiveDrawer(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {['Prescriptions', 'Profile', 'Logout'].map((elem, i) => (
-          <ListItem button key={i}>
-            {elem === 'Prescriptions' && <PrescriptionIcon htmlColor='green' fontSize='large' />}
-            {elem === 'Profile' && <ProfileIcon htmlColor='green' fontSize='large' />}
-            {elem === 'Logout' && <LogoutIcon htmlColor='green' fontSize='large' />}
-            <ListItemText primary={elem} />
-          </ListItem>
+        {['prescriptions', 'profile', 'logout'].map((elem, i) => (
+          <Link to={elem} onClick={() => handleDrawerToggle()} key={i}>
+            <ListItem button>
+              {elem === 'prescriptions' && <PrescriptionIcon htmlColor='green' fontSize='large' />}
+              {elem === 'profile' && <ProfileIcon htmlColor='green' fontSize='large' />}
+              {elem === 'logout' && <LogoutIcon htmlColor='green' fontSize='large' />}
+              <ListItemText>{elem}</ListItemText>
+            </ListItem>
+          </Link>
         ))}
       </List>
     </div>
