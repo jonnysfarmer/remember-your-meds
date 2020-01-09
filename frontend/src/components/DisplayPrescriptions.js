@@ -1,20 +1,70 @@
 import React, { useState, useEffect } from 'react'
 
-import Button from '@material-ui/core/Button'
-import CssBaseline from '@material-ui/core/CssBaseline'
+import { makeStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-import Container from '@material-ui/core/Container'
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Avatar from '@material-ui/core/Avatar'
-import LocalPharmacyOutlinedIcon from '@material-ui/icons/LocalPharmacyOutlined'
 
 
-import { useStyles } from '../styles/styles'
 
-const DisplayPrescriptions = (props) => {
+// import { makeStyles } from '../styles/styles'
 
-  if (props === null) return <div>Loading</div> 
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    margin: theme.spacing(1),
+    width: '100%'
+  },
+  paper: {
+    padding: theme.spacing(2),
+    margin: 'auto'
+  },
+  avatar: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+    backgroundColor: theme.palette.success.main
+  }
+}))
+
+const DisplayPrescriptions = ({ medicine, data }) => {
+
+  const classes = useStyles()
+
+  if (medicine === null) return <div>Loading</div>
   return (
-    <div>hello </div>
+    <div className={classes.root}>
+      <Paper className={classes.paper}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm container>
+            <Grid item xs container direction="column" spacing={2}>
+              <Grid item xs>
+                <Typography gutterBottom variant="subtitle1">
+                  {medicine.name}
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                  Full resolution 1920x1080 • JPEG
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  ID: 1030114
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="body2" style={{ cursor: 'pointer' }}>
+                  more information
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Avatar className={classes.avatar} >
+                <EditOutlinedIcon fontSize="small"/>
+              </Avatar>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Paper>
+    </div>
   )
 
 }

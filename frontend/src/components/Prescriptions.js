@@ -58,7 +58,7 @@ const Prescriptions = () => {
         </Button>
         {data.map((ele, i) => {
           return (
-            <DisplayPrescriptions key={i} props={ele} />
+            <DisplayPrescriptions key={i} medicine={ele.medicine} data={ele} />
           )
         })}
 
