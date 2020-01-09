@@ -8,8 +8,6 @@ import Box from '@material-ui/core/Box'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
-// import { green } from '@material-ui/core/colors'
-// import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/core/styles'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Visibility from '@material-ui/icons/Visibility'
@@ -44,6 +42,7 @@ const registerform = {
   mobile: ''
 }
 
+// eslint-disable-next-line no-unused-vars
 const Register = (props) => {
 
   const classes = useStyles()
@@ -53,7 +52,7 @@ const Register = (props) => {
   const [showPassword, setShowPassword] = useState(false)
 
   const handleClickShowPassword = () => {
-    setShowPassword( !showPassword )
+    setShowPassword(!showPassword)
   }
   const handleMouseDownPassword = event => {
     event.preventDefault()
@@ -89,7 +88,7 @@ const Register = (props) => {
         <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
           <ThemeProvider theme={theme}>
             <TextField
-              error = {err.username && true}
+              error={err.username && true}
               variant="outlined"
               margin="normal"
               required
@@ -103,7 +102,7 @@ const Register = (props) => {
               onChange={(e) => handleChange(e)}
             />
             <TextField
-              error = {err.email && true}
+              error={err.email && true}
               variant="outlined"
               margin="normal"
               required
@@ -117,7 +116,7 @@ const Register = (props) => {
               onChange={(e) => handleChange(e)}
             />
             <TextField
-              error = {err.password && true}
+              error={err.password && true}
               variant="outlined"
               margin="normal"
               required
@@ -129,17 +128,18 @@ const Register = (props) => {
               autoComplete="current-password"
               helperText={err.password}
               onChange={(e) => handleChange(e)}
-              InputProps={{ endAdornment: 
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
+              InputProps={{
+                endAdornment:
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
               }}
             />
             <TextField
@@ -153,17 +153,18 @@ const Register = (props) => {
               id="password_confirmation"
               autoComplete="confirmation-password"
               onChange={(e) => handleChange(e)}
-              InputProps={{ endAdornment: 
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
+              InputProps={{
+                endAdornment:
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
               }}
             />
             <TextField
@@ -180,16 +181,17 @@ const Register = (props) => {
                 startAdornment: <InputAdornment position="start">+44</InputAdornment>
               }}
             />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Register
+            </Button>
+
           </ThemeProvider>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Register
-          </Button>
 
         </form>
       </div>
