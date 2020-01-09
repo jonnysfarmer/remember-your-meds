@@ -5,6 +5,7 @@ import { Switch, Route, HashRouter } from 'react-router-dom'
 import ResponsiveDrawer from './components/Navbar'
 import Home from './components/Home'
 import Register from './components/Register'
+import Login from './components/Login'
 import CreatePrescription from './components/CreatePrescription'
 
 
@@ -19,6 +20,7 @@ const App = () => {
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/register' component={Register} />
+        <Route exact path='/prescriptions' component={Login} />
         <Route exact path='/prescriptions/create' component={CreatePrescription} />
       </Switch>
     </HashRouter>

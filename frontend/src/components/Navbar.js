@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 //Material UI Styling
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import AppBar from '@material-ui/core/AppBar'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Divider from '@material-ui/core/Divider'
@@ -14,13 +14,18 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import SvgIcon from '@material-ui/core/SvgIcon'
 import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
+// import Typography from '@material-ui/core/Typography'
 import { ThemeProvider } from '@material-ui/core/styles'
 
 import { useStyles, theme } from '../styles/styles'
 
 
+
+
 function ResponsiveDrawer(props) {
+
+  const history = useHistory()
+  const location = history.location.pathname
 
   //SVG icons
   function MenuIcon(props) {
@@ -66,7 +71,7 @@ function ResponsiveDrawer(props) {
       <Divider />
       <List>
         {['prescriptions', 'profile', 'logout'].map((elem, i) => (
-          <Link to={elem} key={i} className={classes.iconColor}>
+          <Link to={`/${elem}`} key={i} className={classes.iconColor}>
             <ListItem>
               {elem === 'prescriptions' && <PrescriptionIcon fontSize='large' />}
               {elem === 'profile' && <ProfileIcon fontSize='large' />}
@@ -85,7 +90,10 @@ function ResponsiveDrawer(props) {
       <ThemeProvider theme={theme}>
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
-            <IconButton
+
+            {(location === '/prescriptions' || location === '/prescriptions/create/' || location === 'profile/' ||
+            location === '/prescriptions/' || location === '/prescriptions/create' || location === 'profile')
+            && <IconButton
               color="inherit"
               aria-label="open drawer"
               edge="start"
@@ -94,10 +102,9 @@ function ResponsiveDrawer(props) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
-              Take your medicine!
-            </Typography>
+            }
           </Toolbar>
+
         </AppBar>
         <nav className={classes.drawer} aria-label="mailbox folders">
           <Hidden smUp implementation="css">
