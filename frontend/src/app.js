@@ -16,7 +16,7 @@ const App = () => {
     <HashRouter>
       <ResponsiveDrawer />
       <Switch>
-        <Route exact path="/1" component={Home} />
+        <Route exact path="/" component={Home} />
         <Route exact path="/register" component={Register} />
       </Switch>
     </HashRouter>
