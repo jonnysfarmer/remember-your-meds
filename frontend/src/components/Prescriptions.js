@@ -6,9 +6,10 @@ import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import Avatar from '@material-ui/core/Avatar'
 import LocalPharmacyOutlinedIcon from '@material-ui/icons/LocalPharmacyOutlined'
+import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles'
 
 
-import { useStyles } from '../styles/styles'
+import { useStyles, theme } from '../styles/styles'
 
 import axios from 'axios'
 import Auth from '../lib/auth'

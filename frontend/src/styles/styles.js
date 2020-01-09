@@ -75,16 +75,12 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-<<<<<<< HEAD
-    backgroundColor: theme.palette.success.main
-=======
     backgroundColor: theme.palette.success.main,
     '&:hover': {
       backgroundColor: theme.palette.success.dark
     }
     
 
->>>>>>> development
   }
 }))
 
