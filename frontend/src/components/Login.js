@@ -107,7 +107,7 @@ const Login = (props) => {
       .then((resp) => {
         Auth.setToken(resp.data.token)
         console.log('Logged In')
-        // props.history.push(`/dashboard/${resp.data.id}`)
+        props.history.push('/perscriptions')
       })
       .catch((err) => {
         setErrors(err.response.data)
