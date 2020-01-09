@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, HashRouter } from 'react-router-dom'
 
 import Home from './components/Home'
 import Register from './components/Register'
@@ -9,13 +9,13 @@ const App = () => {
 
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       {/* <Navbar /> */}
       <Switch>
-        <Route exact path="/1" component={Home} />
-        <Route exact path="/" component={Register} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/register" component={Register} />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

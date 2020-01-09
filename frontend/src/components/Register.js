@@ -80,7 +80,7 @@ const Register = (props) => {
   const classes = useStyles()
 
   const [registerInfo, setRegisterInfo] = useState(registerform)
-  const [error, setErrors] = useState({})
+  const [err, setErrors] = useState({})
   const [showPassword, setShowPassword] = useState(false)
 
   const handleClickShowPassword = () => {
@@ -120,42 +120,45 @@ const Register = (props) => {
         <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
           <ThemeProvider theme={theme}>
             <TextField
+              error = {err.username && true}
               variant="outlined"
               margin="normal"
               required
               fullWidth
               id="username"
-              label={error.username ? 'Error' : 'Username'}
+              label={err.username ? 'Error' : 'Username'}
               name="username"
               autoComplete="email"
-              helperText={error.username}
+              helperText={err.username}
               autoFocus
               onChange={(e) => handleChange(e)}
             />
             <TextField
+              error = {err.email && true}
               variant="outlined"
               margin="normal"
               required
               fullWidth
               id="email"
-              label={error.password ? 'Error' : 'Email Address'}
-              helperText={error.email}
+              label={err.email ? 'Error' : 'Email Address'}
+              helperText={err.email}
               name="email"
               autoComplete="email"
               autoFocus
               onChange={(e) => handleChange(e)}
             />
             <TextField
+              error = {err.password && true}
               variant="outlined"
               margin="normal"
               required
               fullWidth
               name="password"
-              label={error.password ? 'Error' : 'Password'}
+              label={err.password ? 'Error' : 'Password'}
               type={showPassword ? 'text' : 'password'}
               id="password"
               autoComplete="current-password"
-              helperText={error.password}
+              helperText={err.password}
               onChange={(e) => handleChange(e)}
               InputProps={{ endAdornment: 
                 <InputAdornment position="end">
