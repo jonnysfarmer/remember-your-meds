@@ -8,6 +8,8 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Avatar from '@material-ui/core/Avatar'
 
 
+import axios from 'axios'
+import Auth from '../lib/auth'
 
 // import { makeStyles } from '../styles/styles'
 
@@ -28,9 +30,25 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const DisplayPrescriptions = ({ medicine, data }) => {
+const DisplayPrescriptions = ({ medicine, data, prescription }) => {
+
+  const [reminders, setReminder] = useState([])
+  const [errors, setErrors] = useState([])
+
+  const dataHook = () => {
+    axios.get('/api/reminders/user/', {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then((resp) => {
+        setReminder(resp.data)
+      })
+      .catch(err => setErrors(err.response.data))
+  }
+
+  useEffect(dataHook, [])
 
   const classes = useStyles()
+  console.log(reminders)
 
   if (medicine === null) return <div>Loading</div>
   return (

@@ -22,20 +22,21 @@ const Prescriptions = () => {
   const [data, setData] = useState([])
   const [errors, setErrors] = useState([])
 
+  // api/reminders/users/
+
   const dataHook = () => {
     axios.get('/api/prescriptions/user/', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then((resp) => {
         setData(resp.data)
-        console.log(resp)
       })
       .catch(err => setErrors(err.response.data))
   }
 
   useEffect(dataHook, [])
 
-  console.log(data)
+  // console.log(data)
 
   return (
     <Container component="main" maxWidth="xs">
@@ -58,7 +59,7 @@ const Prescriptions = () => {
         </Button>
         {data.map((ele, i) => {
           return (
-            <DisplayPrescriptions key={i} medicine={ele.medicine} data={ele} />
+            <DisplayPrescriptions key={i} data={ele} medicine={ele.medicine} />
           )
         })}
 
