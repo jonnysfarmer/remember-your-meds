@@ -54,7 +54,10 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: theme.palette.success.main
+    backgroundColor: theme.palette.success.main,
+    '&:hover': {
+      backgroundColor: theme.palette.success.dark
+    }
 
   }
 }))
@@ -100,7 +103,7 @@ const Register = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     axios.post('/api/register/', registerInfo)
-      .then(() => console.log('registered'))
+      .then(() => props.history.push('/login'))
       .catch((err) => {
         setErrors(err.response.data)
         // console.log(err.response.data.password)
