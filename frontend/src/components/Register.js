@@ -8,14 +8,15 @@ import Box from '@material-ui/core/Box'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
-import { green } from '@material-ui/core/colors'
-import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles'
+// import { green } from '@material-ui/core/colors'
+// import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles'
+import { ThemeProvider } from '@material-ui/core/styles'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import IconButton from '@material-ui/core/IconButton'
 
-
+import { useStyles, theme } from '../styles/styles'
 
 import axios from 'axios'
 
@@ -34,41 +35,6 @@ function Copyright() {
     </Typography>
   )
 }
-
-// These are the styles for the form
-
-const useStyles = makeStyles(theme => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.success.main
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    margin: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: theme.palette.success.main,
-    '&:hover': {
-      backgroundColor: theme.palette.success.dark
-    }
-
-  }
-}))
-
-// this is Themse for the form palette
-
-const theme = createMuiTheme({
-  palette: {
-    primary: green
-  }
-})
 
 const registerform = {
   username: '',
