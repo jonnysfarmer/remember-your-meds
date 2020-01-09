@@ -72,6 +72,7 @@ const theme = createMuiTheme({
 
 const loginform = {
 
+  username: '',
   email: '',
   password: '',
   password_confirmation: ''
@@ -107,7 +108,7 @@ const Login = (props) => {
       .then((resp) => {
         Auth.setToken(resp.data.token)
         console.log('Logged In')
-        props.history.push('/perscriptions')
+        props.history.push('/prescriptions')
       })
       .catch((err) => {
         setErrors(err.response.data)
@@ -127,7 +128,21 @@ const Login = (props) => {
         <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
           <ThemeProvider theme={theme}>
             <TextField
-              error={err.email && true}
+              error={err.message && true}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label={err.message ? 'Error' : 'Username'}
+              helperText={err.message}
+              name="username"
+              autoComplete="username"
+              autoFocus
+              onChange={(e) => handleChange(e)}
+            />
+            <TextField
+              error = {err.email && true}
               variant="outlined"
               margin="normal"
               required

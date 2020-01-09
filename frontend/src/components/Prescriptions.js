@@ -5,13 +5,14 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import Avatar from '@material-ui/core/Avatar'
-import LocalPharmacyOutlinedIcon from '@material-ui/icons/LocalPharmacyOutlined';
+import LocalPharmacyOutlinedIcon from '@material-ui/icons/LocalPharmacyOutlined'
 
 
-import { useStyles, theme } from '../styles/styles'
+import { useStyles } from '../styles/styles'
 
 import axios from 'axios'
 import Auth from '../lib/auth'
+import DisplayPrescriptions from './DisplayPrescriptions'
 
 
 const Prescriptions = () => {
@@ -22,10 +23,13 @@ const Prescriptions = () => {
   const [errors, setErrors] = useState([])
 
   const dataHook = () => {
-    axios.get('/api/reminder/user/', {
+    axios.get('/api/prescriptions/user/', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then((resp) => setData(resp.data))
+      .then((resp) => {
+        setData(resp.data)
+        console.log(resp)
+      })
       .catch(err => setErrors(err.response.data))
   }
 
@@ -52,6 +56,11 @@ const Prescriptions = () => {
         >
           Create new Prescription
         </Button>
+        {data.map((ele, i) => {
+          return (
+            <DisplayPrescriptions key={i} props={ele} />
+          )
+        })}
 
       </div>
     </Container>
