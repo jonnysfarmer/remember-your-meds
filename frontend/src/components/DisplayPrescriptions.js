@@ -6,6 +6,10 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Avatar from '@material-ui/core/Avatar'
+import Switch from '@material-ui/core/Switch'
+
+
+
 
 
 import axios from 'axios'
@@ -30,27 +34,54 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const DisplayPrescriptions = ({ medicine, data, prescription }) => {
+// ('take', 'Take medicine'),
+// ('order a prescription for', 'Order prescription'),
+// ('make an appointment for', 'Make doctors appointment')
+
+const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
 
   const [reminders, setReminder] = useState([])
   const [errors, setErrors] = useState([])
+  const [takereminder, setTakereminder] = useState({})
+  const [orderreminder, setOrderreminder] = useState({})
+  const [appointmentreminder, setAppointmentreminder] = useState({})
 
   const dataHook = () => {
     axios.get('/api/reminders/user/', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then((resp) => {
+        const data1 = resp.data
+        const specific = data1.filter(ele => ele.prescription.id === presID)
+        const take = specific.filter(ele => ele.reminder_type === 'take')
+        const order = specific.filter(ele => ele.reminder_type === 'order a prescription for')
+        const appointment = specific.filter(ele => ele.reminder_type === 'make an appointment for')
         setReminder(resp.data)
+        setTakereminder(take[0])
+        setOrderreminder(order[0])
+        setAppointmentreminder(appointment[0])
+
       })
       .catch(err => setErrors(err.response.data))
   }
 
+  const handleChangetake = (name) => (event) => {
+    setTakereminder({ ...takereminder, [name]: event.target.checked })
+
+    setErrors({})
+    console.log(takereminder)
+
+  }
+
+
   useEffect(dataHook, [])
 
   const classes = useStyles()
-  console.log(reminders)
+  console.log(takereminder)
+  // console.log(orderreminder)
+  // console.log(appointmentreminder)
 
-  if (medicine === null) return <div>Loading</div>
+  if (medicine === null || takereminder === {}) return <div>Loading</div>
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -61,11 +92,20 @@ const DisplayPrescriptions = ({ medicine, data, prescription }) => {
                 <Typography gutterBottom variant="subtitle1">
                   {medicine.name}
                 </Typography>
-                <Typography variant="body2" gutterBottom>
-                  Full resolution 1920x1080 • JPEG
+                <Typography variant="body2" color="textSecondary">
+                  <Switch
+                    checked={takereminder.active}
+                    onChange={handleChangetake('active')}
+                    value= "active"
+                    color= "secondary"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                  />
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  ID: 1030114
+                  order reminder
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  appointment reminder
                 </Typography>
               </Grid>
               <Grid item>
@@ -76,7 +116,7 @@ const DisplayPrescriptions = ({ medicine, data, prescription }) => {
             </Grid>
             <Grid item>
               <Avatar className={classes.avatar} >
-                <EditOutlinedIcon fontSize="small"/>
+                <EditOutlinedIcon fontSize="small" />
               </Avatar>
             </Grid>
           </Grid>

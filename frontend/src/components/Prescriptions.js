@@ -59,7 +59,7 @@ const Prescriptions = () => {
         </Button>
         {data.map((ele, i) => {
           return (
-            <DisplayPrescriptions key={i} data={ele} medicine={ele.medicine} />
+            <DisplayPrescriptions key={i} data={ele} medicine={ele.medicine} presID={ele.id} />
           )
         })}
 
