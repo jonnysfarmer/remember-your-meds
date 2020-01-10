@@ -71,7 +71,7 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
       .then((resp) => {
         const data1 = resp.data
         const specific = data1.filter(ele => ele.prescription.id === presID)
-      
+
         setReminder(specific)
 
 
@@ -117,15 +117,13 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
                     <Typography component="div" variant="caption" color="textSecondary" key={i}>
                       <Grid component="label" container alignItems="center" spacing={0}>
                         <Grid item>
-                          <ThemeProvider theme={theme}>
-                            <SwitchonOFF
-                              size="small"
-                              checked={ele.active || ''}
-                              onChange={handleChange(ele.id, i)}
-                              value="active"
-                              inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            />
-                          </ThemeProvider>
+                          <SwitchonOFF
+                            size="small"
+                            checked={ele.active || ''}
+                            onChange={handleChange(ele.id, i)}
+                            value="active"
+                            inputProps={{ 'aria-label': 'secondary checkbox' }}
+                          />
                         </Grid>
                         <Grid item >
                           <Box className={classes.boxdisplay}>

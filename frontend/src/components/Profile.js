@@ -7,6 +7,9 @@ import Container from '@material-ui/core/Container'
 import Avatar from '@material-ui/core/Avatar'
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
 import { makeStyles } from '@material-ui/core/styles'
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
+import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
 
 
 // import { useStyles, theme } from '../styles/styles'
@@ -40,6 +43,20 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     color: theme.palette.success.main
+  },
+  grid: {
+    padding: theme.spacing(2),
+    margin: theme.spacing(1)
+    // margin: 'auto'
+  },
+  root: {
+    flexGrow: 1,
+    margin: theme.spacing(1),
+    width: '100%'
+  },
+  centeralign: {
+    alignItems: 'center',
+    display: 'flex'
   }
 }))
 
@@ -125,14 +142,30 @@ const Profile = () => {
         <Typography component="h2" variant="h6" className={classes.title}>
           Current Prescriptions
         </Typography>
-        {prescriptions.map((ele, i) => {
+        <div className={classes.root}>
+          {prescriptions.map((ele, i) => {
 
-          return (
-            <div key={i}>
-              {ele.medicine.name}
-            </div>
-          )
-        })}
+            return (
+
+              <Paper className={classes.grid} key={i}>
+                <Grid container spacing={2} >
+                  <Grid item xs={9} className={classes.centeralign} >
+                    <Typography component="h1" variant="h6" color="textSecondary" >
+                      {ele.medicine.name}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Avatar className={classes.avatar} >
+                      <EditOutlinedIcon fontSize="small" />
+                    </Avatar>
+                  </Grid>
+                </Grid>
+              </Paper>
+
+
+            )
+          })}
+        </div>
 
 
       </div>
