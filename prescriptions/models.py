@@ -39,8 +39,8 @@ class Reminder(models.Model):
     # setup the reminder types
     REMINDER_TYPE_CHOICES = [
         ('take', 'Take medicine'),
-        ('order a prescription for', 'Order prescription'),
-        ('make an appointment for', 'Make doctors appointment')
+        ('order prescription', 'Order prescription'),
+        ('make appointment', 'Make doctors appointment')
     ]
     # one user can have many reminders, but one reminder can only have one user
     user = models.ForeignKey(User, related_name='reminder', on_delete=models.CASCADE)

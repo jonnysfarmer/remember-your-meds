@@ -29,14 +29,14 @@ class PrescriptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Prescription
-        fields = ('id', 'user', 'medicine', 'number_doses', 'doses_per_day', 'number_repeats', 'doctor')
+        fields = ('id', 'user', 'medicine', 'number_days_doses', 'number_repeats', 'doctor')
 
 class PrescriptionPutSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Prescription
         fields = '__all__'
-        extra_kwargs = {'id' : {'required': False}, 'user' : {'required': False}, 'medicine' : {'required': False}, 'number_doses' : {'required': False}, 'doses_per_day' : {'required': False}, 'number_repeats' : {'required': False}, 'doctor' : {'required': False}}
+        extra_kwargs = {'id' : {'required': False}, 'user' : {'required': False}, 'medicine' : {'required': False}, 'number_days_doses' : {'required': False}, 'number_repeats' : {'required': False}, 'doctor' : {'required': False}}
 
 class PopulatedPrescriptionSerializer(PrescriptionSerializer):
 

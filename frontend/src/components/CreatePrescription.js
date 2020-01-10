@@ -1,28 +1,23 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+//Material UI
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
-// import Link from '@material-ui/core/Link'
-// import Box from '@material-ui/core/Box'
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import { ThemeProvider } from '@material-ui/core/styles'
-// import InputAdornment from '@material-ui/core/InputAdornment'
-// import Visibility from '@material-ui/icons/Visibility'
-// import VisibilityOff from '@material-ui/icons/VisibilityOff'
-// import IconButton from '@material-ui/core/IconButton'
-
+//Material UI our styles/icons
 import { useStyles, theme } from '../styles/styles'
 import { PrescriptionIcon } from '../styles/icons'
+//Our Libraries/Components
+import Auth from '../lib/auth'
 
-import axios from 'axios'
-import { Divider } from '@material-ui/core'
 
 
-const CreatePrescription = (props) => {
+const CreatePrescription = () => {
 
   const classes = useStyles()
   const [medicine, setMedicine] = useState([])
@@ -36,14 +31,28 @@ const CreatePrescription = (props) => {
       .catch(err => setErrors(err))
   }
 
+  //make a function to create a new medicine if needed (refactor this out)
+  const createMedicine = (x) => {
+    console.log(x)
+    //post it to medicine db
+    axios.post('/api/medicines/', x, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      //then update medicine to be the newly created id
+      .then((response) => setData({ ...data, ['medicine']: response.data.id }))
+      .catch((err) => {
+        setErrors(err.response.data)
+      })
+  }
+
   //collecting and calculating medicine
   const formData = {
     //for the dB
+    user: '',
     medicine: '',
     number_days_doses: '',
     number_repeats: '',
-    //for calculations here
-    number_days_doses_remaining: '' //number of days doses you have left at time of filling form
+    doctor: ''
   }
 
   //standard form stuff
@@ -54,6 +63,9 @@ const CreatePrescription = (props) => {
         const med = (medicine[fieldId[2]].id)
         setData({ ...data, ['medicine']: med })
       } else {
+        //create medicine on the database
+        createMedicine({ ['name']: e.target.value })
+        // setNewMedicine({ ['name']: e.target.value })
         setData({ ...data, ['medicine']: e.target.value })
       }
     } else {
@@ -64,22 +76,38 @@ const CreatePrescription = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(data)
-    // axios.post('/api/register/', registerInfo)
-    //   .then(() => console.log('registered'))
-    //   .catch((err) => {
-    //     setErrors(err.response.data)
-    //     // console.log(err.response.data.password)
-    //   })
+    //add userid to data
+    const user = Auth.getUserId()
+    setData({ ...data, ['user']: user })
+
+    //POST to prescription
+    axios.post('/api/prescriptions/', data, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => console.log('added'))
+      .catch((err) => {
+        setErrors(err.response.data)
+      })
   }
+
+
+
+  //if medicine not in list
+  // - POST to medicine
+  // - GET id
+  // - update data with medicine ID rather than text
+  //when medicine has id (originally in list, or added)
+  // - POST to prescription
+
 
   //on mount
   useEffect(() => {
     getMedicines()
   }, [])
 
+  // console.log(data)
 
-  console.log(data)
+
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -87,21 +115,18 @@ const CreatePrescription = (props) => {
         <Avatar className={classes.avatar}>
           <PrescriptionIcon />
         </Avatar>
-        {/* <Typography component='h1' variant='h4'>
+        <Typography component='h1' variant='h4'>
           Prescription
-        </Typography> */}
+        </Typography>
 
         <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
           <ThemeProvider theme={theme}>
-            <Typography component='h2' variant='h5'>
-              From your prescription:
-            </Typography>
-            <Divider />
             <Autocomplete
               freeSolo
               id='medicine'
               options={medicine.map(option => option.name)}
               onChange={(e) => handleChange(e)}
+              onBlur={(e) => handleChange(e)}
               renderInput={params => (
                 <TextField {...params}
                   label='Medicine name'
@@ -142,29 +167,6 @@ const CreatePrescription = (props) => {
               onChange={(e) => handleChange(e)}
             />
 
-            <Typography component='h2' variant='h5'>
-              In your cupboard:
-            </Typography>
-            <Divider />
-            <TextField
-              id='number_days_doses_remaining'
-              label='How many days doses do you have left?'
-              name='number_days_doses_remaining'
-              type='number'
-              required
-              error={err.number_presc_doses && true}
-              helperText={'do not include today'}
-              variant='outlined'
-              fullWidth
-              margin='normal'
-              onChange={(e) => handleChange(e)}
-            />
-
-
-
-
-
-
             <Button
               type='submit'
               fullWidth
@@ -172,11 +174,9 @@ const CreatePrescription = (props) => {
               color='primary'
               className={classes.submit}
             >
-              Register
+              Add prescription
             </Button>
-
           </ThemeProvider>
-
         </form>
       </div>
     </Container>

@@ -28,8 +28,8 @@ class MedicineSpecificView(APIView):
 
     def get(self, _request, pk):
         medicines = Medicine.objects.get(pk=pk)
-        serialized_posts = MedicineSerializer(medicines)
-        return Response(serialized_posts.data)
+        serializer = MedicineSerializer(medicines)
+        return Response(serializer.data)
 
 class ReminderListView(APIView):
 
