@@ -12,6 +12,8 @@ import Prescription from './components/Prescription'
 import EditPrescription from './components/EditPrescription'
 import Profile from './components/Profile'
 
+import CreateReminder from './components/CreateReminder'
+
 
 //STYLES FOR OVERWRITING MATERIAL UI
 import './styles/main.css'
@@ -30,6 +32,8 @@ const App = () => {
         <Route exact path="/prescriptions/:id" component={Prescription} />
         <Route exact path="/prescriptions/:id/edit" component={EditPrescription} />
         <Route exact path='/profile' component={Profile} />
+        
+        <Route exact path='/temp/reminders' component={CreateReminder} />
       </Switch>
     </HashRouter>
   )

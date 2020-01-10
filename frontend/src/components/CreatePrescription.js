@@ -31,10 +31,9 @@ const CreatePrescription = (props) => {
   }
 
   //===== CREATE A CUSTOM MEDICINE IN OUR DB
-  const createMedicine = (x) => {
-    console.log(x)
+  const createMedicine = (med) => {
     //----- Post to medicine table
-    axios.post('/api/medicines/', x, {
+    axios.post('/api/medicines/', med, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       //----- Receive it's ID and update our data to hold id rather than name
