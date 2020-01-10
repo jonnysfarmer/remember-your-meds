@@ -1,14 +1,13 @@
 
 import { green, red } from '@material-ui/core/colors'
 import { makeStyles, createMuiTheme, withStyles } from '@material-ui/core/styles'
-import { palette } from '@material-ui/system'
+// import { palette } from '@material-ui/system'
 import Switch from '@material-ui/core/Switch'
 
 //================================
 // SETTINGS
 //================================
 const drawerWidth = 200
-
 
 //================================
 // THEME
@@ -60,6 +59,8 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     padding: theme.spacing(3)
   },
+
+  
   //===== FOR PAGES =====
   paper: {
     marginTop: theme.spacing(8),
