@@ -15,98 +15,80 @@ import { PrescriptionIcon } from '../styles/icons'
 //Our Libraries/Components
 import Auth from '../lib/auth'
 
-
-
-const CreatePrescription = () => {
+const CreatePrescription = (props) => {
 
   const classes = useStyles()
+
   const [medicine, setMedicine] = useState([])
-  const [data, setData] = useState(formData)
+  const [data, setData] = useState()
   const [err, setErrors] = useState({})
 
-  // //get the list of medicines so we can fill out the autocomplete field (refactor this out I think)
+  //===== GET THE MEDICINE LIST TO POPULATE AUTOCOMPLETE
   const getMedicines = () => {
     axios.get('/api/medicines/')
       .then(resp => setMedicine(resp.data))
       .catch(err => setErrors(err))
   }
 
-  //make a function to create a new medicine if needed (refactor this out)
+  //===== CREATE A CUSTOM MEDICINE IN OUR DB
   const createMedicine = (x) => {
     console.log(x)
-    //post it to medicine db
+    //----- Post to medicine table
     axios.post('/api/medicines/', x, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      //then update medicine to be the newly created id
+      //----- Receive it's ID and update our data to hold id rather than name
       .then((response) => setData({ ...data, ['medicine']: response.data.id }))
       .catch((err) => {
         setErrors(err.response.data)
       })
   }
 
-  //collecting and calculating medicine
-  const formData = {
-    //for the dB
-    user: '',
-    medicine: '',
-    number_days_doses: '',
-    number_repeats: '',
-    doctor: ''
-  }
-
-  //standard form stuff
+  //===== STORE FORM FIELD VALUES
   const handleChange = (e) => {
+    //----- Check if data is from medicine field
     if (e.target.id.substring(0, 3) === 'med') {
+      //----- If it DOES NOT have a value, then the user has selected a medicine from our list
       if (!e.target.value) {
+        //----- splits the ID :: MaterialUI appends our id with the index number of the option created (in the select dropdown)
         const fieldId = e.target.id.split('-')
+        //----- the value in position 2 of the split ID contains the index, we use that to get the medicine.id from our list
         const med = (medicine[fieldId[2]].id)
+        //----- set our form data grab to be our medicine.id
         setData({ ...data, ['medicine']: med })
       } else {
-        //create medicine on the database
+      //----- If it HAS a value then it is not from our NHS list and we must create it
         createMedicine({ ['name']: e.target.value })
-        // setNewMedicine({ ['name']: e.target.value })
-        setData({ ...data, ['medicine']: e.target.value })
       }
     } else {
+    //----- If it is not the medicine field, we catch what the user wrote and add it to our form data as normal
       setData({ ...data, [e.target.name]: e.target.value })
       setErrors({})
     }
   }
 
+  //===== SUBMIT FORM
   const handleSubmit = (e) => {
     e.preventDefault()
-    //add userid to data
+    //----- Add the user.id to our form data
     const user = Auth.getUserId()
     setData({ ...data, ['user']: user })
-
-    //POST to prescription
+    //----- POST to /prescription
     axios.post('/api/prescriptions/', data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then(() => console.log('added'))
+      //----- Open the prescription view page for this prescription
+      .then((resp) => props.history.push(`/prescriptions/${resp.data.id}/`))
       .catch((err) => {
         setErrors(err.response.data)
       })
   }
 
-
-
-  //if medicine not in list
-  // - POST to medicine
-  // - GET id
-  // - update data with medicine ID rather than text
-  //when medicine has id (originally in list, or added)
-  // - POST to prescription
-
-
-  //on mount
+  //===== LOAD MEDICINE LIST
   useEffect(() => {
     getMedicines()
+    //the empty array below ensure this runs only at on mount
   }, [])
-
-  // console.log(data)
-
 
   return (
     <Container component='main' maxWidth='xs'>
