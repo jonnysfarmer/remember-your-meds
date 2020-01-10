@@ -7,10 +7,13 @@ import Typography from '@material-ui/core/Typography'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Avatar from '@material-ui/core/Avatar'
 import Switch from '@material-ui/core/Switch'
+import { ThemeProvider } from '@material-ui/core/styles'
+import Box from '@material-ui/core/Box'
 
 
 
 
+import { theme } from '../styles/styles'
 
 import axios from 'axios'
 import Auth from '../lib/auth'
@@ -31,6 +34,11 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(4),
     height: theme.spacing(4),
     backgroundColor: theme.palette.success.main
+  },
+  boxdisplay: {
+    marginLeft: theme.spacing(1),
+    color: theme.palette.text.primary
+
   }
 }))
 
@@ -67,7 +75,7 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
 
   const handleChangetake = (name) => (event) => {
     setTakereminder({ ...takereminder, [name]: event.target.checked })
-
+    // need to create a post here
     setErrors({})
     console.log(takereminder)
 
@@ -92,21 +100,31 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
                 <Typography gutterBottom variant="subtitle1">
                   {medicine.name}
                 </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  <Switch
-                    checked={takereminder.active}
-                    onChange={handleChangetake('active')}
-                    value= "active"
-                    color= "secondary"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                  />
+
+                <Typography component="div" variant="body2" color="textSecondary" >
+                  <Grid component="label" container alignItems="center" spacing={0}>
+                    <Grid item>Off</Grid>
+                    <Grid item>
+                      <ThemeProvider theme={theme}>
+                        <Switch
+                          size="small"
+                          checked={takereminder.active || ''}
+                          onChange={handleChangetake('active')}
+                          value="active"
+                          color="primary"
+                          inputProps={{ 'aria-label': 'secondary checkbox' }}
+                        />
+                      </ThemeProvider>
+                    </Grid>
+                    <Grid item >On</Grid>
+                    <Grid item >
+                      <Box className={classes.boxdisplay}>
+                      Reminder to {takereminder.reminder_type}
+                      </Box>
+                    </Grid>
+                  </Grid>
                 </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  order reminder
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  appointment reminder
-                </Typography>
+
               </Grid>
               <Grid item>
                 <Typography variant="body2" style={{ cursor: 'pointer' }}>
@@ -128,3 +146,4 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
 }
 
 export default DisplayPrescriptions
+

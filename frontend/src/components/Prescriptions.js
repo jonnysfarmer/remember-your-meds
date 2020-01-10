@@ -9,7 +9,7 @@ import LocalPharmacyOutlinedIcon from '@material-ui/icons/LocalPharmacyOutlined'
 import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles'
 
 
-import { useStyles, theme } from '../styles/styles'
+import { useStyles } from '../styles/styles'
 
 import axios from 'axios'
 import Auth from '../lib/auth'
