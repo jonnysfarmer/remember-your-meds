@@ -46,17 +46,16 @@ const CreatePrescription = (props) => {
     number_days_doses_remaining: '' //number of days doses you have left at time of filling form
   }
 
-
-
-
-
   //standard form stuff
   const handleChange = (e) => {
     if (e.target.id.substring(0, 3) === 'med') {
-      const fieldId = e.target.id.split('-')
-      console.log(medicine[fieldId[2]].name)
-      const med = (medicine[fieldId[2]].id)
-      setData({ ...data, ['medicine']: med })
+      if (!e.target.value) {
+        const fieldId = e.target.id.split('-')
+        const med = (medicine[fieldId[2]].id)
+        setData({ ...data, ['medicine']: med })
+      } else {
+        setData({ ...data, ['medicine']: e.target.value })
+      }
     } else {
       setData({ ...data, [e.target.name]: e.target.value })
       setErrors({})
@@ -103,7 +102,6 @@ const CreatePrescription = (props) => {
               id='medicine'
               options={medicine.map(option => option.name)}
               onChange={(e) => handleChange(e)}
-              // onChange={(e) => handleChange(e.target.value)}
               renderInput={params => (
                 <TextField {...params}
                   label='Medicine name'
