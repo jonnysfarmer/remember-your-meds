@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   avatar: {
     width: theme.spacing(4),
     height: theme.spacing(4),
-    backgroundColor: theme.palette.text.secondary
+    backgroundColor: theme.palette.success.main
   },
   boxdisplay: {
     marginLeft: theme.spacing(1),

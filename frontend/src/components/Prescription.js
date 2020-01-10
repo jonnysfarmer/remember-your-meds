@@ -90,7 +90,7 @@ const useStyles = makeStyles(theme => ({
   avatargrey: {
     width: theme.spacing(4),
     height: theme.spacing(4),
-    backgroundColor: theme.palette.text.secondary
+    backgroundColor: theme.palette.success.main
   }
 }))
 
@@ -134,12 +134,17 @@ const Prescription = (props) => {
     e.preventDefault()
     props.history.push('/prescriptions/')
   }
-
+  const handleDelete = (e) => {
+    e.preventDefault()
+    const id= props.match.params.id
+    axios.delete(`/api/prescriptions/${id}/`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(()=> props.history.push('/prescriptions/'))
+  }
 
   useEffect(prescriptionHook, [])
   useEffect(reminderHook, [])
-
-
 
   if (reminders === [] || medicine === {}) return <div>loading</div>
   return (
@@ -149,7 +154,7 @@ const Prescription = (props) => {
         <Avatar className={classes.avatar}>
           <LocalPharmacyOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h4">
+        <Typography component="h1" variant="h4" >
           {medicine.name}
         </Typography>
         <Typography component="h3" variant="caption" className={classes.title}>
@@ -184,7 +189,6 @@ const Prescription = (props) => {
         <div className={classes.root}>
           {reminders ?
             reminders.map((ele, i) => {
-
               return (
 
                 <Paper className={classes.grid} key={i}>
@@ -201,8 +205,6 @@ const Prescription = (props) => {
                     </Grid>
                   </Grid>
                 </Paper>
-
-
               )
             }) :
             <div className={classes.altinput}>
@@ -215,7 +217,7 @@ const Prescription = (props) => {
                 variant="contained"
                 color="primary"
                 className={classes.altsubmit}
-              // onClick = {(e)=>handleCreate(e)}
+              // onClick here to edit page
               >
                 Add new reminder
               </Button>
@@ -243,14 +245,12 @@ const Prescription = (props) => {
               variant="contained"
               color="secondary"
               className={classes.submitred}
+              onClick={(e) => handleDelete(e)}
             >
               Delete
             </Button>
           </Grid>
         </Grid>
-
-
-
 
       </div>
     </Container>
