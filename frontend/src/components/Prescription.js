@@ -5,8 +5,10 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import Avatar from '@material-ui/core/Avatar'
-import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
+import LocalPharmacyOutlinedIcon from '@material-ui/icons/LocalPharmacyOutlined'
 import { makeStyles } from '@material-ui/core/styles'
+import Link from '@material-ui/core/Link'
+
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
@@ -70,61 +72,90 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: theme.palette.success.dark
     }
+  },
+  submitgrey: {
+    margin: theme.spacing(1, 0, 2),
+    backgroundColor: theme.palette.text.secondary,
+    '&:hover': {
+      backgroundColor: theme.palette.success.dark
+    }
+  },
+  submitred: {
+    margin: theme.spacing(1, 0, 2),
+    backgroundColor: theme.palette.error.main,
+    '&:hover': {
+      backgroundColor: theme.palette.error.secondary
+    }
+  },
+  avatargrey: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+    backgroundColor: theme.palette.text.secondary
   }
 }))
 
-const IndividualPrescription = (props) => {
+const Prescription = (props) => {
 
   const classes = useStyles()
 
-  const [user, setUser] = useState({})
-  const [prescriptions, setPrescriptions] = useState([])
+  const [prescription, setPrescription] = useState({})
+  const [medicine, setMedicine] = useState({})
+  const [reminders, setReminders] = useState([])
 
   const [errors, setErrors] = useState([])
 
-  // api/reminders/users/
 
-  const userHook = () => {
-    axios.get('/api/profile/', {
-      headers: { Authorization: `Bearer ${Auth.getToken()}` }
-    })
-      .then((resp) => {
-        setUser(resp.data)
-      })
-      .catch(err => setErrors(err.response.data))
-  }
   const prescriptionHook = () => {
-    axios.get('/api/prescriptions/user/', {
+    const id = props.match.params.id
+    axios.get(`/api/prescriptions/${id}/`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then((resp) => {
         const data = resp.data
-        const medicineInfo = data.map(ele => ele.medicine)
-        setPrescriptions(resp.data)
+        setMedicine(data.medicine)
+        setPrescription(resp.data)
       })
       .catch(err => setErrors(err.response.data))
   }
-  const handleCreate = (e) => {
+  const reminderHook = () => {
+    const id = parseInt(props.match.params.id)
+    axios.get('/api/reminders/user/', {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then((resp) => {
+        const data1 = resp.data
+        const specific = data1.filter(ele => ele.prescription.id === id)
+        setReminders(specific)
+        console.log(specific)
+      })
+      .catch(err => setErrors(err.response.data))
+  }
+  const handleReturn = (e) => {
     e.preventDefault()
-    props.history.push('/prescriptions/create/')
+    props.history.push('/prescriptions/')
   }
 
 
-  useEffect(userHook, [])
   useEffect(prescriptionHook, [])
+  useEffect(reminderHook, [])
 
 
 
-
+  if (reminders === [] || medicine === {}) return <div>loading</div>
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <AccountCircleOutlinedIcon />
+          <LocalPharmacyOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h4">
-          Profile
+          {medicine.name}
+        </Typography>
+        <Typography component="h3" variant="caption" className={classes.title}>
+          <Link href={medicine.url} color="inherit">
+            More Information
+          </Link>
         </Typography>
         <Button
           type="submit"
@@ -133,44 +164,38 @@ const IndividualPrescription = (props) => {
           color="primary"
           className={classes.submit}
         >
-          Edit Profile
+          Edit Prescription
         </Button>
-        <Typography component="h2" variant="h6" className={classes.title}>
-          Username
+        <Typography component="h2" variant="h6" >
+          Number of doses a day
         </Typography>
         <Typography component="h1" variant="subtitle1" color="textSecondary">
-          {user.username}
+          {prescription.number_days_doses}
         </Typography>
-        <Typography component="h2" variant="h6" className={classes.title}>
-          Email
-        </Typography>
-        <Typography component="h1" variant="subtitle1" color="textSecondary">
-          {user.email}
-        </Typography>
-        <Typography component="h2" variant="h6" className={classes.title}>
-          Mobile
+        <Typography component="h2" variant="h6">
+          Repeats until appointment
         </Typography>
         <Typography component="h1" variant="subtitle1" color="textSecondary">
-          {user.mobile ? user.mobile : 'No mobile entered'}
+          {prescription.number_repeats}
         </Typography>
-        <Typography component="h2" variant="h6" className={classes.title}>
-          Current Prescriptions
+        <Typography component="h2" variant="h6">
+          Current Reminders
         </Typography>
         <div className={classes.root}>
-          {prescriptions ?
-            prescriptions.map((ele, i) => {
+          {reminders ?
+            reminders.map((ele, i) => {
 
               return (
 
                 <Paper className={classes.grid} key={i}>
                   <Grid container spacing={2} >
-                    <Grid item xs={9} className={classes.centeralign} >
+                    <Grid item xs={10} className={classes.centeralign} >
                       <Typography component="h3" variant="subtitle1" color="textSecondary" >
-                        {ele.medicine.name}
+                        {ele.reminder_type}
                       </Typography>
                     </Grid>
                     <Grid item>
-                      <Avatar className={classes.avatar} >
+                      <Avatar className={classes.avatargrey} >
                         <EditOutlinedIcon fontSize="small" />
                       </Avatar>
                     </Grid>
@@ -182,7 +207,7 @@ const IndividualPrescription = (props) => {
             }) :
             <div className={classes.altinput}>
               <Typography component="h1" variant="subtitle1" color="textSecondary">
-                You currently have no prescriptions
+                You currently have no reminderes
               </Typography>
               <Button
                 type="submit"
@@ -190,13 +215,41 @@ const IndividualPrescription = (props) => {
                 variant="contained"
                 color="primary"
                 className={classes.altsubmit}
-                onClick = {(e)=>handleCreate(e)}
+              // onClick = {(e)=>handleCreate(e)}
               >
-                Create new prescription
+                Add new reminder
               </Button>
             </div>
           }
         </div>
+        <Grid container spacing={2} >
+          <Grid item xs={6} className={classes.centeralign} >
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submitgrey}
+              onClick={(e) => handleReturn(e)}
+
+            >
+              Back
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              className={classes.submitred}
+            >
+              Delete
+            </Button>
+          </Grid>
+        </Grid>
+
+
 
 
       </div>
@@ -205,4 +258,4 @@ const IndividualPrescription = (props) => {
 
 }
 
-export default IndividualPrescription
+export default Prescription

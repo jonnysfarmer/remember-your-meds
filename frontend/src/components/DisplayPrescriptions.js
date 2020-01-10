@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Avatar from '@material-ui/core/Avatar'
 import Switch from '@material-ui/core/Switch'
+import Link from '@material-ui/core/Link'
+
 
 import Box from '@material-ui/core/Box'
 import { red, green } from '@material-ui/core/colors'
@@ -32,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   avatar: {
     width: theme.spacing(4),
     height: theme.spacing(4),
-    backgroundColor: theme.palette.success.main
+    backgroundColor: theme.palette.text.secondary
   },
   boxdisplay: {
     marginLeft: theme.spacing(1),
@@ -73,7 +75,6 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
         const specific = data1.filter(ele => ele.prescription.id === presID)
 
         setReminder(specific)
-
 
       })
       .catch(err => setErrors(err.response.data))
@@ -138,7 +139,9 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
               </Grid>
               <Grid item>
                 <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                  more information
+                  <Link href={`#/prescriptions/${presID}`} color="inherit">
+                    More Information
+                  </Link>
                 </Typography>
               </Grid>
             </Grid>

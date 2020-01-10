@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   title: {
-    color: theme.palette.success.main
+    // color: theme.palette.success.main
   },
   grid: {
     padding: theme.spacing(2),
@@ -70,6 +70,11 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: theme.palette.success.dark
     }
+  },
+  avatargrey: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+    backgroundColor: theme.palette.text.secondary
   }
 }))
 
@@ -170,13 +175,13 @@ const Profile = (props) => {
 
                 <Paper className={classes.grid} key={i}>
                   <Grid container spacing={2} >
-                    <Grid item xs={9} className={classes.centeralign} >
+                    <Grid item xs={10} className={classes.centeralign} >
                       <Typography component="h3" variant="subtitle1" color="textSecondary" >
                         {ele.medicine.name}
                       </Typography>
                     </Grid>
                     <Grid item>
-                      <Avatar className={classes.avatar} >
+                      <Avatar className={classes.avatargrey} >
                         <EditOutlinedIcon fontSize="small" />
                       </Avatar>
                     </Grid>
