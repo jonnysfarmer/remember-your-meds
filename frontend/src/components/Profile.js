@@ -165,7 +165,7 @@ const Profile = (props) => {
                 <Paper className={classes.grid} key={i}>
                   <Grid container spacing={2} >
                     <Grid item xs={9} className={classes.centeralign} >
-                      <Typography component="h1" variant="h6" color="textSecondary" >
+                      <Typography component="h3" variant="subtitle1" color="textSecondary" >
                         {ele.medicine.name}
                       </Typography>
                     </Grid>
