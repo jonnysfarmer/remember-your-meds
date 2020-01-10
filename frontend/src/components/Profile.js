@@ -84,7 +84,7 @@ const Profile = (props) => {
   const classes = useStyles()
 
   const [user, setUser] = useState({})
-  const [prescriptions, setPrescriptions] = useState([])
+  const [prescriptions, setPrescriptions] = useState('')
 
   const [errors, setErrors] = useState([])
 
@@ -107,8 +107,14 @@ const Profile = (props) => {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then((resp) => {
-
-        setPrescriptions(resp.data)
+        const data = resp.data
+        if (data.length === 0) {
+          console.log('test')
+          setPrescriptions('')
+        } else {
+          setPrescriptions(resp.data)
+        }
+        
       })
       .catch(err => setErrors(err.response.data))
   }
@@ -180,7 +186,7 @@ const Profile = (props) => {
                       <Typography component="h3" variant="subtitle1" color="textSecondary" >
                         <Link href={`#/prescriptions/${ele.id}`} color="inherit">
                           {ele.medicine.name}
-                         </Link>
+                        </Link>
                       </Typography>
                     </Grid>
                     <Grid item>

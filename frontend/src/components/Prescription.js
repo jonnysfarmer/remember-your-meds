@@ -100,7 +100,7 @@ const Prescription = (props) => {
 
   const [prescription, setPrescription] = useState({})
   const [medicine, setMedicine] = useState({})
-  const [reminders, setReminders] = useState([])
+  const [reminders, setReminders] = useState('')
 
   const [errors, setErrors] = useState([])
 
@@ -125,8 +125,14 @@ const Prescription = (props) => {
       .then((resp) => {
         const data1 = resp.data
         const specific = data1.filter(ele => ele.prescription.id === id)
-        setReminders(specific)
         console.log(specific)
+        if (specific.length === 0) {
+          console.log('test')
+          setReminders('')
+        } else {
+          setReminders(specific)
+        }
+
       })
       .catch(err => setErrors(err.response.data))
   }
@@ -136,17 +142,17 @@ const Prescription = (props) => {
   }
   const handleDelete = (e) => {
     e.preventDefault()
-    const id= props.match.params.id
+    const id = props.match.params.id
     axios.delete(`/api/prescriptions/${id}/`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then(()=> props.history.push('/prescriptions/'))
+      .then(() => props.history.push('/prescriptions/'))
   }
 
   useEffect(prescriptionHook, [])
   useEffect(reminderHook, [])
 
-  if (reminders === [] || medicine === {}) return <div>loading</div>
+  if (medicine === {}) return <div>loading</div>
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -187,7 +193,7 @@ const Prescription = (props) => {
           Current Reminders
         </Typography>
         <div className={classes.root}>
-          {reminders  ?
+          {reminders ?
             reminders.map((ele, i) => {
               return (
 
