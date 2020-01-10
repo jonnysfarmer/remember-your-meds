@@ -18,7 +18,7 @@ import Paper from '@material-ui/core/Paper'
 import axios from 'axios'
 import Auth from '../lib/auth'
 
-
+// Styles for Material UI
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -82,8 +82,9 @@ const Profile = (props) => {
 
   const [errors, setErrors] = useState([])
 
-  // api/reminders/users/
 
+
+  // Pull Profile Info data to display
   const userHook = () => {
     axios.get('/api/profile/', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -93,17 +94,19 @@ const Profile = (props) => {
       })
       .catch(err => setErrors(err.response.data))
   }
+
+  // Get all of your prescription info, to list prescriptions
   const prescriptionHook = () => {
     axios.get('/api/prescriptions/user/', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then((resp) => {
-        const data = resp.data
-        const medicineInfo = data.map(ele => ele.medicine)
+
         setPrescriptions(resp.data)
       })
       .catch(err => setErrors(err.response.data))
   }
+  // Pushes you to the create new prescription page
   const handleCreate = (e) => {
     e.preventDefault()
     props.history.push('/prescriptions/create/')
@@ -114,6 +117,9 @@ const Profile = (props) => {
   useEffect(prescriptionHook, [])
 
 
+  // This displays the info.
+  //it then maps through your prescriptions, displaying what you currently have
+  // if you do not have any prescriptions, it has a button to create a prescription
 
 
   return (
