@@ -25,9 +25,8 @@ class Prescription(models.Model):
     user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
     # medicine can belong to many users, and one user can have many prescriptions, but a prescription can only have one medicine
     medicine = models.ForeignKey(Medicine, related_name='medicine', on_delete=models.CASCADE)
-    # we can calculate based on number doses + doses_per_day when you'll next run out and therefore alert you to renew prescription
-    number_doses = models.IntegerField(blank=True, null=True)
-    doses_per_day = models.IntegerField(blank=True, null=True)
+    # we ask user to enter the number of DAYS DOSAGE their prescription contains
+    number_days_doses = models.IntegerField(blank=True, null=True)
     # we can track how often we've alerted you to a prescription renewal, and compare with this to alert you to make a doctors appointment
     number_repeats = models.IntegerField(blank=True, null=True)
     # including optional doctor id in case we get to stretch goals

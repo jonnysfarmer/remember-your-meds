@@ -19,6 +19,7 @@ import { useStyles, theme } from '../styles/styles'
 import { PrescriptionIcon } from '../styles/icons'
 
 import axios from 'axios'
+import { Divider } from '@material-ui/core'
 
 
 const CreatePrescription = (props) => {
@@ -37,31 +38,34 @@ const CreatePrescription = (props) => {
 
   //collecting and calculating medicine
   const formData = {
+    //for the dB
     medicine: '',
-    number_doses: '',
-    number_presc_doses: '',
-    doses_per_day: '',
-    number_repeats: ''
+    number_days_doses: '',
+    number_repeats: '',
+    //for calculations here
+    number_days_doses_remaining: '' //number of days doses you have left at time of filling form
   }
 
-  //get number of days remaining now
-  //use that to calculate when repeat reminder is due (doses left = 0 minus 7 days)
 
-  //DONE get number of tablets (or doses) on prescription 
-  //get the number of tablets (or doses) to take per day
-  //store that in db for calculating next repeat reminder
 
 
 
   //standard form stuff
   const handleChange = (e) => {
-    console.log('handling change')
-    setData({ ...data, [e.target.name]: e.target.value })
-    setErrors({})
+    if (e.target.id.substring(0, 3) === 'med') {
+      const fieldId = e.target.id.split('-')
+      console.log(medicine[fieldId[2]].name)
+      const med = (medicine[fieldId[2]].id)
+      setData({ ...data, ['medicine']: med })
+    } else {
+      setData({ ...data, [e.target.name]: e.target.value })
+      setErrors({})
+    }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log(data)
     // axios.post('/api/register/', registerInfo)
     //   .then(() => console.log('registered'))
     //   .catch((err) => {
@@ -84,20 +88,25 @@ const CreatePrescription = (props) => {
         <Avatar className={classes.avatar}>
           <PrescriptionIcon />
         </Avatar>
-        <Typography component='h1' variant='h4'>
+        {/* <Typography component='h1' variant='h4'>
           Prescription
-        </Typography>
+        </Typography> */}
 
         <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
           <ThemeProvider theme={theme}>
+            <Typography component='h2' variant='h5'>
+              From your prescription:
+            </Typography>
+            <Divider />
             <Autocomplete
               freeSolo
+              id='medicine'
               options={medicine.map(option => option.name)}
+              onChange={(e) => handleChange(e)}
+              // onChange={(e) => handleChange(e.target.value)}
               renderInput={params => (
                 <TextField {...params}
-                  id='medicine'
                   label='Medicine name'
-                  name='medicine'
                   type='text'
                   required
                   error={err.medicine && true}
@@ -105,19 +114,48 @@ const CreatePrescription = (props) => {
                   variant='outlined'
                   fullWidth
                   margin='normal'
-                  onChange={(e) => handleChange(e)}
                 />
               )}
             />
-
             <TextField
-              id='dosesOnPresc'
+              id='number_days_doses'
               label='Number of days doses on prescription'
-              name='dosesOnPresc'
+              name='number_days_doses'
               type='number'
               required
               error={err.number_presc_doses && true}
               helperText={'e.g. if you take 3 tablets per day, that is 1 days dose'}
+              variant='outlined'
+              fullWidth
+              margin='normal'
+              onChange={(e) => handleChange(e)}
+            />
+            <TextField
+              id='number_repeats'
+              label='Number of prescription repeats'
+              name='number_repeats'
+              type='number'
+              required
+              error={err.number_presc_doses && true}
+              // helperText={}
+              variant='outlined'
+              fullWidth
+              margin='normal'
+              onChange={(e) => handleChange(e)}
+            />
+
+            <Typography component='h2' variant='h5'>
+              In your cupboard:
+            </Typography>
+            <Divider />
+            <TextField
+              id='number_days_doses_remaining'
+              label='How many days doses do you have left?'
+              name='number_days_doses_remaining'
+              type='number'
+              required
+              error={err.number_presc_doses && true}
+              helperText={'do not include today'}
               variant='outlined'
               fullWidth
               margin='normal'
