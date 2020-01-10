@@ -187,7 +187,7 @@ const Prescription = (props) => {
           Current Reminders
         </Typography>
         <div className={classes.root}>
-          {reminders ?
+          {reminders  ?
             reminders.map((ele, i) => {
               return (
 
