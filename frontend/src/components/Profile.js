@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import Avatar from '@material-ui/core/Avatar'
-import LocalPharmacyOutlinedIcon from '@material-ui/icons/LocalPharmacyOutlined'
+import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
 import { makeStyles } from '@material-ui/core/styles'
 
 
@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import axios from 'axios'
 import Auth from '../lib/auth'
-import DisplayPrescriptions from './DisplayPrescriptions'
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -41,31 +41,39 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Prescriptions = (props) => {
+const Profile = () => {
 
   const classes = useStyles()
 
-  const [data, setData] = useState([])
+  const [user, setUser] = useState([])
+  const [prescriptions, setPrescriptions] = useState([])
+
   const [errors, setErrors] = useState([])
 
   // api/reminders/users/
 
-  const dataHook = () => {
+  const userHook = () => {
+    axios.get('/api/profile/', {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then((resp) => {
+        setUser(resp.data)
+      })
+      .catch(err => setErrors(err.response.data))
+  }
+  const prescriptionHook = () => {
     axios.get('/api/prescriptions/user/', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then((resp) => {
-        setData(resp.data)
+        setPrescriptions(resp.data)
       })
       .catch(err => setErrors(err.response.data))
   }
-  
-  const handleCreate = (e) => {
-    e.preventDefault()
-    props.history.push('/prescriptions/create/')
-  }
 
-  useEffect(dataHook, [])
+
+  useEffect(userHook, [])
+  useEffect(prescriptionHook, [])
 
   // console.log(data)
 
@@ -74,10 +82,10 @@ const Prescriptions = (props) => {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LocalPharmacyOutlinedIcon />
+          <AccountCircleOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h4">
-          My Prescriptions
+          Profile
         </Typography>
         <Button
           type="submit"
@@ -85,15 +93,10 @@ const Prescriptions = (props) => {
           variant="contained"
           color="primary"
           className={classes.submit}
-          onClick = {(e)=>handleCreate(e)}
         >
-          Create new Prescription
+          Edit Profile
         </Button>
-        {data.map((ele, i) => {
-          return (
-            <DisplayPrescriptions key={i} data={ele} medicine={ele.medicine} presID={ele.id} />
-          )
-        })}
+          {user.email}
 
       </div>
     </Container>
@@ -101,4 +104,4 @@ const Prescriptions = (props) => {
 
 }
 
-export default Prescriptions
+export default Profile

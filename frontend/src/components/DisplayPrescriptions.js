@@ -12,9 +12,6 @@ import Box from '@material-ui/core/Box'
 import { red, green } from '@material-ui/core/colors'
 
 
-
-
-
 import { theme } from '../styles/styles'
 
 import axios from 'axios'
@@ -125,8 +122,6 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
                               checked={ele.active || ''}
                               onChange={handleChange(ele.id, i)}
                               value="active"
-                              // color="primary"
-                              // disabled={{ backgroundColor: 'red' }} 
                               inputProps={{ 'aria-label': 'secondary checkbox' }}
                             />
                           </ThemeProvider>

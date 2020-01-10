@@ -1,6 +1,7 @@
 
 import { green } from '@material-ui/core/colors'
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles'
+import { palette } from '@material-ui/system'
 
 //================================
 // SETTINGS

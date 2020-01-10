@@ -53,8 +53,8 @@ function ResponsiveDrawer(props) {
       <ThemeProvider theme={theme}>
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
-            {(location === '/prescriptions' || location === '/prescriptions/create/' || location === 'profile/' ||
-              location === '/prescriptions/' || location === '/prescriptions/create' || location === 'profile')
+            {(location === '/prescriptions' || location === '/prescriptions/create/' || location === '/profile/' ||
+              location === '/prescriptions/' || location === '/prescriptions/create' || location === '/profile')
               &&
               <IconButton
                 color="inherit"
