@@ -24,37 +24,41 @@ import axios from 'axios'
 const CreatePrescription = (props) => {
 
   const classes = useStyles()
+  const [medicine, setMedicine] = useState([])
   const [data, setData] = useState(formData)
   const [err, setErrors] = useState({})
 
   // //get the list of medicines so we can fill out the autocomplete field (refactor this out I think)
-  
-  const medicineList = () => {
-    
-  }
   const getMedicines = () => {
-    const [medicine, setMedicine] = useState([])
     axios.get('/api/medicines/')
       .then(resp => setMedicine(resp.data))
       .catch(err => setErrors(err))
   }
 
+  //collecting and calculating medicine
   const formData = {
+    medicine: '',
     number_doses: '',
+    number_presc_doses: '',
     doses_per_day: '',
     number_repeats: ''
   }
 
+  //get number of days remaining now
+  //use that to calculate when repeat reminder is due (doses left = 0 minus 7 days)
 
-  
+  //DONE get number of tablets (or doses) on prescription 
+  //get the number of tablets (or doses) to take per day
+  //store that in db for calculating next repeat reminder
 
-  
 
-  // const handleChange = (e) => {
-  //   setData({ ...data, [e.target.name]: e.target.value })
-  //   setErrors({})
-  //   console.log(data)
-  // }
+
+  //standard form stuff
+  const handleChange = (e) => {
+    console.log('handling change')
+    setData({ ...data, [e.target.name]: e.target.value })
+    setErrors({})
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -66,48 +70,70 @@ const CreatePrescription = (props) => {
     //   })
   }
 
+  //on mount
+  useEffect(() => {
+    getMedicines()
+  }, [])
 
+
+  console.log(data)
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <PrescriptionIcon />
         </Avatar>
-        <Typography component="h1" variant="h4">
+        <Typography component='h1' variant='h4'>
           Prescription
         </Typography>
 
         <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
           <ThemeProvider theme={theme}>
-          
-
             <Autocomplete
-              id="medicine"
-              options={getMedicines()}
-              getOptionLabel={option => option.title}
+              freeSolo
+              options={medicine.map(option => option.name)}
               renderInput={params => (
                 <TextField {...params}
-                  error={err.medicine && true}
-                  variant="outlined"
+                  id='medicine'
+                  label='Medicine name'
+                  name='medicine'
+                  type='text'
                   required
-                  fullWidth
-                  label={err.username ? 'Error' : 'Medicine name'}
-                  name="medicine"
+                  error={err.medicine && true}
                   helperText={err.medicine}
-                // onChange={(e) => handleChange(e)}
+                  variant='outlined'
+                  fullWidth
+                  margin='normal'
+                  onChange={(e) => handleChange(e)}
                 />
               )}
+            />
+
+            <TextField
+              id='dosesOnPresc'
+              label='Number of days doses on prescription'
+              name='dosesOnPresc'
+              type='number'
+              required
+              error={err.number_presc_doses && true}
+              helperText={'e.g. if you take 3 tablets per day, that is 1 days dose'}
+              variant='outlined'
+              fullWidth
+              margin='normal'
+              onChange={(e) => handleChange(e)}
             />
 
 
 
 
+
+
             <Button
-              type="submit"
+              type='submit'
               fullWidth
-              variant="contained"
-              color="primary"
+              variant='contained'
+              color='primary'
               className={classes.submit}
             >
               Register
