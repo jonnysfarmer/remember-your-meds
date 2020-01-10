@@ -73,7 +73,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Profile = (props) => {
+const IndividualPrescription = (props) => {
 
   const classes = useStyles()
 
@@ -205,4 +205,4 @@ const Profile = (props) => {
 
 }
 
-export default Profile
+export default IndividualPrescription
