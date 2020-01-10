@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
+import Link from '@material-ui/core/Link'
 
 
 
@@ -177,7 +178,9 @@ const Profile = (props) => {
                   <Grid container spacing={2} >
                     <Grid item xs={10} className={classes.centeralign} >
                       <Typography component="h3" variant="subtitle1" color="textSecondary" >
-                        {ele.medicine.name}
+                        <Link href={`#/prescriptions/${ele.id}`} color="inherit">
+                          {ele.medicine.name}
+                         </Link>
                       </Typography>
                     </Grid>
                     <Grid item>
@@ -201,7 +204,7 @@ const Profile = (props) => {
                 variant="contained"
                 color="primary"
                 className={classes.altsubmit}
-                onClick = {(e)=>handleCreate(e)}
+                onClick={(e) => handleCreate(e)}
               >
                 Create new prescription
               </Button>
