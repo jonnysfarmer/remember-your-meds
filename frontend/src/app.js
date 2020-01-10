@@ -30,7 +30,6 @@ const App = () => {
         <Route exact path="/prescriptions/:id" component={Prescription} />
         <Route exact path="/prescriptions/:id/edit" component={EditPrescription} />
         <Route exact path='/profile' component={Profile} />
-
       </Switch>
     </HashRouter>
   )
