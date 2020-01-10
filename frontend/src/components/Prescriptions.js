@@ -6,17 +6,42 @@ import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import Avatar from '@material-ui/core/Avatar'
 import LocalPharmacyOutlinedIcon from '@material-ui/icons/LocalPharmacyOutlined'
-import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
 
-import { useStyles } from '../styles/styles'
+// import { useStyles, theme } from '../styles/styles'
 
 import axios from 'axios'
 import Auth from '../lib/auth'
 import DisplayPrescriptions from './DisplayPrescriptions'
 
 
-const Prescriptions = () => {
+const useStyles = makeStyles(theme => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.success.main
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    margin: theme.spacing(1)
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: theme.palette.success.main,
+    '&:hover': {
+      backgroundColor: theme.palette.success.dark
+    }
+
+  }
+}))
+
+const Prescriptions = (props) => {
 
   const classes = useStyles()
 
@@ -33,6 +58,11 @@ const Prescriptions = () => {
         setData(resp.data)
       })
       .catch(err => setErrors(err.response.data))
+  }
+  
+  const handleCreate = (e) => {
+    e.preventDefault()
+    props.history.push('/prescriptions/create/')
   }
 
   useEffect(dataHook, [])
@@ -55,6 +85,7 @@ const Prescriptions = () => {
           variant="contained"
           color="primary"
           className={classes.submit}
+          onClick = {(e)=>handleCreate(e)}
         >
           Create new Prescription
         </Button>

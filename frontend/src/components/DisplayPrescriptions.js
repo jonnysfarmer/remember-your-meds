@@ -7,15 +7,12 @@ import Typography from '@material-ui/core/Typography'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Avatar from '@material-ui/core/Avatar'
 import Switch from '@material-ui/core/Switch'
-import { ThemeProvider } from '@material-ui/core/styles'
+
 import Box from '@material-ui/core/Box'
 import { red, green } from '@material-ui/core/colors'
 
 
 
-
-
-import { theme } from '../styles/styles'
 
 import axios from 'axios'
 import Auth from '../lib/auth'
@@ -61,7 +58,7 @@ const SwitchonOFF = withStyles({
 })(Switch)
 
 
-const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
+const DisplayPrescriptions = ({ medicine, presID }) => {
 
   const [reminders, setReminder] = useState([])
   const [errors, setErrors] = useState([])
@@ -74,7 +71,7 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
       .then((resp) => {
         const data1 = resp.data
         const specific = data1.filter(ele => ele.prescription.id === presID)
-      
+
         setReminder(specific)
 
 
@@ -101,6 +98,7 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
   useEffect(dataHook, [])
 
   const classes = useStyles()
+  console.log(reminders)
 
 
   if (medicine === null || reminders === []) return <div>Loading</div>
@@ -119,17 +117,13 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
                     <Typography component="div" variant="caption" color="textSecondary" key={i}>
                       <Grid component="label" container alignItems="center" spacing={0}>
                         <Grid item>
-                          <ThemeProvider theme={theme}>
-                            <SwitchonOFF
-                              size="small"
-                              checked={ele.active || ''}
-                              onChange={handleChange(ele.id, i)}
-                              value="active"
-                              // color="primary"
-                              // disabled={{ backgroundColor: 'red' }} 
-                              inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            />
-                          </ThemeProvider>
+                          <SwitchonOFF
+                            size="small"
+                            checked={ele.active || ''}
+                            onChange={handleChange(ele.id, i)}
+                            value="active"
+                            inputProps={{ 'aria-label': 'secondary checkbox' }}
+                          />
                         </Grid>
                         <Grid item >
                           <Box className={classes.boxdisplay}>
