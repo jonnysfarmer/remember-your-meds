@@ -7,12 +7,12 @@ import Typography from '@material-ui/core/Typography'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Avatar from '@material-ui/core/Avatar'
 import Switch from '@material-ui/core/Switch'
-import { ThemeProvider } from '@material-ui/core/styles'
+
 import Box from '@material-ui/core/Box'
 import { red, green } from '@material-ui/core/colors'
 
 
-import { theme } from '../styles/styles'
+
 
 import axios from 'axios'
 import Auth from '../lib/auth'
@@ -58,7 +58,7 @@ const SwitchonOFF = withStyles({
 })(Switch)
 
 
-const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
+const DisplayPrescriptions = ({ medicine, presID }) => {
 
   const [reminders, setReminder] = useState([])
   const [errors, setErrors] = useState([])

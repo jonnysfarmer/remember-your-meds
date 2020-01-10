@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 
 
+
 // import { useStyles, theme } from '../styles/styles'
 
 import axios from 'axios'
@@ -57,10 +58,22 @@ const useStyles = makeStyles(theme => ({
   centeralign: {
     alignItems: 'center',
     display: 'flex'
-  }
+  },
+  altinput: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  altsubmit: {
+    margin: theme.spacing(1, 0, 2),
+    backgroundColor: theme.palette.success.main,
+    '&:hover': {
+      backgroundColor: theme.palette.success.dark
+    }
+  },
 }))
 
-const Profile = () => {
+const Profile = (props) => {
 
   const classes = useStyles()
 
@@ -87,10 +100,13 @@ const Profile = () => {
       .then((resp) => {
         const data = resp.data
         const medicineInfo = data.map(ele => ele.medicine)
-        // console.log(medicineInfo)
         setPrescriptions(resp.data)
       })
       .catch(err => setErrors(err.response.data))
+  }
+  const handleCreate = (e) => {
+    e.preventDefault()
+    props.history.push('/prescriptions/create/')
   }
 
 
@@ -98,8 +114,6 @@ const Profile = () => {
   useEffect(prescriptionHook, [])
 
 
-  console.log(user)
-  console.log(prescriptions)
 
 
   return (
@@ -143,28 +157,45 @@ const Profile = () => {
           Current Prescriptions
         </Typography>
         <div className={classes.root}>
-          {prescriptions.map((ele, i) => {
+          {prescriptions ?
+            prescriptions.map((ele, i) => {
 
-            return (
+              return (
 
-              <Paper className={classes.grid} key={i}>
-                <Grid container spacing={2} >
-                  <Grid item xs={9} className={classes.centeralign} >
-                    <Typography component="h1" variant="h6" color="textSecondary" >
-                      {ele.medicine.name}
-                    </Typography>
+                <Paper className={classes.grid} key={i}>
+                  <Grid container spacing={2} >
+                    <Grid item xs={9} className={classes.centeralign} >
+                      <Typography component="h1" variant="h6" color="textSecondary" >
+                        {ele.medicine.name}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Avatar className={classes.avatar} >
+                        <EditOutlinedIcon fontSize="small" />
+                      </Avatar>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <Avatar className={classes.avatar} >
-                      <EditOutlinedIcon fontSize="small" />
-                    </Avatar>
-                  </Grid>
-                </Grid>
-              </Paper>
+                </Paper>
 
 
-            )
-          })}
+              )
+            }) :
+            <div className={classes.altinput}>
+              <Typography component="h1" variant="subtitle1" color="textSecondary">
+                You currently have no prescriptions
+              </Typography>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.altsubmit}
+                onClick = {(e)=>handleCreate(e)}
+              >
+                Create new prescription
+              </Button>
+            </div>
+          }
         </div>
 
 
