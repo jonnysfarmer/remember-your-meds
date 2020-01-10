@@ -20,7 +20,8 @@ const CreateReminder = () => {
 
   const classes = useStyles()
 
-  const [reminders, setReminders] = useState({})
+  const [reminders, setReminders] = useState()
+  const [active, setActive] = useState()
 
   //===== INITIAL PAGE DATA
   //----- Medicine Name (prescription.medicine -> medicine.id, medicine.name)
@@ -31,7 +32,7 @@ const CreateReminder = () => {
 
 
   // ORDER REPEAT
-  //---- Get reminder Id
+  //---- Get prescription Id
   const presId = 22
   //---- Call API for Reminder info and then filter by prescription ID
   const getReminderByPrescription = () => {
@@ -39,12 +40,21 @@ const CreateReminder = () => {
     axios.get('/api/reminders/user/', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      // .then(resp => setReminders(resp.data.filter(ele => ele.prescription.id === presId)))
-      .then(resp => console.log(resp.data))
+      .then(resp => setReminders(resp.data.filter(ele => ele.prescription.id === presId)))
       .catch(err => console.log(err.response.data))
   }
+
   //---- Get status of reminder to order
-    
+  //If reminders not yet set, console log waiting
+  // if (!reminders) { console.log('waiting on reminders') }
+  //Once they're set, map them and set the fields we need
+  // else {
+    // reminders.map((ele, i) => {
+    //   setActive(ele.active)
+    // })
+  // }
+   
+
   // user turns on
   // user needs to enter number of days doses left in their cupboard
   // user needs to confirm how many repeats they have left
@@ -68,7 +78,7 @@ const CreateReminder = () => {
   }, [])
 
   if (!reminders) return <div>Loading</div>
-  console.log(reminders)
+  // console.log(reminders)
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />

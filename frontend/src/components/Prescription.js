@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -7,7 +8,7 @@ import Container from '@material-ui/core/Container'
 import Avatar from '@material-ui/core/Avatar'
 import LocalPharmacyOutlinedIcon from '@material-ui/icons/LocalPharmacyOutlined'
 import { makeStyles } from '@material-ui/core/styles'
-import Link from '@material-ui/core/Link'
+// import Link from '@material-ui/core/Link'
 
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Grid from '@material-ui/core/Grid'
@@ -126,7 +127,7 @@ const Prescription = (props) => {
         const data1 = resp.data
         const specific = data1.filter(ele => ele.prescription.id === id)
         setReminders(specific)
-        console.log(specific)
+        // console.log(specific)
       })
       .catch(err => setErrors(err.response.data))
   }
@@ -136,11 +137,11 @@ const Prescription = (props) => {
   }
   const handleDelete = (e) => {
     e.preventDefault()
-    const id= props.match.params.id
+    const id = props.match.params.id
     axios.delete(`/api/prescriptions/${id}/`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then(()=> props.history.push('/prescriptions/'))
+      .then(() => props.history.push('/prescriptions/'))
   }
 
   useEffect(prescriptionHook, [])
@@ -197,6 +198,23 @@ const Prescription = (props) => {
                       <Typography component="h3" variant="subtitle1" color="textSecondary" >
                         {ele.reminder_type}
                       </Typography>
+
+
+                      {/* TEMP */}
+                      <div>
+                        {/* {console.log(`/prescriptions/${ele.user.id}/add-reminder`)} */}
+                        <Link
+                          to={{
+                            pathname: `/prescriptions/${ele.user.id}/add-reminder`,
+                            state: { reminderType: ele.reminder_type }
+                          }}
+                        >LINK</Link>
+                      </div>
+                      {/* END TEMP */}
+
+
+
+
                     </Grid>
                     <Grid item>
                       <Avatar className={classes.avatargrey} >
