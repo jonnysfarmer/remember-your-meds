@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
@@ -9,6 +9,8 @@ import Avatar from '@material-ui/core/Avatar'
 import Switch from '@material-ui/core/Switch'
 import { ThemeProvider } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
+import { red, green } from '@material-ui/core/colors'
+
 
 
 
@@ -38,21 +40,32 @@ const useStyles = makeStyles(theme => ({
   boxdisplay: {
     marginLeft: theme.spacing(1),
     color: theme.palette.text.primary
-
   }
-}))
 
-// ('take', 'Take medicine'),
-// ('order a prescription for', 'Order prescription'),
-// ('make an appointment for', 'Make doctors appointment')
+}))
+const SwitchonOFF = withStyles({
+  switchBase: {
+    color: red[500],
+    '&$checked': {
+      color: green[500]
+    },
+    '&$checked + $track': {
+      backgroundColor: green[500]
+    },
+    '& + $track': {
+      backgroundColor: red[500]
+    }
+  },
+  checked: {},
+  track: {}
+})(Switch)
+
 
 const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
 
   const [reminders, setReminder] = useState([])
   const [errors, setErrors] = useState([])
-  const [takereminder, setTakereminder] = useState({})
-  const [orderreminder, setOrderreminder] = useState({})
-  const [appointmentreminder, setAppointmentreminder] = useState({})
+
 
   const dataHook = () => {
     axios.get('/api/reminders/user/', {
@@ -61,13 +74,9 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
       .then((resp) => {
         const data1 = resp.data
         const specific = data1.filter(ele => ele.prescription.id === presID)
-        const take = specific.filter(ele => ele.reminder_type === 'take')
-        const order = specific.filter(ele => ele.reminder_type === 'order a prescription for')
-        const appointment = specific.filter(ele => ele.reminder_type === 'make an appointment for')
+      
         setReminder(specific)
-        setTakereminder(take[0])
-        setOrderreminder(order[0])
-        setAppointmentreminder(appointment[0])
+
 
       })
       .catch(err => setErrors(err.response.data))
@@ -76,14 +85,12 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
 
   const handleChange = (name, i) => (event) => {
     const newreminders = [...reminders]
-    console.log(newreminders)
     newreminders[i].active = event.target.checked
-    console.log(newreminders)
+
     
     setReminder(newreminders)
-    // need to create a post here
     setErrors({})
-    // console.log(takereminder)
+
 
   }
 
@@ -92,11 +99,9 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
   useEffect(dataHook, [])
 
   const classes = useStyles()
-  console.log(takereminder)
-  // console.log(orderreminder)
-  // console.log(appointmentreminder)
 
-  if (medicine === null || takereminder === {} || reminders === []) return <div>Loading</div>
+
+  if (medicine === null || reminders === []) return <div>Loading</div>
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -109,22 +114,21 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
                 </Typography>
                 {reminders.map((ele, i) => {
                   return (
-                    <Typography component="div" variant="body2" color="textSecondary" key={i}>
+                    <Typography component="div" variant="caption" color="textSecondary" key={i}>
                       <Grid component="label" container alignItems="center" spacing={0}>
-                        <Grid item>Off</Grid>
                         <Grid item>
                           <ThemeProvider theme={theme}>
-                            <Switch
+                            <SwitchonOFF
                               size="small"
                               checked={ele.active || ''}
                               onChange={handleChange('active', i)}
                               value="active"
-                              color="primary"
+                              // color="primary"
+                              // disabled={{ backgroundColor: 'red' }} 
                               inputProps={{ 'aria-label': 'secondary checkbox' }}
                             />
                           </ThemeProvider>
                         </Grid>
-                        <Grid item >On</Grid>
                         <Grid item >
                           <Box className={classes.boxdisplay}>
                             Reminder to {ele.reminder_type}
