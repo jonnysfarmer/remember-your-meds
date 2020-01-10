@@ -1,120 +1,182 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+//Material UI
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
-// import Link from '@material-ui/core/Link'
-// import Box from '@material-ui/core/Box'
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import { ThemeProvider } from '@material-ui/core/styles'
-// import InputAdornment from '@material-ui/core/InputAdornment'
-// import Visibility from '@material-ui/icons/Visibility'
-// import VisibilityOff from '@material-ui/icons/VisibilityOff'
-// import IconButton from '@material-ui/core/IconButton'
-
+//Material UI our styles/icons
 import { useStyles, theme } from '../styles/styles'
 import { PrescriptionIcon } from '../styles/icons'
+//Our Libraries/Components
+import Auth from '../lib/auth'
 
-import axios from 'axios'
 
 
-const CreatePrescription = (props) => {
+const CreatePrescription = () => {
 
   const classes = useStyles()
+  const [medicine, setMedicine] = useState([])
   const [data, setData] = useState(formData)
   const [err, setErrors] = useState({})
 
   // //get the list of medicines so we can fill out the autocomplete field (refactor this out I think)
-  
-  const medicineList = () => {
-    
-  }
   const getMedicines = () => {
-    const [medicine, setMedicine] = useState([])
     axios.get('/api/medicines/')
       .then(resp => setMedicine(resp.data))
       .catch(err => setErrors(err))
   }
 
-  const formData = {
-    number_doses: '',
-    doses_per_day: '',
-    number_repeats: ''
+  //make a function to create a new medicine if needed (refactor this out)
+  const createMedicine = (x) => {
+    console.log(x)
+    //post it to medicine db
+    axios.post('/api/medicines/', x, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      //then update medicine to be the newly created id
+      .then((response) => setData({ ...data, ['medicine']: response.data.id }))
+      .catch((err) => {
+        setErrors(err.response.data)
+      })
   }
 
+  //collecting and calculating medicine
+  const formData = {
+    //for the dB
+    user: '',
+    medicine: '',
+    number_days_doses: '',
+    number_repeats: '',
+    doctor: ''
+  }
 
-  
-
-  
-
-  // const handleChange = (e) => {
-  //   setData({ ...data, [e.target.name]: e.target.value })
-  //   setErrors({})
-  //   console.log(data)
-  // }
+  //standard form stuff
+  const handleChange = (e) => {
+    if (e.target.id.substring(0, 3) === 'med') {
+      if (!e.target.value) {
+        const fieldId = e.target.id.split('-')
+        const med = (medicine[fieldId[2]].id)
+        setData({ ...data, ['medicine']: med })
+      } else {
+        //create medicine on the database
+        createMedicine({ ['name']: e.target.value })
+        // setNewMedicine({ ['name']: e.target.value })
+        setData({ ...data, ['medicine']: e.target.value })
+      }
+    } else {
+      setData({ ...data, [e.target.name]: e.target.value })
+      setErrors({})
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // axios.post('/api/register/', registerInfo)
-    //   .then(() => console.log('registered'))
-    //   .catch((err) => {
-    //     setErrors(err.response.data)
-    //     // console.log(err.response.data.password)
-    //   })
+    //add userid to data
+    const user = Auth.getUserId()
+    setData({ ...data, ['user']: user })
+
+    //POST to prescription
+    axios.post('/api/prescriptions/', data, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => console.log('added'))
+      .catch((err) => {
+        setErrors(err.response.data)
+      })
   }
 
 
+
+  //if medicine not in list
+  // - POST to medicine
+  // - GET id
+  // - update data with medicine ID rather than text
+  //when medicine has id (originally in list, or added)
+  // - POST to prescription
+
+
+  //on mount
+  useEffect(() => {
+    getMedicines()
+  }, [])
+
+  // console.log(data)
+
+
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <PrescriptionIcon />
         </Avatar>
-        <Typography component="h1" variant="h4">
+        <Typography component='h1' variant='h4'>
           Prescription
         </Typography>
 
         <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
           <ThemeProvider theme={theme}>
-          
-
             <Autocomplete
-              id="medicine"
-              options={getMedicines()}
-              getOptionLabel={option => option.title}
+              freeSolo
+              id='medicine'
+              options={medicine.map(option => option.name)}
+              onChange={(e) => handleChange(e)}
+              onBlur={(e) => handleChange(e)}
               renderInput={params => (
                 <TextField {...params}
-                  error={err.medicine && true}
-                  variant="outlined"
+                  label='Medicine name'
+                  type='text'
                   required
-                  fullWidth
-                  label={err.username ? 'Error' : 'Medicine name'}
-                  name="medicine"
+                  error={err.medicine && true}
                   helperText={err.medicine}
-                // onChange={(e) => handleChange(e)}
+                  variant='outlined'
+                  fullWidth
+                  margin='normal'
                 />
               )}
             />
-
-
-
+            <TextField
+              id='number_days_doses'
+              label='Number of days doses on prescription'
+              name='number_days_doses'
+              type='number'
+              required
+              error={err.number_presc_doses && true}
+              helperText={'e.g. if you take 3 tablets per day, that is 1 days dose'}
+              variant='outlined'
+              fullWidth
+              margin='normal'
+              onChange={(e) => handleChange(e)}
+            />
+            <TextField
+              id='number_repeats'
+              label='Number of prescription repeats'
+              name='number_repeats'
+              type='number'
+              required
+              error={err.number_presc_doses && true}
+              // helperText={}
+              variant='outlined'
+              fullWidth
+              margin='normal'
+              onChange={(e) => handleChange(e)}
+            />
 
             <Button
-              type="submit"
+              type='submit'
               fullWidth
-              variant="contained"
-              color="primary"
+              variant='contained'
+              color='primary'
               className={classes.submit}
             >
-              Register
+              Add prescription
             </Button>
-
           </ThemeProvider>
-
         </form>
       </div>
     </Container>

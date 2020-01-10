@@ -5,6 +5,10 @@ not setting up cron job/tasking system like RabbitMQ which would be needed to sc
 so have them set as management commands so we can run them on command
 can we setup that to trigger on a button click :think:
 
+
+Material UI, while it looks nice and gives you some stuff out of the box that saves time, it does seem to require you to import a lot of varied stuff to make it work, and if you need to overwrite some of their stylings it get complicated
+It also gets complicated when handling submits
+
 _logo goes here_
 
 by [JenniKate Wallace](https://github.com/jennikate), [Jonny Farmer](https://github.com/jonnysfarmer)
