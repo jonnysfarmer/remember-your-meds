@@ -64,7 +64,7 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
         const take = specific.filter(ele => ele.reminder_type === 'take')
         const order = specific.filter(ele => ele.reminder_type === 'order a prescription for')
         const appointment = specific.filter(ele => ele.reminder_type === 'make an appointment for')
-        setReminder(resp.data)
+        setReminder(specific)
         setTakereminder(take[0])
         setOrderreminder(order[0])
         setAppointmentreminder(appointment[0])
@@ -73,13 +73,20 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
       .catch(err => setErrors(err.response.data))
   }
 
-  const handleChangetake = (name) => (event) => {
-    setTakereminder({ ...takereminder, [name]: event.target.checked })
+
+  const handleChange = (name, i) => (event) => {
+    const newreminders = [...reminders]
+    console.log(newreminders)
+    newreminders[i].active = event.target.checked
+    console.log(newreminders)
+    
+    setReminder(newreminders)
     // need to create a post here
     setErrors({})
-    console.log(takereminder)
+    // console.log(takereminder)
 
   }
+
 
 
   useEffect(dataHook, [])
@@ -89,7 +96,7 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
   // console.log(orderreminder)
   // console.log(appointmentreminder)
 
-  if (medicine === null || takereminder === {}) return <div>Loading</div>
+  if (medicine === null || takereminder === {} || reminders === []) return <div>Loading</div>
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -100,30 +107,33 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
                 <Typography gutterBottom variant="subtitle1">
                   {medicine.name}
                 </Typography>
-
-                <Typography component="div" variant="body2" color="textSecondary" >
-                  <Grid component="label" container alignItems="center" spacing={0}>
-                    <Grid item>Off</Grid>
-                    <Grid item>
-                      <ThemeProvider theme={theme}>
-                        <Switch
-                          size="small"
-                          checked={takereminder.active || ''}
-                          onChange={handleChangetake('active')}
-                          value="active"
-                          color="primary"
-                          inputProps={{ 'aria-label': 'secondary checkbox' }}
-                        />
-                      </ThemeProvider>
-                    </Grid>
-                    <Grid item >On</Grid>
-                    <Grid item >
-                      <Box className={classes.boxdisplay}>
-                      Reminder to {takereminder.reminder_type}
-                      </Box>
-                    </Grid>
-                  </Grid>
-                </Typography>
+                {reminders.map((ele, i) => {
+                  return (
+                    <Typography component="div" variant="body2" color="textSecondary" key={i}>
+                      <Grid component="label" container alignItems="center" spacing={0}>
+                        <Grid item>Off</Grid>
+                        <Grid item>
+                          <ThemeProvider theme={theme}>
+                            <Switch
+                              size="small"
+                              checked={ele.active || ''}
+                              onChange={handleChange('active', i)}
+                              value="active"
+                              color="primary"
+                              inputProps={{ 'aria-label': 'secondary checkbox' }}
+                            />
+                          </ThemeProvider>
+                        </Grid>
+                        <Grid item >On</Grid>
+                        <Grid item >
+                          <Box className={classes.boxdisplay}>
+                            Reminder to {ele.reminder_type}
+                          </Box>
+                        </Grid>
+                      </Grid>
+                    </Typography>
+                  )
+                })}
 
               </Grid>
               <Grid item>
