@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
+import Link from '@material-ui/core/Link'
 
 
 
@@ -18,7 +19,7 @@ import Paper from '@material-ui/core/Paper'
 import axios from 'axios'
 import Auth from '../lib/auth'
 
-
+// Styles for Material UI
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -43,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   title: {
-    color: theme.palette.success.main
+    // color: theme.palette.success.main
   },
   grid: {
     padding: theme.spacing(2),
@@ -71,6 +72,11 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.success.dark
     }
   },
+  avatargrey: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+    backgroundColor: theme.palette.success.main
+  }
 }))
 
 const Profile = (props) => {
@@ -82,8 +88,9 @@ const Profile = (props) => {
 
   const [errors, setErrors] = useState([])
 
-  // api/reminders/users/
 
+
+  // Pull Profile Info data to display
   const userHook = () => {
     axios.get('/api/profile/', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -93,17 +100,19 @@ const Profile = (props) => {
       })
       .catch(err => setErrors(err.response.data))
   }
+
+  // Get all of your prescription info, to list prescriptions
   const prescriptionHook = () => {
     axios.get('/api/prescriptions/user/', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then((resp) => {
-        const data = resp.data
-        const medicineInfo = data.map(ele => ele.medicine)
+
         setPrescriptions(resp.data)
       })
       .catch(err => setErrors(err.response.data))
   }
+  // Pushes you to the create new prescription page
   const handleCreate = (e) => {
     e.preventDefault()
     props.history.push('/prescriptions/create/')
@@ -114,6 +123,9 @@ const Profile = (props) => {
   useEffect(prescriptionHook, [])
 
 
+  // This displays the info.
+  //it then maps through your prescriptions, displaying what you currently have
+  // if you do not have any prescriptions, it has a button to create a prescription
 
 
   return (
@@ -164,13 +176,15 @@ const Profile = (props) => {
 
                 <Paper className={classes.grid} key={i}>
                   <Grid container spacing={2} >
-                    <Grid item xs={9} className={classes.centeralign} >
-                      <Typography component="h1" variant="h6" color="textSecondary" >
-                        {ele.medicine.name}
+                    <Grid item xs={10} className={classes.centeralign} >
+                      <Typography component="h3" variant="subtitle1" color="textSecondary" >
+                        <Link href={`#/prescriptions/${ele.id}`} color="inherit">
+                          {ele.medicine.name}
+                         </Link>
                       </Typography>
                     </Grid>
                     <Grid item>
-                      <Avatar className={classes.avatar} >
+                      <Avatar className={classes.avatargrey} >
                         <EditOutlinedIcon fontSize="small" />
                       </Avatar>
                     </Grid>
@@ -190,7 +204,7 @@ const Profile = (props) => {
                 variant="contained"
                 color="primary"
                 className={classes.altsubmit}
-                onClick = {(e)=>handleCreate(e)}
+                onClick={(e) => handleCreate(e)}
               >
                 Create new prescription
               </Button>
