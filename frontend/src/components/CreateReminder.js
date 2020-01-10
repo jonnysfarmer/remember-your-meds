@@ -20,26 +20,31 @@ const CreateReminder = () => {
 
   const classes = useStyles()
 
-  const [reminders, setReminders] = useState([])
+  const [reminders, setReminders] = useState({})
 
   //===== INITIAL PAGE DATA
   //----- Medicine Name (prescription.medicine -> medicine.id, medicine.name)
-
   //----- Reminder Status (with reminder.id)
   //----- Reminder Status (with prescription.id)
   //----- Set prescription id
   // const presId = 22
+
+
+  // ORDER REPEAT
+  //---- Get reminder Id
+  const presId = 22
   //---- Call API for Reminder info and then filter by prescription ID
   const getReminderByPrescription = () => {
     console.log('getting reminders')
     axios.get('/api/reminders/user/', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then(resp => setReminders(resp.data.filter(ele => ele.prescription.id === 22)))
+      // .then(resp => setReminders(resp.data.filter(ele => ele.prescription.id === presId)))
+      .then(resp => console.log(resp.data))
       .catch(err => console.log(err.response.data))
   }
-
-  // ORDER PRESCRIPTION
+  //---- Get status of reminder to order
+    
   // user turns on
   // user needs to enter number of days doses left in their cupboard
   // user needs to confirm how many repeats they have left
@@ -63,7 +68,7 @@ const CreateReminder = () => {
   }, [])
 
   if (!reminders) return <div>Loading</div>
-  // console.log(reminders)
+  console.log(reminders)
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -77,7 +82,17 @@ const CreateReminder = () => {
 
         <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
           <ThemeProvider theme={theme}>
-           
+
+            <Typography component='h1' variant='h6'>
+              Order prescription
+            </Typography>
+            {/* if on
+              show next reminder
+              show turn off option
+            if off
+              confirm num prescription repeats remaining
+            turn on */}
+
             <Button
               type='submit'
               fullWidth
@@ -99,15 +114,15 @@ export default CreateReminder
 
 
 
-  // MAKE DOCTORS APPT
-  //similar to order prescription, do that first
+// MAKE DOCTORS APPT
+//similar to order prescription, do that first
 
 
-  // TAKE YOUR MED
-  // user needs to enter the times to take it
-  // we store that in our database
+// TAKE YOUR MED
+// user needs to enter the times to take it
+// we store that in our database
 
- {/* <div>
+{/* <div>
               {reminders.map((ele, i) => {
                 return (
                   <>
