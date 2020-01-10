@@ -98,6 +98,7 @@ const DisplayPrescriptions = ({ medicine, data, prescription, presID }) => {
   useEffect(dataHook, [])
 
   const classes = useStyles()
+  console.log(reminders)
 
 
   if (medicine === null || reminders === []) return <div>Loading</div>

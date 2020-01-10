@@ -37,7 +37,9 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: theme.palette.success.dark
     }
-
+  },
+  title: {
+    color: theme.palette.success.main
   }
 }))
 
@@ -45,7 +47,7 @@ const Profile = () => {
 
   const classes = useStyles()
 
-  const [user, setUser] = useState([])
+  const [user, setUser] = useState({})
   const [prescriptions, setPrescriptions] = useState([])
 
   const [errors, setErrors] = useState([])
@@ -66,6 +68,9 @@ const Profile = () => {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then((resp) => {
+        const data = resp.data
+        const medicineInfo = data.map(ele => ele.medicine)
+        // console.log(medicineInfo)
         setPrescriptions(resp.data)
       })
       .catch(err => setErrors(err.response.data))
@@ -75,7 +80,10 @@ const Profile = () => {
   useEffect(userHook, [])
   useEffect(prescriptionHook, [])
 
-  // console.log(data)
+
+  console.log(user)
+  console.log(prescriptions)
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -96,7 +104,36 @@ const Profile = () => {
         >
           Edit Profile
         </Button>
+        <Typography component="h2" variant="h6" className={classes.title}>
+          Username
+        </Typography>
+        <Typography component="h1" variant="subtitle1" color="textSecondary">
+          {user.username}
+        </Typography>
+        <Typography component="h2" variant="h6" className={classes.title}>
+          Email
+        </Typography>
+        <Typography component="h1" variant="subtitle1" color="textSecondary">
           {user.email}
+        </Typography>
+        <Typography component="h2" variant="h6" className={classes.title}>
+          Mobile
+        </Typography>
+        <Typography component="h1" variant="subtitle1" color="textSecondary">
+          {user.mobile ? user.mobile : 'No mobile entered'}
+        </Typography>
+        <Typography component="h2" variant="h6" className={classes.title}>
+          Current Prescriptions
+        </Typography>
+        {prescriptions.map((ele, i) => {
+
+          return (
+            <div key={i}>
+              {ele.medicine.name}
+            </div>
+          )
+        })}
+
 
       </div>
     </Container>
