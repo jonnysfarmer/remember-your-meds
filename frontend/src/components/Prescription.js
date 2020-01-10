@@ -127,7 +127,6 @@ const Prescription = (props) => {
         const specific = data1.filter(ele => ele.prescription.id === id)
         console.log(specific)
         if (specific.length === 0) {
-          console.log('test')
           setReminders('')
         } else {
           setReminders(specific)
@@ -151,6 +150,8 @@ const Prescription = (props) => {
 
   useEffect(prescriptionHook, [])
   useEffect(reminderHook, [])
+
+  console.log(medicine)
 
   if (medicine === {}) return <div>loading</div>
   return (
