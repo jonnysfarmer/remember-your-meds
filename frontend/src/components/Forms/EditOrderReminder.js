@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import moment from 'moment'
 
 import { makeStyles, withStyles } from '@material-ui/core/styles'
@@ -10,6 +11,8 @@ import Button from '@material-ui/core/Button'
 
 import Box from '@material-ui/core/Box'
 import { red, green } from '@material-ui/core/colors'
+
+import Auth from '../../lib/auth'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -65,12 +68,17 @@ const EditOrderReminder = (props) => {
 
   //===== INITIATE DATA FROM PROPS
   const setDataFromProps = () => {
-    // setPropsData(props.props.propsData)
-    setData(props.props.propsData)
+    setData({
+      ...props.props.propsData,
+      ['reminder_type']: 'order prescription', 
+      ['user']: Auth.getUserId(),
+      // ['prescription']: 
+      ['doctor']: '' //setting to null unless we implement doctor
+    })
   }
 
   //===== STORE ACTIVE STATE
-  const handleActive = (e) => {
+  const handleActive = () => {
     const remState = (data.active = !data.active)
     setData({ ...data, ['active']: remState })
     if (remState === true) {
@@ -89,37 +97,59 @@ const EditOrderReminder = (props) => {
   //==== CALCULATE REMINDER DUE
   const calcReminderDue = () => {
     //----- start with today's date
-    const startdate = moment() //'now'
+    const startdate = moment().format() //'now'
     //----- add to it the number of doses user has remaining (due_date)
-    const dueDate = moment(startdate, "DD-MM-YYYY").add(doses, 'days').format('DD/MM/YYYY')
+    const dueDate = moment(startdate).add(doses, 'd').format()
     //----- subtract from that 7 days as we will notify them 7 days in advance (reminder_date)
-    const reminderDate = moment(dueDate, "DD-MM-YYYY").subtract(7, 'days').format('DD/MM/YYYY')
+    const reminderDate = moment(dueDate).subtract(7, 'd').format()
 
     //----- handle if reminder_date is less than today
-    console.log(dueDate, reminderDate)
+   
     //---- set data in our object
     setData({
       ...data,
       ['due_time']: dueDate,
-      ['reminder_time']: reminderDate,
-      ['reminder_type']: 'order prescription'
+      ['reminder_time']: reminderDate
     })
   }
+
+  //===== UPDATE REMINDER
+  function updateReminder() {
+    // axios.put(`/api/reminders/${data.id}/`, data, {
+    //   headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    // })
+  }
+
+  //===== MAKE REMINDER
+  function makeReminder() {
+    //----- POST to /reminder
+    axios.post('/api/reminders/', data, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      //----- Open the prescription view page for this prescription
+      .then((resp) => console.log(resp))
+      .catch((err) => {
+        setErrors(err.response.data)
+      })
+  }
+  
 
   //==== SUBMIT DATA
   const handleSubmit = (e) => {
     e.preventDefault()
     //----calculate the dates
-    calcReminderDue()
-    console.log(data)
+    setEditing(false)
+    //decide whether this is a create or an update and call appropriate api function
+    !data.id ? makeReminder() : updateReminder()
   }
+
 
 
   //===== USE EFFECT
   useEffect(() => {
     setDataFromProps()
   }, [props])
-
+  console.log(data)
 
   if (!data) return <div>loading</div>
   return (
@@ -141,8 +171,8 @@ const EditOrderReminder = (props) => {
           </Grid>
           <Grid item>
             <Box className={classes.boxdisplay}>
-              Reminder to order medicine {data.active === false && 'inactive'}
-              {data.active === true && ' will be sent on'}
+              Reminder to order {data.active === false && 'inactive'}
+              {data.active === true && ' will be sent on '} {data.reminder_time && <span>{moment(data.reminder_time).format('DD/MM/YYYY')}</span>}
             </Box>
           </Grid>
         </Grid>
@@ -160,6 +190,7 @@ const EditOrderReminder = (props) => {
           fullWidth
           margin='normal'
           onChange={(e) => handleChange(e)}
+          onBlur={(e) => calcReminderDue(e)}
         />
         <Button
           type='submit'
@@ -168,7 +199,7 @@ const EditOrderReminder = (props) => {
           color='primary'
           className={classes.submit}
         >
-          Add prescription
+          Save reminder
         </Button>
       </>
       }

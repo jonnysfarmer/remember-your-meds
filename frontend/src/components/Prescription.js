@@ -207,7 +207,7 @@ const Prescription = (props) => {
                         <Link
                           to={{
                             pathname: `/prescriptions/${ele.prescription.id}/add-reminder`,
-                            state: { reminder_type: ele.reminder_type, id: ele.id, active: ele.active }
+                            state: { reminder_type: ele.reminder_type, id: ele.id, active: ele.active, prescription: props.match.params.id }
                           }}
                         >LINK</Link>
                       </div>

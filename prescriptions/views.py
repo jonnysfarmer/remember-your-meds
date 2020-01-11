@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_204_NO_CONTENT, HTTP_401_UNAUTHORIZED
 from .models import Medicine, Doctor, Prescription, Reminder
-from .serializers import MedicineSerializer, ReminderSerializer, PrescriptionSerializer, PopulatedPrescriptionSerializer, ReminderPutSerializer, PrescriptionPutSerializer
+from .serializers import MedicineSerializer, ReminderSerializer, ReminderPostSerializer, PrescriptionSerializer, PopulatedPrescriptionSerializer, ReminderPutSerializer, PrescriptionPutSerializer
 
 
 from django.conf import settings                                                                                                                                                       
@@ -39,7 +39,7 @@ class ReminderListView(APIView):
         return Response(serialized.data)
 
     def post(self, request):
-        reminder = ReminderSerializer(data=request.data)
+        reminder = ReminderPostSerializer(data=request.data)
         if reminder.is_valid():
             reminder.save()
             return Response(reminder.data, status=HTTP_201_CREATED)

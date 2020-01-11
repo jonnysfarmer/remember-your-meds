@@ -26,7 +26,8 @@ const AddReminder = (props) => {
   const [medicine, setMedicine] = useState({})
   const [errors, setErrors] = useState({})
 
-  //===== INITIATE DATA FROM PROPS
+  //===== INITIATE DATA FROM PROPS :: I THINK THIS ONLY WORKS FOR ONE REMINDER MUST ADJUST TO LOOP AND ARRAY THEM I THINK
+  //PROBABLY EASIER WAY TO DO THIS, move to the edit form page probably
   const setDataFromProps = () => {
     //----- check params for reminderId & reminderType & reminderStatus and set to null if there is none
     const remId = !props.location.state ? null : props.location.state.id
@@ -36,7 +37,8 @@ const AddReminder = (props) => {
     setPropsData({
       id: remId,
       reminder_type: remType,
-      active: remStatus
+      active: remStatus,
+      prescription: parseInt(props.match.params.id)
     })
   }
 
