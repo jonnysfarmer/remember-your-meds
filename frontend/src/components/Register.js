@@ -62,7 +62,6 @@ const Register = (props) => {
   const handleChange = (e) => {
     setRegisterInfo({ ...registerInfo, [e.target.name]: e.target.value })
     setErrors({})
-    console.log(registerInfo)
   }
 
   const handleSubmit = (e) => {

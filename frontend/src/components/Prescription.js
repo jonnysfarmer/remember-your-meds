@@ -205,8 +205,8 @@ const Prescription = (props) => {
                         {/* {console.log(`/prescriptions/${ele.user.id}/add-reminder`)} */}
                         <Link
                           to={{
-                            pathname: `/prescriptions/${ele.user.id}/add-reminder`,
-                            state: { reminderType: ele.reminder_type }
+                            pathname: `/prescriptions/${ele.prescription.id}/add-reminder`,
+                            state: { reminder_type: ele.reminder_type, id: ele.id, active: ele.active }
                           }}
                         >LINK</Link>
                       </div>

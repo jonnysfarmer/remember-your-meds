@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
-
+import axios from 'axios'
 //Material UI
 import Container from '@material-ui/core/Container'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Avatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
 import { ThemeProvider } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import ButtonGroup from '@material-ui/core/ButtonGroup'
 //Material UI our styles/icons
 import { useStyles, theme } from '../../styles/styles'
 import { ReminderIcon } from '../../styles/icons'
 //Our Components
-import getPrescriptionHook from '../getPrescriptionHook'
+import EditOrderReminder from './EditOrderReminder'
+import Auth from '../../lib/auth'
+
 
 const AddReminder = (props) => {
   //=====================================
@@ -22,27 +22,48 @@ const AddReminder = (props) => {
   const classes = useStyles()
 
   const [propsData, setPropsData] = useState({})
+  const [prescription, setPrescription] = useState({})
+  const [medicine, setMedicine] = useState({})
+  const [errors, setErrors] = useState({})
 
   //===== INITIATE DATA FROM PROPS
   const setDataFromProps = () => {
-    console.log('settingdata')
-    //----- check params for reminderType and set to null if there is none
-    const remType = !props.location.state ? null : props.location.state.reminderType
+    //----- check params for reminderId & reminderType & reminderStatus and set to null if there is none
+    const remId = !props.location.state ? null : props.location.state.id
+    const remType = !props.location.state ? null : props.location.state.reminder_type
+    const remStatus = !props.location.state ? false : props.location.state.active
     //----- set user id from url, and reminder type as mull or reminderType as above
     setPropsData({
-      ['prescriptionId']: props.match.params.id,
-      ['reminderType']: remType
+      id: remId,
+      reminder_type: remType,
+      active: remStatus
     })
   }
 
   //===== PRESCRIPTION INFO
   // can I call getPrescriptionHook here?
+  const prescriptionHook = () => {
+    const id = props.match.params.id
+    axios.get(`/api/prescriptions/${id}/`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then((resp) => {
+        const data = resp.data
+        setMedicine(data.medicine)
+        setPrescription(resp.data)
+      })
+      .catch(err => setErrors(err.response.data))
+  }
+
+  
 
   //===== USE EFFECT
   useEffect(() => {
     setDataFromProps()
+    prescriptionHook()
   }, [props])
-  console.log(propsData.reminderType)
+
+  // console.log(propsData.reminderType)
 
   //===== UI
   if (propsData === []) return <div>loading</div>
@@ -59,27 +80,12 @@ const AddReminder = (props) => {
             <Typography component='h1' variant='h4'>
               Reminders
             </Typography>
+            <p>for {medicine.name}</p>
 
-            <form className={classes.form}>
 
-              <Typography component='h2' variant='h6'>
-                Create reminders for 
-              </Typography>
-              {!propsData.reminderType &&
-                <div>
-                  <ButtonGroup
-                    fullWidth
-                    color="primary"
-                    aria-label="small outlined primary button group"
-                  >
-                    Create a reminder to
-                    <Button>Take medicine</Button>
-                    <Button>Order prescription</Button>
-                    <Button>Visit doctor</Button>
-                  </ButtonGroup>
-                </div>
-              }
-            </form>
+            <EditOrderReminder props={{ propsData }} />
+
+
           </div>
 
         </ThemeProvider>
