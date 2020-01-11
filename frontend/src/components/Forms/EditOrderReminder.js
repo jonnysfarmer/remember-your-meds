@@ -115,9 +115,9 @@ const EditOrderReminder = (props) => {
 
   //===== UPDATE REMINDER
   function updateReminder() {
-    // axios.put(`/api/reminders/${data.id}/`, data, {
-    //   headers: { Authorization: `Bearer ${Auth.getToken()}` }
-    // })
+    axios.put(`/api/reminders/${data.id}/`, data, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
   }
 
   //===== MAKE REMINDER

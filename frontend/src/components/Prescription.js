@@ -202,6 +202,7 @@ const Prescription = (props) => {
 
                       {/* TEMP */}
                       <div>
+                        <p>{ele.id}</p>
                         {/* {console.log(`/prescriptions/${ele.user.id}/add-reminder`)} */}
                         {/* {console.log(typeof(ele.active))} */}
                         <Link
