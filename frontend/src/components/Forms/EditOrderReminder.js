@@ -61,13 +61,13 @@ const EditOrderReminder = (props) => {
 
   //===== INITIATE DATA FROM PROPS
   const setDataFromProps = () => {
-    setPropsData(props.props.propsData)
+    // setPropsData(props.props.propsData)
+    setData(props.props.propsData)
   }
 
 
   //===== STORE FORM FIELD VALUES
   const handleChange = (e) => {
-    console.log(data)
     setData({ ...data, [e.target.name]: e.target.value })
     setErrors({})
   }
@@ -78,9 +78,9 @@ const EditOrderReminder = (props) => {
     setDataFromProps()
   }, [props])
 
+
+  if (!data) return <div>loading</div>
   console.log(data)
-
-
   return (
     <form className={classes.form}>
       <Typography component='h2' variant='h6'>
@@ -99,7 +99,7 @@ const EditOrderReminder = (props) => {
           </Grid>
           <Grid item>
             <Box className={classes.boxdisplay}>
-              Reminder to order medicine {!propsData.active && 'inactive'}
+              Reminder to order medicine {data.active === false && 'inactive'}
             </Box>
           </Grid>
         </Grid>
