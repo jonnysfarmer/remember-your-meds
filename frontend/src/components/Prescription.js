@@ -203,6 +203,7 @@ const Prescription = (props) => {
                       {/* TEMP */}
                       <div>
                         {/* {console.log(`/prescriptions/${ele.user.id}/add-reminder`)} */}
+                        {/* {console.log(typeof(ele.active))} */}
                         <Link
                           to={{
                             pathname: `/prescriptions/${ele.prescription.id}/add-reminder`,

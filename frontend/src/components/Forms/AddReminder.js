@@ -63,7 +63,7 @@ const AddReminder = (props) => {
     prescriptionHook()
   }, [props])
 
-  // console.log(propsData.reminderType)
+  // console.log(typeof(propsData.active))
 
   //===== UI
   if (propsData === []) return <div>loading</div>

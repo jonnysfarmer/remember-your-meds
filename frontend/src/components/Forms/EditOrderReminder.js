@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import moment from 'moment'
 
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
@@ -68,8 +69,22 @@ const EditOrderReminder = (props) => {
 
   //===== STORE FORM FIELD VALUES
   const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value })
+    if (e.target.name === 'active') {
+      const remState = (data.active = !data.active)
+      setData({ ...data, [e.target.name]: remState })
+
+      if (remState === true) {
+        calcReminderDue()
+      }
+    }
     setErrors({})
+  }
+
+  //==== CALCULATE REMINDER DUE
+  const calcReminderDue = () => {
+    const startdate = moment()
+    const t = moment(startdate, "DD-MM-YYYY").add(5, 'days').format('DD/MM/YYYY')
+    console.log(t)
   }
 
 
@@ -94,12 +109,14 @@ const EditOrderReminder = (props) => {
               size="small"
               inputProps={{ 'aria-label': 'secondary checkbox' }}
               name='active'
+              value={data.active}
               onChange={e => handleChange(e)}
             />
           </Grid>
           <Grid item>
             <Box className={classes.boxdisplay}>
               Reminder to order medicine {data.active === false && 'inactive'}
+              {data.active === true && ' will be sent on'}
             </Box>
           </Grid>
         </Grid>
