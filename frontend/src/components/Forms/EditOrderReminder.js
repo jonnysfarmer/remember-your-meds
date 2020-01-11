@@ -82,8 +82,14 @@ const EditOrderReminder = (props) => {
 
   //==== CALCULATE REMINDER DUE
   const calcReminderDue = () => {
-    const startdate = moment()
-    const t = moment(startdate, "DD-MM-YYYY").add(5, 'days').format('DD/MM/YYYY')
+    //----- start with today's date
+    const startdate = moment() //'now'
+    //----- add to it the number of doses user has remaining (due_date)
+
+    //----- subtract from that 7 days as we will notify them 7 days in advance (reminder_date)
+    const t = moment(startdate, "DD-MM-YYYY").subtract(7, 'days').format('DD/MM/YYYY')
+
+    //----- handle if reminder_date is less than today
     console.log(t)
   }
 
