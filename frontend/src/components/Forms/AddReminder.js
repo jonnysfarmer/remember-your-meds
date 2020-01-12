@@ -21,23 +21,18 @@ const AddReminder = (props) => {
 
   const classes = useStyles()
 
-  const [propsData, setPropsData] = useState({})
+  const [propsData, setData] = useState({})
+  // eslint-disable-next-line no-unused-vars
   const [prescription, setPrescription] = useState({})
   const [medicine, setMedicine] = useState({})
+  // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState({})
 
   //===== INITIATE DATA FROM PROPS :: I THINK THIS ONLY WORKS FOR ONE REMINDER MUST ADJUST TO LOOP AND ARRAY THEM I THINK
   //PROBABLY EASIER WAY TO DO THIS, move to the edit form page probably
   const setDataFromProps = () => {
-    //----- check params for reminderId & reminderType & reminderStatus and set to null if there is none
-    const remId = !props.location.state ? null : props.location.state.id
-    const remType = !props.location.state ? null : props.location.state.reminder_type
-    const remStatus = !props.location.state ? false : props.location.state.active
-    //----- set user id from url, and reminder type as mull or reminderType as above
-    setPropsData({
-      id: remId,
-      reminder_type: remType,
-      active: remStatus,
+    setData({
+      ...props.location.state,
       prescription: parseInt(props.match.params.id)
     })
   }

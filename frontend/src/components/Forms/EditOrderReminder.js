@@ -68,11 +68,10 @@ const EditOrderReminder = (props) => {
 
   //===== INITIATE DATA FROM PROPS
   const setDataFromProps = () => {
+    // console.log('editloading', props.props.propsData)
     setData({
       ...props.props.propsData,
-      ['reminder_type']: 'order prescription', 
       ['user']: Auth.getUserId(),
-      // ['prescription']: 
       ['doctor']: '' //setting to null unless we implement doctor
     })
   }
@@ -126,10 +125,10 @@ const EditOrderReminder = (props) => {
     axios.post('/api/reminders/', data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      //----- Open the prescription view page for this prescription
       .then((resp) => console.log(resp))
       .catch((err) => {
         setErrors(err.response.data)
+        console.log(errors)
       })
   }
   
@@ -149,7 +148,7 @@ const EditOrderReminder = (props) => {
   useEffect(() => {
     setDataFromProps()
   }, [props])
-  console.log(data)
+  // console.log('editpage', data)
 
   if (!data) return <div>loading</div>
   return (
