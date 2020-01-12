@@ -2,17 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import moment from 'moment'
 //Material UI
-import Container from '@material-ui/core/Container'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Avatar from '@material-ui/core/Avatar'
-import { makeStyles, withStyles } from '@material-ui/core/styles'
-import { ThemeProvider } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
-import Switch from '@material-ui/core/Switch'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
-import Box from '@material-ui/core/Box'
+import { Divider, Container, CssBaseline, Avatar, Typography, Grid, Switch, TextField, Box, Button } from '@material-ui/core'
+import { makeStyles, withStyles, ThemeProvider } from '@material-ui/core/styles'
 import { red, green } from '@material-ui/core/colors'
 //Material UI our styles/icons
 import { theme } from '../styles/styles'
@@ -41,7 +32,6 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: theme.palette.success.dark
     }
-
   }
 }))
 const SwitchOnOFF = withStyles({
@@ -71,8 +61,7 @@ const EditReminder = (props) => {
   const [number, setNumber] = useState() //only used in this component for calculating dates
   const [data, setData] = useState() //data to save to reminders in db
   const [reminders, setReminders] = useState([]) //place to store data retrieved from db
-  // const [prescription, setPrescription] = useState({})
-  // const [medicine, setMedicine] = useState({})
+  const [medicineName, setMedicineName] = useState() //used to display medicine name without having to make more api calls
   const [errors, setErrors] = useState()
 
   //===== SET CUSTOM CONTENT 
@@ -101,6 +90,7 @@ const EditReminder = (props) => {
         ['prescription']: reminders[0].prescription.id,
         ['medicine']: reminders[0].prescription.medicine.id
       })
+      setMedicineName(reminders[0].prescription.medicine.name)
     }
   }
 
@@ -189,8 +179,8 @@ const EditReminder = (props) => {
   //===== USE EFFECT
   useEffect(() => {
     console.log('using'),
-    reminderHook()
-  },[])
+      reminderHook()
+  }, [])
   useEffect(() => setInitialData(), [reminders])
   console.log('editpage', reminders)
 
@@ -208,17 +198,18 @@ const EditReminder = (props) => {
           <Typography component='h1' variant='h4'>
             Reminders
           </Typography>
+          <p>for {medicineName}</p>
 
           {reminders.map((ele, i) => {
             return (
-              <div key={i}>
+              <Grid container spacing={0} key={i}>
                 <form className={classes.form} id={ele.id} onSubmit={(e) => handleSubmit(e)}>
-                  <Typography component='h2' variant='h6'>
+                  <Typography component='h2' variant='h6' className={classes.capitalize}>
                     {ele.reminder_type}
                   </Typography>
 
                   <Typography component="div" variant="caption" color="textSecondary">
-                    <Grid component="label" container alignItems="center" spacing={0}>
+                    <Grid component="label" container alignItems="flex-start" spacing={0}>
                       <Grid item>
                         <SwitchOnOFF
                           size="small"
@@ -231,7 +222,7 @@ const EditReminder = (props) => {
                           }}
                         />
                       </Grid>
-                      <Grid item>
+                      <Grid item >
                         <Box className={classes.boxdisplay}>
                           Reminder {ele.active === false && 'inactive'}
                           {ele.active === true && ` will be sent on ${moment(ele.reminder_time).format('DD/MM/YYYY')}`}
@@ -240,49 +231,34 @@ const EditReminder = (props) => {
                     </Grid>
                   </Typography>
 
-                  {editing === true && <>
-                    {ele.reminder_type === 'order prescription' &&
+                  {(editing === true && ele.reminder_type !== 'take') &&
+                    <>
                       <TextField
-                        id='input_doses'
-                        label='How many days do you have left?'
+                        id={`input_${ele.reminder_type}`}
+                        label={ele.reminder_type === 'order prescription' ? 'How many days do you have left?' : 'How many repeats do you have left?'}
                         name={ele.reminder_type}
                         type='number'
                         required
-                        helperText='not including today'
+                        helperText={ele.reminder_type === 'order prescription' ? 'Not including today' : ''}
                         variant='outlined'
                         fullWidth
                         margin='normal'
                         onChange={(e) => handleChange(e)}
                         onBlur={(e) => calcReminderDue(e)}
-                      />}
-                    {ele.reminder_type === 'make appointment' &&
-                      <TextField
-                        id='input_repeats'
-                        label='How many repeat prescriptions do you have?'
-                        name={ele.reminder_type}
-                        type='number'
-                        required
-                        helperText='check your number of repeat prescriptions left'
-                        variant='outlined'
+                      />
+                      <Button
+                        type='submit'
                         fullWidth
-                        margin='normal'
-                        onChange={(e) => handleChange(e)}
-                        onBlur={(e) => calcReminderDue(e)}
-                      />}
-                    <Button
-                      type='submit'
-                      fullWidth
-                      variant='contained'
-                      color='primary'
-                      className={classes.submit}
-                    >
-                      Save reminder
-                    </Button>
-                  </>
-
+                        variant='contained'
+                        color='primary'
+                        className={classes.submit}
+                      >
+                        Save reminder
+                      </Button>
+                    </>
                   }
                 </form>
-              </div>
+              </Grid>
             )
           })}
 
