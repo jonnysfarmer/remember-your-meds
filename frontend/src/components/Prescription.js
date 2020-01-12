@@ -103,6 +103,7 @@ const Prescription = (props) => {
   const [medicine, setMedicine] = useState({})
   const [reminders, setReminders] = useState([])
 
+  // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState([])
 
 
@@ -205,12 +206,7 @@ const Prescription = (props) => {
                         <p>{ele.id}</p>
                         {/* {console.log(`/prescriptions/${ele.user.id}/add-reminder`)} */}
                         {/* {console.log(typeof(ele.active))} */}
-                        <Link
-                          to={{
-                            pathname: `/prescriptions/${ele.prescription.id}/add-reminder`,
-                            state: { reminder_type: ele.reminder_type, id: ele.id, active: ele.active, prescription: props.match.params.id }
-                          }}
-                        >LINK</Link>
+                        <Link to={`/prescriptions/${ele.prescription.id}/add-reminder`}>LINK</Link>
                       </div>
                       {/* END TEMP */}
 
