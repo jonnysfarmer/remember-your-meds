@@ -136,6 +136,15 @@ const EditReminder = (props) => {
     //----- handle if reminder_date is less than today
   }
 
+  //===== HANDLE TAKE REMINDERS
+  const handleTake = (e) => {
+    const time = e.target.value.split(':')
+    setData({
+      ...data,
+      ['due_time']: moment().hours(time[0]).minutes(time[1]).format()
+    })
+  }
+
   //===== UPDATE REMINDER
   function updateReminder(id) {
     console.log(data)
@@ -178,8 +187,7 @@ const EditReminder = (props) => {
 
   //===== USE EFFECT
   useEffect(() => {
-    console.log('using'),
-      reminderHook()
+    reminderHook()
   }, [])
   useEffect(() => setInitialData(), [reminders])
   console.log('editpage', reminders)
@@ -246,6 +254,56 @@ const EditReminder = (props) => {
                         onChange={(e) => handleChange(e)}
                         onBlur={(e) => calcReminderDue(e)}
                       />
+                      <Button
+                        type='submit'
+                        fullWidth
+                        variant='contained'
+                        color='primary'
+                        className={classes.submit}
+                      >
+                        Save reminder
+                      </Button>
+                    </>
+                  }
+
+                  {(editing === true && ele.reminder_type === 'take') &&
+                    <>
+                      <TextField
+                        id='input_take_am'
+                        label='Set morning reminder'
+                        name='take'
+                        helperText='Leave blank if you do not take in the morning'
+                        variant='outlined'
+                        fullWidth
+                        margin='normal'
+                        type='time'
+                        onBlur={(e) => handleTake(e)}
+                      >
+                      </TextField>
+                      <TextField
+                        id='input_take_mid'
+                        label='Set midday reminder'
+                        name='take'
+                        helperText='Leave blank if you do not take in the middle of the day'
+                        variant='outlined'
+                        fullWidth
+                        margin='normal'
+                        type='time'
+                        onBlur={(e) => handleTake(e)}
+                      >
+                      </TextField>
+                      <TextField
+                        id='input_take_pm'
+                        label='Set evening reminder'
+                        name='take'
+                        helperText='Leave blank if you do not take in the evening'
+                        variant='outlined'
+                        fullWidth
+                        margin='normal'
+                        type='time'
+                        onBlur={(e) => handleTake(e)}
+                      >
+                      </TextField>
                       <Button
                         type='submit'
                         fullWidth
