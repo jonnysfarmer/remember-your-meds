@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import moment from 'moment'
 //Material UI
-import { Divider, Container, CssBaseline, Avatar, Typography, Grid, Switch, TextField, Box, Button } from '@material-ui/core'
+import { Container, CssBaseline, Avatar, Typography, Grid, Switch, TextField, Box, Button } from '@material-ui/core'
 import { makeStyles, withStyles, ThemeProvider } from '@material-ui/core/styles'
 import { red, green } from '@material-ui/core/colors'
 //Material UI our styles/icons
@@ -68,7 +68,7 @@ const EditReminder = (props) => {
   //----- Set the days (order, appt) or time (take) to count back for creating when we send reminders
   const remOrder = 7 //days
   const remAppt = 14 //days
-  const remTake = 15 //min
+  // const remTake = 15 //min
 
 
   //===== GET REMINDER INFO
@@ -84,7 +84,9 @@ const EditReminder = (props) => {
   //===== SET INITIAL DATA THAT IS CONSTANT
   const setInitialData = () => {
     console.log('init', reminders)
-    if (reminders.length === 0) { console.log('waiting for data') } else {
+    if (reminders.length === 0) {
+      console.log('waiting for data')
+    } else {
       setData({
         ['user']: reminders[0].user.id,
         ['prescription']: reminders[0].prescription.id,
@@ -224,7 +226,7 @@ const EditReminder = (props) => {
                           inputProps={{ 'aria-label': 'secondary checkbox' }}
                           name='active'
                           value={ele.active}
-                          onChange={(e) => {
+                          onChange={(ele) => {
                             handleActive(ele.active)
                             setData({ ...data, ['active']: ele.active = !ele.active })
                           }}

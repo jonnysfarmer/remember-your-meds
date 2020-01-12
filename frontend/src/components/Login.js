@@ -70,20 +70,20 @@ const theme = createMuiTheme({
   }
 })
 
-const loginform = {
+// const loginform = {
 
-  username: '',
-  email: '',
-  password: '',
-  password_confirmation: ''
+//   username: '',
+//   email: '',
+//   password: '',
+//   password_confirmation: ''
 
-}
+// }
 
 const Login = (props) => {
 
   const classes = useStyles()
 
-  const [loginInfo, setLoginInfo] = useState(loginform)
+  const [loginInfo, setLoginInfo] = useState()
   const [err, setErrors] = useState({})
   const [showPassword, setShowPassword] = useState(false)
 
@@ -98,7 +98,6 @@ const Login = (props) => {
   const handleChange = (e) => {
     setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value })
     setErrors({})
-    console.log(loginInfo)
   }
 
   // Need to add getting Auth Token
@@ -127,7 +126,7 @@ const Login = (props) => {
         </Typography>
         <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
           <ThemeProvider theme={theme}>
-            <TextField
+            {/* <TextField
               error={err.message && true}
               variant="outlined"
               margin="normal"
@@ -140,7 +139,7 @@ const Login = (props) => {
               autoComplete="username"
               autoFocus
               onChange={(e) => handleChange(e)}
-            />
+            /> */}
             <TextField
               error = {err.email && true}
               variant="outlined"
@@ -182,7 +181,7 @@ const Login = (props) => {
                   </InputAdornment>
               }}
             />
-            <TextField
+            {/* <TextField
               variant="outlined"
               margin="normal"
               required
@@ -206,7 +205,7 @@ const Login = (props) => {
                     </IconButton>
                   </InputAdornment>
               }}
-            />
+            /> */}
           </ThemeProvider>
           <Button
             type="submit"
