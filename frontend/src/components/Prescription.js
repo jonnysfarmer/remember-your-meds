@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -7,7 +8,7 @@ import Container from '@material-ui/core/Container'
 import Avatar from '@material-ui/core/Avatar'
 import LocalPharmacyOutlinedIcon from '@material-ui/icons/LocalPharmacyOutlined'
 import { makeStyles } from '@material-ui/core/styles'
-import Link from '@material-ui/core/Link'
+// import Link from '@material-ui/core/Link'
 
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Grid from '@material-ui/core/Grid'
@@ -102,6 +103,7 @@ const Prescription = (props) => {
   const [medicine, setMedicine] = useState({})
   const [reminders, setReminders] = useState('')
 
+  // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState([])
 
 
@@ -204,6 +206,20 @@ const Prescription = (props) => {
                       <Typography component="h3" variant="subtitle1" color="textSecondary" >
                         {ele.reminder_type}
                       </Typography>
+
+
+                      {/* TEMP */}
+                      <div>
+                        <p>{ele.id}</p>
+                        {/* {console.log(`/prescriptions/${ele.user.id}/add-reminder`)} */}
+                        {/* {console.log(typeof(ele.active))} */}
+                        <Link to={`/prescriptions/${ele.prescription.id}/edit-reminders`}>LINK</Link>
+                      </div>
+                      {/* END TEMP */}
+
+
+
+
                     </Grid>
                     <Grid item>
                       <Avatar className={classes.avatargrey} >

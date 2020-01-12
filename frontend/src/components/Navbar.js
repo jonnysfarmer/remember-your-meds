@@ -2,25 +2,18 @@ import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
 //Material UI Styling
-import AppBar from '@material-ui/core/AppBar'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Divider from '@material-ui/core/Divider'
-import Drawer from '@material-ui/core/Drawer'
-import Hidden from '@material-ui/core/Hidden'
-import IconButton from '@material-ui/core/IconButton'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import Toolbar from '@material-ui/core/Toolbar'
+import { AppBar, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemText, Toolbar } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/core/styles'
 
 import { useStyles, theme } from '../styles/styles'
 import { MenuIcon, PrescriptionIcon, ProfileIcon, LogoutIcon } from '../styles/icons'
+import Auth from '../lib/auth'
 
 function ResponsiveDrawer(props) {
 
+  // eslint-disable-next-line no-unused-vars
   const history = useHistory()
-  const location = history.location.pathname
+  // const location = history.location.pathname
   const { container } = props
   const classes = useStyles()
   const [mobileOpen, setMobileOpen] = React.useState(false)
@@ -53,9 +46,7 @@ function ResponsiveDrawer(props) {
       <ThemeProvider theme={theme}>
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
-            {(location === '/prescriptions' || location === '/prescriptions/create/' || location === '/profile/' ||
-              location === '/prescriptions/' || location === '/prescriptions/create' || location === '/profile' )
-              &&
+            {Auth.isAuthorized() &&
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
@@ -87,9 +78,7 @@ function ResponsiveDrawer(props) {
               {drawer}
             </Drawer>
           </Hidden>
-          {(location === '/prescriptions' || location === '/prescriptions/create/' || location === 'profile/' ||
-            location === '/prescriptions/' || location === '/prescriptions/create' || location === 'profile')
-            &&
+          {Auth.isAuthorized() &&
             <Hidden xsDown implementation="css">
               <Drawer
                 classes={{

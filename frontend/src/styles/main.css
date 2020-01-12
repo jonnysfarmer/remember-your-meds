@@ -10,3 +10,7 @@
 .MuiList-root a {
   text-decoration: none;
 }
+
+.MuiTypography-h6 {
+  text-transform: capitalize;
+}

@@ -1,13 +1,13 @@
 
-import { green } from '@material-ui/core/colors'
-import { makeStyles, createMuiTheme } from '@material-ui/core/styles'
-import { palette } from '@material-ui/system'
+import { green, red } from '@material-ui/core/colors'
+import { makeStyles, createMuiTheme, withStyles } from '@material-ui/core/styles'
+// import { palette } from '@material-ui/system'
+import Switch from '@material-ui/core/Switch'
 
 //================================
 // SETTINGS
 //================================
 const drawerWidth = 200
-
 
 //================================
 // THEME
@@ -59,6 +59,8 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     padding: theme.spacing(3)
   },
+
+  
   //===== FOR PAGES =====
   paper: {
     marginTop: theme.spacing(8),
@@ -80,12 +82,34 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: theme.palette.success.dark
     }
-    
-
   }
 }))
 
+
+//================================
+// SWITCH STYLES
+//================================
+const SwitchOnOFF = withStyles({
+  switchBase: {
+    color: red[500],
+    '&$checked': {
+      color: green[500]
+    },
+    '&$checked + $track': {
+      backgroundColor: green[500]
+    },
+    '& + $track': {
+      backgroundColor: red[500]
+    }
+  },
+  checked: {},
+  track: {}
+})(Switch)
+
+
+
 export {
   useStyles,
-  theme
+  theme,
+  SwitchOnOFF
 }

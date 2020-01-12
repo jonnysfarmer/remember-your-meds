@@ -63,6 +63,7 @@ const SwitchonOFF = withStyles({
 const DisplayPrescriptions = ({ medicine, presID }) => {
 
   const [reminders, setReminder] = useState([])
+  // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState([])
 
 
@@ -86,7 +87,7 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
     console.log(id)
     console.log(event.target.checked)
     newreminders[i].active = event.target.checked
-    axios.put(`/api/reminders/${id}/`, { "active": event.target.checked }, {
+    axios.put(`/api/reminders/${id}/`, { 'active': event.target.checked }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
 
