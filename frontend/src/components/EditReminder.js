@@ -80,7 +80,7 @@ const EditReminder = (props) => {
     //get the reminder Id for this reminder
     const getId = e.target.id.split('_')
     //get the user from the array and update to true
-    
+
 
     //set everything back to the editState
 
@@ -99,6 +99,7 @@ const EditReminder = (props) => {
   const defineFormFields = (e) => {
 
   }
+
 
 
 
@@ -193,6 +194,10 @@ const EditReminder = (props) => {
   }, [reminders])
 
   // console.log(reminders)
+  useEffect(() => setInitialData(), [reminders])
+  useEffect(() => defineFormFields(), [reminders])
+
+  // console.log(buttonState)
 
   //===== UI
   if (reminders === []) return <div>loading</div>
@@ -207,7 +212,7 @@ const EditReminder = (props) => {
           </Avatar>
           <Typography component='h1' variant='h4'>
             Reminders
-          </Typography>
+            </Typography>
           <p>for {medicineName}</p>
 
           {reminders.map((ele, i) => {
@@ -229,6 +234,7 @@ const EditReminder = (props) => {
                           name='active'
                           // value={ele.active}
                           onChange={() => setData({ ...data, ['active']: ele.active = !ele.active })}
+                          onChange={(e) => setData({ ...data, ['active']: ele.active = !ele.active })}
                         />
                       </Grid>
                       <Grid item >
@@ -241,20 +247,16 @@ const EditReminder = (props) => {
                   </Typography>
 
                   {(ele.active === true) &&
-                    <Grid item>
-                      <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                        <Link
-                          id={'edit_' + ele.id}
-                          onClick={e => changeEditState(e)}>
-                          Edit
-                        </Link>
-                      </Typography>
-                    </Grid>
-                  }
-
-
-                  {/* 
                     <>
+                      <Grid item>
+                        <Typography variant="body2" style={{ cursor: 'pointer' }}>
+                          <Link
+                            id={'edit_' + ele.id}
+                            onClick={e => changeEditState(e)}>
+                            Edit
+                        </Link>
+                        </Typography>
+                      </Grid>
                       <TextField
                         id={`input_${ele.reminder_type}`}
                         label={ele.reminder_type}
@@ -278,7 +280,31 @@ const EditReminder = (props) => {
                         Save reminder
                       </Button>
                     </>
-                  } */}
+                  }
+
+
+
+                  {/* {buttonState === 'submit' &&
+                        <Button
+                          type='submit'
+                          fullWidth
+                          variant='contained'
+                          color='primary'
+                          className={classes.submit}
+                        >
+                          Save reminder
+                        </Button>
+                      }
+                      {buttonState === 'edit' &&
+                        <Typography>
+                          <a
+                            onClick={setButtonState({ ['button']: 'submit' })}
+                            type='edit'
+                          >Edit reminder</a>
+                        </Typography>
+                      }
+                    </> */}
+
                 </form>
               </Grid>
             )
@@ -286,8 +312,8 @@ const EditReminder = (props) => {
 
 
         </div>
-      </ThemeProvider >
-    </Container >
+      </ThemeProvider>
+    </Container>
   )
 }
 
