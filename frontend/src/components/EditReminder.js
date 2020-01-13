@@ -75,7 +75,6 @@ const EditReminder = (props) => {
     //----- start with today's date for dates, or the time entered for time
     const startdate = moment().format() //'now'
     const time = e.target.value.split(':')
-    console.log(time)
     //----- set the days to work back to create reminders
     const remOrder = 7 //days
     const remAppt = 14 //days
@@ -121,19 +120,18 @@ const EditReminder = (props) => {
 
 
   //===== UPDATE REMINDER
-  function updateReminder(id) {
+  function updateReminder(id, data) {
+    console.log('put', data)
     axios.put(`/api/reminders/${id}/`, data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      // .then(props.history.push('/prescriptions/'))
-      .then(resp => console.log(resp.data))
+      .then(props.history.push('/prescriptions/'))
+      // .then(resp => console.log(resp.data))
       .catch(error => console.log(error.data))
   }
 
   //===== TURN OFF REMINDER
-  //can probably update this one similar to how I ahve SUBMIT, then UPDATE as two functions
   function switchReminder(e, i) {
-    console.log('changeremindstate')
     //get the id as a number
     const split = e.target.id.split('_')
     const id = parseInt(split[1])
@@ -156,8 +154,8 @@ const EditReminder = (props) => {
   //==== SUBMIT DATA
   const handleSubmit = (e) => {
     e.preventDefault()
-    setData({ ...data, ['id']: e.target.id })
-    updateReminder(e.target.id)
+    const data = { ...data, ['id']: e.target.id , ['edited']: true }
+    updateReminder(e.target.id, data)
   }
 
 
@@ -165,7 +163,7 @@ const EditReminder = (props) => {
   useEffect(() => reminderHook(), [])
   useEffect(() => setInitialData(), [reminders])
 
-  console.log(errors)
+  // console.log(errors)
 
   //===== UI
   if (reminders === []) return <div>loading</div>
