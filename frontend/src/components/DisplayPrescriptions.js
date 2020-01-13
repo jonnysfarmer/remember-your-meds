@@ -8,7 +8,7 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Avatar from '@material-ui/core/Avatar'
 import Switch from '@material-ui/core/Switch'
 import Link from '@material-ui/core/Link'
-
+import { useHistory } from 'react-router-dom'
 
 import Box from '@material-ui/core/Box'
 import { red, green } from '@material-ui/core/colors'
@@ -60,7 +60,9 @@ const SwitchonOFF = withStyles({
 })(Switch)
 
 
-const DisplayPrescriptions = ({ medicine, presID }) => {
+const DisplayPrescriptions = ({ medicine, presID }, props) => {
+
+  const history = useHistory()
 
   const [reminders, setReminder] = useState([])
   // eslint-disable-next-line no-unused-vars
@@ -83,14 +85,26 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
 
 
   const handleChange = (id, i) => (event) => {
+<<<<<<< HEAD
     const newreminders = [...reminders]
     newreminders[i].active = event.target.checked
     axios.put(`/api/reminders/${id}/`, { 'active': event.target.checked }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
+=======
+    if (reminders[i].edited === false) {
+      history.push(`prescriptions/${presID}/edit-reminders`)
+    } else {
+      const newreminders = [...reminders]
+      newreminders[i].active = event.target.checked
+      axios.put(`/api/reminders/${id}/`, { 'active': event.target.checked }, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+>>>>>>> development
 
-    setReminder(newreminders)
-    setErrors({})
+      setReminder(newreminders)
+      setErrors({})
+    }
   }
 
 
@@ -98,7 +112,7 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
   useEffect(dataHook, [])
 
   const classes = useStyles()
-  // console.log(reminders)
+  console.log(reminders)
 
 
   if (medicine === null || reminders === []) return <div>Loading</div>

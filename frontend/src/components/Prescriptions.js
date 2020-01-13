@@ -67,8 +67,7 @@ const Prescriptions = (props) => {
 
   useEffect(dataHook, [])
 
-  // console.log(data)
-
+  console.log(errors)
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

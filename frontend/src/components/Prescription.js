@@ -154,7 +154,7 @@ const Prescription = (props) => {
   useEffect(prescriptionHook, [])
   useEffect(reminderHook, [])
 
-  console.log(medicine)
+  // console.log(medicine)
 
   if (medicine === {}) return <div>loading</div>
   return (

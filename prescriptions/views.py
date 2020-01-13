@@ -32,6 +32,8 @@ class MedicineSpecificView(APIView):
         return Response(serializer.data)
 
 class ReminderListView(APIView):
+    
+    permission_classes = (IsAuthenticated, )
 
     def get(self, _request):
         reminders = Reminder.objects.all()
@@ -39,6 +41,7 @@ class ReminderListView(APIView):
         return Response(serialized.data)
 
     def post(self, request):
+        request.data['user'] = request.user.id
         reminder = ReminderPostSerializer(data=request.data)
         if reminder.is_valid():
             reminder.save()
