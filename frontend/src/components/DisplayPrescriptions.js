@@ -211,7 +211,7 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
             </Grid>
             <Grid item>
               <Avatar className={classes.avatar} >
-                <EditOutlinedIcon fontSize="small" />
+                <EditOutlinedIcon fontSize="small" onClick={()=>handleinitialredirect()}/>
               </Avatar>
             </Grid>
           </Grid>
