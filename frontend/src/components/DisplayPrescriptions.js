@@ -123,7 +123,7 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
 
 
   useEffect(dataHook, [])
-  console.log(takeReminders[0])
+  console.log(takeReminders)
   const classes = useStyles()
 
 
