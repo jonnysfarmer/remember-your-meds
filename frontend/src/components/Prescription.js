@@ -106,20 +106,22 @@ const Prescription = (props) => {
   // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState([])
 
+  
 
+  // PULLS THE INFO, seperates out the medicine and prescription info
   const prescriptionHook = () => {
     const id = props.match.params.id
     axios.get(`/api/prescriptions/${id}/`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then((resp) => {
-        console.log(resp.data)
         const data = resp.data
         setMedicine(data.medicine)
         setPrescription(resp.data)
       })
       .catch(err => setErrors(err.response.data))
   }
+  // pulls out all the reminders, and filters them for the specific prescription
   const reminderHook = () => {
     const id = parseInt(props.match.params.id)
     axios.get('/api/reminders/user/', {
@@ -138,10 +140,14 @@ const Prescription = (props) => {
       })
       .catch(err => setErrors(err.response.data))
   }
+
+  // got back to original page
   const handleReturn = (e) => {
     e.preventDefault()
     props.history.push('/prescriptions/')
   }
+
+  // deletes prescription and pushes you back
   const handleDelete = (e) => {
     e.preventDefault()
     const id = props.match.params.id
@@ -156,6 +162,8 @@ const Prescription = (props) => {
 
   // console.log(medicine)
 
+  //=====NEED TO SORT OUT THE LINK, REACT ROUTER OR MATERIAL UI
+
   if (medicine === {}) return <div>loading</div>
   return (
     <Container component="main" maxWidth="xs">
@@ -168,7 +176,7 @@ const Prescription = (props) => {
           {medicine.name}
         </Typography>
         <Typography component="h3" variant="caption" className={classes.title}>
-          <Link href={medicine.url} color="inherit">
+          <Link to={medicine.url} color="inherit">
             More Information
           </Link>
         </Typography>

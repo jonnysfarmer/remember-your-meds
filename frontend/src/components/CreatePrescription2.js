@@ -38,7 +38,7 @@ const CreatePrescription2 = (props) => {
       .catch(err => setErrors(err))
   }
 
-  //===POST 5 reminders
+  // POST 5 reminders for a preset at this specific time
 
   const postReminders = (presID) => {
     const reminderArray = [
