@@ -79,7 +79,7 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
         const specific = data1.filter(ele => ele.prescription.id === presID)
         const nontake = specific.filter(ele => ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment')
         const take = specific.filter(ele => ele.reminder_type === 'take-mid' || ele.reminder_type === 'take-pm' || ele.reminder_type === 'take-am')
-        const takeEdited = take.filter(ele => ele.edited === true)
+        const takeEdited = take.filter(ele => ele.edited === true && ele.active === true)
         console.log(takeEdited)
         setTakeReminders(takeEdited)
         setReminder(nontake)

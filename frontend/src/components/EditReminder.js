@@ -121,11 +121,11 @@ const EditReminder = (props) => {
 
 
   //===== UPDATE REMINDER
-  function updateReminder(id) {
-    axios.put(`/api/reminders/${id}/`, data, {
+  function updateReminder(id, data2) {
+    axios.put(`/api/reminders/${id}/`, data2, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      // .then(props.history.push('/prescriptions/'))
+      .then(props.history.push('/prescriptions/'))
       .then(resp => console.log(resp.data))
       .catch(error => console.log(error.data))
   }
@@ -144,6 +144,7 @@ const EditReminder = (props) => {
     //update the state for this id
     newReminders[i].active = state
     //put the status change tot he db
+    console.log(state)
     axios.put(`/api/reminders/${id}/`, { 'active': state }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
@@ -156,8 +157,9 @@ const EditReminder = (props) => {
   //==== SUBMIT DATA
   const handleSubmit = (e) => {
     e.preventDefault()
-    setData({ ...data, ['id']: e.target.id })
-    updateReminder(e.target.id)
+    const data2 = { ...data, ['id']: e.target.id, ['edited']: true }
+    setData({ ...data, ['id']: e.target.id, ['edited']: true })
+    updateReminder(e.target.id, data2)
   }
 
 
@@ -165,7 +167,7 @@ const EditReminder = (props) => {
   useEffect(() => reminderHook(), [])
   useEffect(() => setInitialData(), [reminders])
 
-  console.log(errors)
+  // console.log(errors)
 
   //===== UI
   if (reminders === []) return <div>loading</div>
