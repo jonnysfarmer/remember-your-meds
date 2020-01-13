@@ -101,7 +101,7 @@ const Prescription = (props) => {
 
   const [prescription, setPrescription] = useState({})
   const [medicine, setMedicine] = useState({})
-  const [reminders, setReminders] = useState([])
+  const [reminders, setReminders] = useState('')
 
   // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState([])
@@ -127,8 +127,13 @@ const Prescription = (props) => {
       .then((resp) => {
         const data1 = resp.data
         const specific = data1.filter(ele => ele.prescription.id === id)
-        setReminders(specific)
-        // console.log(specific)
+        console.log(specific)
+        if (specific.length === 0) {
+          setReminders('')
+        } else {
+          setReminders(specific)
+        }
+
       })
       .catch(err => setErrors(err.response.data))
   }
@@ -148,7 +153,9 @@ const Prescription = (props) => {
   useEffect(prescriptionHook, [])
   useEffect(reminderHook, [])
 
-  if (reminders === [] || medicine === {}) return <div>loading</div>
+  console.log(medicine)
+
+  if (medicine === {}) return <div>loading</div>
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
