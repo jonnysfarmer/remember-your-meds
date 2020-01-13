@@ -113,6 +113,7 @@ const Prescription = (props) => {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then((resp) => {
+        console.log(resp.data)
         const data = resp.data
         setMedicine(data.medicine)
         setPrescription(resp.data)
