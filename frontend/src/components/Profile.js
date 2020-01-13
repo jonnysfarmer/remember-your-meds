@@ -124,6 +124,11 @@ const Profile = (props) => {
     props.history.push('/prescriptions/create/')
   }
 
+  const handleEdit = (e) => {
+    e.preventDefault()
+    props.history.push('/profile/edit/')
+  }
+
 
   useEffect(userHook, [])
   useEffect(prescriptionHook, [])
@@ -150,6 +155,7 @@ const Profile = (props) => {
           variant="contained"
           color="primary"
           className={classes.submit}
+          onClick={(e)=>handleEdit(e)}
         >
           Edit Profile
         </Button>

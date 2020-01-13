@@ -5,8 +5,10 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 from django.conf import settings
+from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_204_NO_CONTENT, HTTP_401_UNAUTHORIZED
+
 import jwt
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserPutSerializer
 User = get_user_model()
 
 
@@ -50,3 +52,12 @@ class ProfileView(APIView):
         user = User.objects.get(pk=request.user.id)
         serialized_user = UserSerializer(user)
         return Response(serialized_user.data)
+
+    def put(self, request):
+        user = User.objects.get(pk=request.user.id)
+        updated_user = UserPutSerializer(user, data=request.data)
+
+        if updated_user.is_valid():
+            updated_user.save()
+            return Response(updated_user.data)
+        return Response(updated_user.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
