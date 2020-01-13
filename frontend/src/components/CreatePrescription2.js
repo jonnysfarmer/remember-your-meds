@@ -14,6 +14,10 @@ import { useStyles, theme } from '../styles/styles'
 import { PrescriptionIcon } from '../styles/icons'
 //Our Libraries/Components
 import Auth from '../lib/auth'
+import moment from 'moment'
+
+
+
 
 const CreatePrescription2 = (props) => {
 
@@ -32,6 +36,50 @@ const CreatePrescription2 = (props) => {
         setMedicine(nhsmeds)
       })
       .catch(err => setErrors(err))
+  }
+
+  //===POST 5 reminders
+
+  const postReminders = (presID) => {
+    const reminderArray = [
+      {
+        'prescription': presID,
+        'reminder_type': 'take-am',
+        'due_time': moment().format(),
+        'reminder_time': moment().format()
+      },
+      {
+        'prescription': presID,
+        'reminder_type': 'take-mid',
+        'due_time': moment().format(),
+        'reminder_time': moment().format()
+      },
+      {
+        'prescription': presID,
+        'reminder_type': 'take-pm',
+        'due_time': moment().format(),
+        'reminder_time': moment().format()
+      },
+      {
+        'prescription': presID,
+        'reminder_type': 'order prescription',
+        'due_time': moment().format(),
+        'reminder_time': moment().format()
+      },
+      {
+        'prescription': presID,
+        'reminder_type': 'make appointment',
+        'due_time': moment().format(),
+        'reminder_time': moment().format()
+      }
+    ]
+    reminderArray.map((ele, i) => {
+      axios.post('/api/reminders/', ele, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+        .catch(err => console.log(err.response.data))
+    })
+
   }
 
 
@@ -54,7 +102,10 @@ const CreatePrescription2 = (props) => {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
         //----- Open the prescription view page for this prescription
-        .then((resp) => props.history.push(`/prescriptions/${resp.data.id}/`))
+        .then((resp) => {
+          postReminders(resp.data.id)
+          props.history.push(`/prescriptions/${resp.data.id}/`)
+        })
         .catch((err) => {
           setErrors(err.response.data)
         })
@@ -71,7 +122,10 @@ const CreatePrescription2 = (props) => {
             headers: { Authorization: `Bearer ${Auth.getToken()}` }
           })
             //----- Open the prescription view page for this prescription
-            .then((resp) => props.history.push(`/prescriptions/${resp.data.id}/`))
+            .then((resp) => {
+              postReminders(resp.data.id)
+              props.history.push(`/prescriptions/${resp.data.id}/`)
+            })
             .catch((err) => {
               setErrors(err.response.data)
             })
