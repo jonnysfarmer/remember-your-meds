@@ -60,15 +60,16 @@ const SwitchonOFF = withStyles({
 })(Switch)
 
 
-const DisplayPrescriptions = ({ medicine, presID }, props) => {
+const DisplayPrescriptions = ({ medicine, presID }) => {
 
   const history = useHistory()
 
   const [reminders, setReminder] = useState([])
+  const [takeReminders, setTakeReminders] = useState([])
   // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState([])
 
-
+  // pulls all the reminder info then filters for specific prescriptioj
   const dataHook = () => {
     axios.get('/api/reminders/user/', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -76,8 +77,12 @@ const DisplayPrescriptions = ({ medicine, presID }, props) => {
       .then((resp) => {
         const data1 = resp.data
         const specific = data1.filter(ele => ele.prescription.id === presID)
-
-        setReminder(specific)
+        const nontake = specific.filter(ele => ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment')
+        const take = specific.filter(ele => ele.reminder_type === 'take-mid' || ele.reminder_type === 'take-pm' || ele.reminder_type === 'take-am')
+        const takeEdited = take.filter(ele => ele.edited === true)
+        console.log(takeEdited)
+        setTakeReminders(takeEdited)
+        setReminder(nontake)
 
       })
       .catch(err => setErrors(err.response.data))
@@ -86,7 +91,7 @@ const DisplayPrescriptions = ({ medicine, presID }, props) => {
 
   const handleChange = (id, i) => (event) => {
     if (reminders[i].edited === false) {
-      history.push(`prescriptions/${presID}/edit-reminders`)
+      history.push(`/prescriptions/${presID}/edit-reminders`)
     } else {
       const newreminders = [...reminders]
       newreminders[i].active = event.target.checked
@@ -99,12 +104,27 @@ const DisplayPrescriptions = ({ medicine, presID }, props) => {
     }
   }
 
+  const handleinitialredirect = () => {
+    history.push(`/prescriptions/${presID}/edit-reminders`)
+  }
+
+  const handlechangeall = (e) => {
+    const newtakereminders = [...takeReminders]
+    newtakereminders.map((ele, i) =>{
+      ele.active = e.target.checked
+      axios.put(`/api/reminders/${ele.id}/`, { 'active': event.target.checked }, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+    })
+    setTakeReminders(newtakereminders)
+    
+  }
+
 
 
   useEffect(dataHook, [])
-
+  console.log(takeReminders[0])
   const classes = useStyles()
-  console.log(reminders)
 
 
   if (medicine === null || reminders === []) return <div>Loading</div>
@@ -118,6 +138,45 @@ const DisplayPrescriptions = ({ medicine, presID }, props) => {
                 <Typography gutterBottom variant="subtitle1">
                   {medicine.name}
                 </Typography>
+                {!takeReminders[0] ?
+                  <Typography component="div" variant="caption" color="textSecondary">
+                    <Grid component="label" container alignItems="center" spacing={0}>
+                      <Grid item>
+                        <SwitchonOFF
+                          size="small"
+                          checked= {false}
+                          onChange={()=>handleinitialredirect()}
+                          value="active"
+                          inputProps={{ 'aria-label': 'secondary checkbox' }}
+                        />
+                      </Grid>
+                      <Grid item >
+                        <Box className={classes.boxdisplay}>
+                          Reminder to take medicine
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Typography>
+                  :
+                  <Typography component="div" variant="caption" color="textSecondary">
+                    <Grid component="label" container alignItems="center" spacing={0}>
+                      <Grid item>
+                        <SwitchonOFF
+                          size="small"
+                          checked= {takeReminders[0].active}
+                          onChange={(e)=>handlechangeall(e)}
+                          value="active"
+                          inputProps={{ 'aria-label': 'secondary checkbox' }}
+                        />
+                      </Grid>
+                      <Grid item >
+                        <Box className={classes.boxdisplay}>
+                          Reminder to take medicine
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Typography>
+                }
                 {reminders.map((ele, i) => {
                   return (
                     <Typography component="div" variant="caption" color="textSecondary" key={i}>
@@ -125,7 +184,7 @@ const DisplayPrescriptions = ({ medicine, presID }, props) => {
                         <Grid item>
                           <SwitchonOFF
                             size="small"
-                            checked={ele.active || ''}
+                            checked={ele.active}
                             onChange={handleChange(ele.id, i)}
                             value="active"
                             inputProps={{ 'aria-label': 'secondary checkbox' }}
