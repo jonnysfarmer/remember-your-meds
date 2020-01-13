@@ -38,7 +38,7 @@ const EditReminder = (props) => {
   const [data, setData] = useState() //data to save to reminders in db
   const [reminders, setReminders] = useState([]) //place to store data retrieved from db & edit state
   const [medicineName, setMedicineName] = useState() //used to display medicine name without having to make more api calls
-  const [editState, setEditState] = useState() //used to determine whether to show or hide form fields or edit label
+  const [editState, setEditState] = useState({}) //used to determine whether to show or hide form fields or edit label
   const [errors, setErrors] = useState()
 
 
@@ -68,32 +68,30 @@ const EditReminder = (props) => {
       setMedicineName(reminders[0].prescription.medicine.name)
       //set default edit state to false
       reminders.map(ele => {
-        arr.push({ ['id']: ele.id, ['state']: false })
+        arr.push({ [ele.id]: false })
       })
       setEditState(arr)
     }
   }
 
   //==== CHANGE EDIT STATE
-  const changeEditState = (e) => {
-    console.log('changeeditstate')
+  const changeEditState = (e, newState) => {
     //get the reminder Id for this reminder
     const getId = e.target.id.split('_')
-    //get the user from the array and update to true
-
-
-    //set everything back to the editState
-
-
-    // setEditState({ ...editState, ['id']: parseInt(getId[1], ['state']: true })
-    // console.log(edit)
-
+    //make a temp array of editState items
+    const arr = [...editState]
+    //find the index for this id
+    const i = arr.findIndex((ele) => ele.id === parseInt(getId[1]))
+    //update its status to true
+    arr[i].state = newState
+    //set the editState to new values
+    setEditState(arr)
   }
 
+  //==== GET EDIT STATE
 
 
-
-  console.log('editstates', editState)
+  // console.log('editstates', editState)
 
   //===== DEFINE FORM LABELS AND FIELD TYPES
   const defineFormFields = (e) => {
@@ -190,14 +188,14 @@ const EditReminder = (props) => {
   }, [])
   useEffect(() => {
     setInitialData(),
-      defineFormFields()
+    defineFormFields()
   }, [reminders])
 
   // console.log(reminders)
   useEffect(() => setInitialData(), [reminders])
   useEffect(() => defineFormFields(), [reminders])
 
-  // console.log(buttonState)
+  console.log(editState)
 
   //===== UI
   if (reminders === []) return <div>loading</div>
@@ -212,12 +210,12 @@ const EditReminder = (props) => {
           </Avatar>
           <Typography component='h1' variant='h4'>
             Reminders
-            </Typography>
+          </Typography>
           <p>for {medicineName}</p>
 
           {reminders.map((ele, i) => {
             return (
-              <Grid container spacing={0} key={i}>
+              <Grid container spacing={0} key={ele.id}>
                 <form className={classes.form} id={ele.id} onSubmit={(e) => handleSubmit(e)}>
                   <Typography component='h2' variant='h6' className={classes.capitalize}>
                     {ele.reminder_type}
@@ -234,7 +232,6 @@ const EditReminder = (props) => {
                           name='active'
                           // value={ele.active}
                           onChange={() => setData({ ...data, ['active']: ele.active = !ele.active })}
-                          onChange={(e) => setData({ ...data, ['active']: ele.active = !ele.active })}
                         />
                       </Grid>
                       <Grid item >
@@ -246,18 +243,19 @@ const EditReminder = (props) => {
                     </Grid>
                   </Typography>
 
-                  {(ele.active === true) &&
+                  
+                  {(ele.active === true ) &&
                     <>
                       <Grid item>
                         <Typography variant="body2" style={{ cursor: 'pointer' }}>
                           <Link
                             id={'edit_' + ele.id}
-                            onClick={e => changeEditState(e)}>
+                            onClick={e => changeEditState(e, true)}>
                             Edit
-                        </Link>
+                          </Link>
                         </Typography>
                       </Grid>
-                      <TextField
+                      {/* <TextField
                         id={`input_${ele.reminder_type}`}
                         label={ele.reminder_type}
                         name={ele.reminder_type}
@@ -278,7 +276,7 @@ const EditReminder = (props) => {
                         className={classes.submit}
                       >
                         Save reminder
-                      </Button>
+                      </Button> */}
                     </>
                   }
 
