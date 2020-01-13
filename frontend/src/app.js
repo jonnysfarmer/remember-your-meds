@@ -12,6 +12,7 @@ import Prescription from './components/Prescription'
 import Profile from './components/Profile'
 import Logout from './components/Logout'
 import EditProfile from './components/EditProfile'
+import CreatePrescription2 from './components/CreatePrescription2'
 
 import EditReminder from './components/EditReminder'
 
@@ -29,7 +30,7 @@ const App = () => {
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/prescriptions" component={Prescriptions} />
-        <Route exact path='/prescriptions/create' component={CreatePrescription} />
+        <Route exact path='/prescriptions/create' component={CreatePrescription2} />
         <Route exact path="/prescriptions/:id" component={Prescription} />
         {/* <Route exact path="/prescriptions/:id/edit" component={EditPrescription} /> */}
         <Route exact path="/prescriptions/:id/edit-reminders" component={EditReminder} />
