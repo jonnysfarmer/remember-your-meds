@@ -90,6 +90,13 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
 
 
   const handleChange = (id, i) => (event) => {
+<<<<<<< HEAD
+    const newreminders = [...reminders]
+    newreminders[i].active = event.target.checked
+    axios.put(`/api/reminders/${id}/`, { 'active': event.target.checked }, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+=======
     if (reminders[i].edited === false) {
       history.push(`/prescriptions/${presID}/edit-reminders`)
     } else {
@@ -98,6 +105,7 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
       axios.put(`/api/reminders/${id}/`, { 'active': event.target.checked }, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
+>>>>>>> development
 
       setReminder(newreminders)
       setErrors({})
