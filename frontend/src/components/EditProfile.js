@@ -94,11 +94,11 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.success.dark
     }
   },
-  submitred: {
+  submitsmall: {
     margin: theme.spacing(1, 0, 2),
-    backgroundColor: theme.palette.error.main,
+    backgroundColor: theme.palette.success.main,
     '&:hover': {
-      backgroundColor: theme.palette.error.secondary
+      backgroundColor: theme.palette.success.dark
     }
   }
 }))
@@ -110,16 +110,9 @@ const EditProfile = (props) => {
   const classes = useStyles()
 
   const [user, setUser] = useState({})
-  const [showPassword, setShowPassword] = useState(false)
   const [err, setErrors] = useState({})
 
-  //hides and shows the password
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword)
-  }
-  const handleMouseDownPassword = event => {
-    event.preventDefault()
-  }
+
 
   // logs the handle change
   const handleChange = (e) => {
@@ -127,11 +120,13 @@ const EditProfile = (props) => {
     setErrors({})
   }
 
-  // on save button
+  // on save button, posts new data
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('/api/register/', user)
-      .then(() => props.history.push('/login'))
+    axios.put('/api/profile/', user, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => props.history.push('/profile'))
       .catch((err) => {
         setErrors(err.response.data)
       })
@@ -148,6 +143,7 @@ const EditProfile = (props) => {
       .catch(err => setErrors(err.response.data))
   }
 
+  // return to profile page
   const handleReturn = (e) => {
     e.preventDefault()
     props.history.push('/profile/')
@@ -156,10 +152,9 @@ const EditProfile = (props) => {
 
 
 
+  // hook to pull data
   useEffect(userHook, [])
-  console.log(user.email)
 
-  if (user.email === null) return <div>loading</div>
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -172,15 +167,7 @@ const EditProfile = (props) => {
         </Typography>
 
         <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Save
-          </Button>
+
           <ThemeProvider theme={theme}>
             <TextField
               error={err.username && true}
@@ -211,56 +198,6 @@ const EditProfile = (props) => {
               value={user.email || 'email'}
             />
             <TextField
-              error={err.password && true}
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              name="password"
-              label={err.password ? 'Error' : 'Password'}
-              type={showPassword ? 'text' : 'password'}
-              id="password"
-              autoComplete="current-password"
-              helperText={err.password}
-              onChange={(e) => handleChange(e)}
-              InputProps={{
-                endAdornment:
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-              }}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              name="password_confirmation"
-              label="Password Confirmation"
-              type={showPassword ? 'text' : 'password'}
-              id="password_confirmation"
-              autoComplete="confirmation-password"
-              onChange={(e) => handleChange(e)}
-              InputProps={{
-                endAdornment:
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-              }}
-            />
-            <TextField
               variant="outlined"
               margin="normal"
               fullWidth
@@ -278,34 +215,34 @@ const EditProfile = (props) => {
 
           </ThemeProvider>
 
-        </form>
-        <Grid container spacing={2} >
-          <Grid item xs={6} className={classes.centeralign} >
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submitgrey}
-              onClick={(e) => handleReturn(e)}
 
-            >
-              Back
-            </Button>
+          <Grid container spacing={2} >
+            <Grid item xs={6} className={classes.centeralign} >
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submitgrey}
+                onClick={(e) => handleReturn(e)}
+
+              >
+                Back
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submitsmall}
+              >
+                Save
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="secondary"
-              className={classes.submitred}
-            // onClick={(e) => handleDelete(e)}
-            >
-              Delete
-            </Button>
-          </Grid>
-        </Grid>
+        </form>
 
 
       </div>
