@@ -59,7 +59,7 @@ const SwitchonOFF = withStyles({
   track: {}
 })(Switch)
 
-
+  
 const DisplayPrescriptions = ({ medicine, presID }) => {
 
   const history = useHistory()
@@ -88,6 +88,7 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
       .catch(err => setErrors(err.response.data))
   }
 
+  // console.log(errors)
 
   const handleChange = (id, i) => (event) => {
     if (reminders[i].edited === false) {
