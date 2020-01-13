@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -8,11 +8,12 @@ import Container from '@material-ui/core/Container'
 import Avatar from '@material-ui/core/Avatar'
 import LocalPharmacyOutlinedIcon from '@material-ui/icons/LocalPharmacyOutlined'
 import { makeStyles } from '@material-ui/core/styles'
-// import Link from '@material-ui/core/Link'
+import Link from '@material-ui/core/Link'
 
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
+import { useHistory } from 'react-router-dom'
 
 
 
@@ -98,6 +99,8 @@ const useStyles = makeStyles(theme => ({
 const Prescription = (props) => {
 
   const classes = useStyles()
+  const history = useHistory()
+
 
   const [prescription, setPrescription] = useState({})
   const [medicine, setMedicine] = useState({})
@@ -130,12 +133,9 @@ const Prescription = (props) => {
       .then((resp) => {
         const data1 = resp.data
         const specific = data1.filter(ele => ele.prescription.id === id)
-        console.log(specific)
-        if (specific.length === 0) {
-          setReminders('')
-        } else {
-          setReminders(specific)
-        }
+        const threeReminders = specific.filter(ele => ele.reminder_type === 'take-am' || ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment')
+        console.log(threeReminders)
+        setReminders(threeReminders)
 
       })
       .catch(err => setErrors(err.response.data))
@@ -145,6 +145,11 @@ const Prescription = (props) => {
   const handleReturn = (e) => {
     e.preventDefault()
     props.history.push('/prescriptions/')
+  }
+
+  const editclick = () => {
+    const id = parseInt(props.match.params.id)
+    history.push(`/prescriptions/${id}/edit-reminders`)
   }
 
   // deletes prescription and pushes you back
@@ -176,7 +181,7 @@ const Prescription = (props) => {
           {medicine.name}
         </Typography>
         <Typography component="h3" variant="caption" className={classes.title}>
-          <Link to={medicine.url} color="inherit">
+          <Link href={medicine.url} color="inherit">
             More Information
           </Link>
         </Typography>
@@ -202,7 +207,7 @@ const Prescription = (props) => {
           {prescription.number_repeats}
         </Typography>
         <Typography component="h2" variant="h6">
-          Current Reminders
+          Reminders
         </Typography>
         <div className={classes.root}>
           {reminders ?
@@ -212,18 +217,18 @@ const Prescription = (props) => {
                 <Paper className={classes.grid} key={i}>
                   <Grid container spacing={2} >
                     <Grid item xs={10} className={classes.centeralign} >
-                      <Typography component="h3" variant="subtitle1" color="textSecondary" >
-                        {ele.reminder_type}
+                      <Typography component="h3" variant="subtitle2" color="textSecondary" >
+                        {ele.reminder_type === 'take-am' ? 'Reminder to take Medicine' : `Reminder to ${ele.reminder_type}`}
                       </Typography>
 
 
                       {/* TEMP */}
-                      <div>
-                        <p>{ele.id}</p>
+                      {/* <div> */}
+                        {/* <p>{ele.id}</p> */}
                         {/* {console.log(`/prescriptions/${ele.user.id}/add-reminder`)} */}
                         {/* {console.log(typeof(ele.active))} */}
-                        <Link to={`/prescriptions/${ele.prescription.id}/edit-reminders`}>LINK</Link>
-                      </div>
+                        {/* <Link to={`/prescriptions/${ele.prescription.id}/edit-reminders`}>LINK</Link> */}
+                      {/* </div> */}
                       {/* END TEMP */}
 
 
@@ -231,7 +236,7 @@ const Prescription = (props) => {
 
                     </Grid>
                     <Grid item>
-                      <Avatar className={classes.avatargrey} >
+                      <Avatar className={classes.avatargrey} onClick={()=>editclick()} >
                         <EditOutlinedIcon fontSize="small" />
                       </Avatar>
                     </Grid>

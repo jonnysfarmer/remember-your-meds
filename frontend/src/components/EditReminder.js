@@ -142,6 +142,7 @@ const EditReminder = (props) => {
     //update the state for this id
     newReminders[i].active = state
     //put the status change tot he db
+    console.log(state)
     axios.put(`/api/reminders/${id}/`, { 'active': state }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
