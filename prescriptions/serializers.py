@@ -51,14 +51,14 @@ class ReminderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reminder
-        fields = ('id', 'user', 'prescription', 'doctor', 'due_time', 'reminder_time', 'reminder_type', 'active')
+        fields = ('id', 'user', 'prescription', 'doctor', 'due_time', 'reminder_time', 'reminder_type', 'active', 'edited')
 
 class ReminderPutSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reminder
-        fields = ('id', 'due_time', 'reminder_time', 'reminder_type', 'active')
-        extra_kwargs = {'id' : {'required': False}, 'due_time' : {'required': False}, 'reminder_time' : {'required': False}, 'reminder_type' : {'required': False}, 'active' : {'required': False}}
+        fields = ('id', 'due_time', 'reminder_time', 'reminder_type', 'active', 'edited')
+        extra_kwargs = {'id' : {'required': False}, 'due_time' : {'required': False}, 'reminder_time' : {'required': False}, 'reminder_type' : {'required': False}, 'active' : {'required': False}, 'edited' : {'required': False}}
 
 
 class ReminderPostSerializer(serializers.ModelSerializer):
