@@ -38,8 +38,9 @@ const EditReminder = (props) => {
   const [data, setData] = useState() //data to save to reminders in db
   const [reminders, setReminders] = useState([]) //place to store data retrieved from db & edit state
   const [medicineName, setMedicineName] = useState() //used to display medicine name without having to make more api calls
+  // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState()
-
+  // console.log('err', errors)
 
   //===== GET REMINDER INFO
   const reminderHook = () => {
@@ -121,13 +122,12 @@ const EditReminder = (props) => {
 
   //===== UPDATE REMINDER
   function updateReminder(id, data) {
-    console.log('put', data)
     axios.put(`/api/reminders/${id}/`, data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(props.history.push('/prescriptions/'))
       // .then(resp => console.log(resp.data))
-      .catch(error => console.log(error.data))
+      .catch(error => setErrors(error.data))
   }
 
   //===== TURN OFF REMINDER
@@ -148,7 +148,7 @@ const EditReminder = (props) => {
       //update our reminder & data
       .then(setReminders(newReminders))
       .then(setData(newReminders))
-      .catch(error => console.log(error.data))
+      .catch(error => setErrors(error.data))
   }
 
   //==== SUBMIT DATA

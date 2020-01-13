@@ -80,7 +80,7 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
         const nontake = specific.filter(ele => ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment')
         const take = specific.filter(ele => ele.reminder_type === 'take-mid' || ele.reminder_type === 'take-pm' || ele.reminder_type === 'take-am')
         const takeEdited = take.filter(ele => ele.edited === true)
-        console.log(takeEdited)
+        console.log('takeedited', takeEdited)
         setTakeReminders(takeEdited)
         setReminder(nontake)
 
@@ -124,7 +124,7 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
 
 
   useEffect(dataHook, [])
-  console.log(takeReminders[0])
+  // console.log(takeReminders[0])
   const classes = useStyles()
 
 
