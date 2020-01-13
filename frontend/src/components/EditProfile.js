@@ -7,17 +7,13 @@ import Container from '@material-ui/core/Container'
 import Avatar from '@material-ui/core/Avatar'
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
 import { makeStyles } from '@material-ui/core/styles'
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import Link from '@material-ui/core/Link'
 import InputAdornment from '@material-ui/core/InputAdornment'
-import Visibility from '@material-ui/icons/Visibility'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
+
 // import CssBaseline from '@material-ui/core/CssBaseline'
 import TextField from '@material-ui/core/TextField'
 import { ThemeProvider } from '@material-ui/core/styles'
-import IconButton from '@material-ui/core/IconButton'
+
 
 
 // import Link from '@material-ui/core/Link'

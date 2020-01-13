@@ -73,7 +73,7 @@ const CreatePrescription2 = (props) => {
         'reminder_time': moment().format()
       }
     ]
-    reminderArray.map((ele, i) => {
+    reminderArray.map((ele) => {
       axios.post('/api/reminders/', ele, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
