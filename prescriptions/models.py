@@ -38,7 +38,9 @@ class Prescription(models.Model):
 class Reminder(models.Model):
     # setup the reminder types
     REMINDER_TYPE_CHOICES = [
-        ('take', 'Take medicine'),
+        ('take-am', 'Take medicine am'),
+        ('take-mid', 'Take medicine mid'),
+        ('take-pm', 'Take medicine pm'),
         ('order prescription', 'Order prescription'),
         ('make appointment', 'Make doctors appointment')
     ]
