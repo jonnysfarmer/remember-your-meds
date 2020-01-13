@@ -84,8 +84,6 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
 
   const handleChange = (id, i) => (event) => {
     const newreminders = [...reminders]
-    console.log(id)
-    console.log(event.target.checked)
     newreminders[i].active = event.target.checked
     axios.put(`/api/reminders/${id}/`, { 'active': event.target.checked }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }

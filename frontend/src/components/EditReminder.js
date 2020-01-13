@@ -38,13 +38,10 @@ const EditReminder = (props) => {
   const [data, setData] = useState() //data to save to reminders in db
   const [reminders, setReminders] = useState([]) //place to store data retrieved from db & edit state
   const [medicineName, setMedicineName] = useState() //used to display medicine name without having to make more api calls
-  const [editState, setEditState] = useState({}) //used to determine whether to show or hide form fields or edit label
   const [errors, setErrors] = useState()
 
 
-
   //===== GET REMINDER INFO
-  // can I call a getReminderHook here?
   const reminderHook = () => {
     axios.get('/api/reminders/user/', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -55,8 +52,6 @@ const EditReminder = (props) => {
 
   //===== SET INITIAL DATA THAT IS CONSTANT
   const setInitialData = () => {
-    const arr = []
-
     if (reminders.length === 0) {
       console.log('waiting for data')
     } else {
@@ -66,43 +61,11 @@ const EditReminder = (props) => {
         ['medicine']: reminders[0].prescription.medicine.id
       })
       setMedicineName(reminders[0].prescription.medicine.name)
-      //set default edit state to false
-      reminders.map(ele => {
-        arr.push({ [ele.id]: false })
-      })
-      setEditState(arr)
     }
   }
 
-  //==== CHANGE EDIT STATE
-  const changeEditState = (e, newState) => {
-    //get the reminder Id for this reminder
-    const getId = e.target.id.split('_')
-    //make a temp array of editState items
-    const arr = [...editState]
-    //find the index for this id
-    const i = arr.findIndex((ele) => ele.id === parseInt(getId[1]))
-    //update its status to true
-    arr[i].state = newState
-    //set the editState to new values
-    setEditState(arr)
-  }
 
-  //==== GET EDIT STATE
-
-
-  // console.log('editstates', editState)
-
-  //===== DEFINE FORM LABELS AND FIELD TYPES
-  const defineFormFields = (e) => {
-
-  }
-
-
-
-
-
-  //===== STORE DOSE/NUMBER VALUE     
+  //===== STORE DOSE/NUMBER VALUE AS ENTERED ON FORM
   const handleChange = (e) => {
     setNumber(e.target.value)
     setErrors({})
@@ -138,6 +101,18 @@ const EditReminder = (props) => {
           ['due_time']: moment().hours(time[0]).minutes(time[1]).format()
         })
       } return
+      case 'take-mid': {
+        setData({
+          ...data,
+          ['due_time']: moment().hours(time[0]).minutes(time[1]).format()
+        })
+      } return
+      case 'take-pm': {
+        setData({
+          ...data,
+          ['due_time']: moment().hours(time[0]).minutes(time[1]).format()
+        })
+      } return
     }
     //----- handle if reminder_date is less than today
   }
@@ -146,56 +121,49 @@ const EditReminder = (props) => {
 
   //===== UPDATE REMINDER
   function updateReminder(id) {
-    console.log('putting', id, data)
     axios.put(`/api/reminders/${id}/`, data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
+      .then(resp => console.log(resp.data))
+      .catch(error => console.log(error.data))
   }
 
-  // //===== MAKE REMINDER
-  // function makeReminder() {
-  //   console.log('posting')
-  //   //----- POST to /reminder
-  //   axios.post('/api/reminders/', data, {
-  //     headers: { Authorization: `Bearer ${Auth.getToken()}` }
-  //   })
-  //     .then((resp) => console.log(resp))
-  //     .catch((err) => {
-  //       setErrors(err.response.data)
-  //       console.log(errors)
-  //     })
-  // }
-
+  //===== TURN OFF REMINDER
+  function switchReminder(e, i) {
+    console.log('changeremindstate')
+    //get the id as a number
+    const split = e.target.id.split('_')
+    const id = parseInt(split[1])
+    //change the state to the opposite
+    const state = e.target.active = !e.target.active
+    //get current reminders
+    const newReminders = [...reminders]
+    //update the state for this id
+    newReminders[i].active = state
+    //put the status change tot he db
+    axios.put(`/api/reminders/${id}/`, { 'active': state }, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      //update our reminder & data
+      .then(setReminders(newReminders))
+      .then(setData(newReminders))
+      .catch(error => console.log(error.data))
+  }
+  console.log(data)
 
   //==== SUBMIT DATA
   const handleSubmit = (e) => {
-    console.log('handlesubmit')
     e.preventDefault()
-    //decide whether this is a create or an update and call appropriate api function
-    // if (!e.target.id) {
-    //   makeReminder()
-    // } else {
     setData({ ...data, ['id']: e.target.id })
     updateReminder(e.target.id)
-    // }
   }
 
 
-
   //===== USE EFFECT
-  useEffect(() => {
-    reminderHook()
-  }, [])
-  useEffect(() => {
-    setInitialData(),
-    defineFormFields()
-  }, [reminders])
-
-  // console.log(reminders)
+  useEffect(() => reminderHook(), [])
   useEffect(() => setInitialData(), [reminders])
-  useEffect(() => defineFormFields(), [reminders])
 
-  console.log(editState)
+
 
   //===== UI
   if (reminders === []) return <div>loading</div>
@@ -215,14 +183,14 @@ const EditReminder = (props) => {
 
           {reminders.map((ele, i) => {
             return (
-              <Grid container spacing={0} key={ele.id}>
+              <Grid container spacing={0} key={i}>
                 <form className={classes.form} id={ele.id} onSubmit={(e) => handleSubmit(e)}>
                   <Typography component='h2' variant='h6' className={classes.capitalize}>
                     {ele.reminder_type}
                   </Typography>
 
-                  <Typography component="div" variant="caption" color="textSecondary">
-                    <Grid component="label" container alignItems="flex-start" spacing={0}>
+                  <Typography component="div" variant="caption" color="textSecondary" key={i}>
+                    <Grid component="label" container alignItems="center" spacing={0}>
                       <Grid item>
                         <SwitchOnOFF
                           id={'switch_' + ele.id}
@@ -230,34 +198,30 @@ const EditReminder = (props) => {
                           size="small"
                           inputProps={{ 'aria-label': 'secondary checkbox' }}
                           name='active'
-                          // value={ele.active}
-                          onChange={() => setData({ ...data, ['active']: ele.active = !ele.active })}
+                          onChange={(e) => switchReminder(e, i)}
                         />
                       </Grid>
                       <Grid item >
                         <Box className={classes.boxdisplay}>
                           Reminder {ele.active === false && 'inactive'}
-                          {ele.active === true && ` will be sent on ${moment(ele.reminder_time).format('DD/MM/YYYY')}`}
+                          {ele.active === true && <span>
+                            {(ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment') ?
+                              ` will be sent ${moment(ele.reminder_time).format('DD/MM/YYYY')}` :
+                              ` will be sent ${moment(ele.reminder_time).format('HH:MM')}`
+                            }
+                          </span>
+                          }
                         </Box>
                       </Grid>
                     </Grid>
                   </Typography>
 
-                  
-                  {(ele.active === true ) &&
+
+                  {(ele.active === true && (ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment') &&
                     <>
-                      <Grid item>
-                        <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                          <Link
-                            id={'edit_' + ele.id}
-                            onClick={e => changeEditState(e, true)}>
-                            Edit
-                          </Link>
-                        </Typography>
-                      </Grid>
-                      {/* <TextField
+                      <TextField
                         id={`input_${ele.reminder_type}`}
-                        label={ele.reminder_type}
+                        label={ele.reminder_type === 'order prescription' ? 'How many days medicine do you have?' : 'How many prescription repeats are left'}
                         name={ele.reminder_type}
                         type='number'
                         required
@@ -275,34 +239,10 @@ const EditReminder = (props) => {
                         color='primary'
                         className={classes.submit}
                       >
-                        Save reminder
-                      </Button> */}
+                        Update {ele.reminder_type} reminder
+                      </Button>
                     </>
-                  }
-
-
-
-                  {/* {buttonState === 'submit' &&
-                        <Button
-                          type='submit'
-                          fullWidth
-                          variant='contained'
-                          color='primary'
-                          className={classes.submit}
-                        >
-                          Save reminder
-                        </Button>
-                      }
-                      {buttonState === 'edit' &&
-                        <Typography>
-                          <a
-                            onClick={setButtonState({ ['button']: 'submit' })}
-                            type='edit'
-                          >Edit reminder</a>
-                        </Typography>
-                      }
-                    </> */}
-
+                  )}
                 </form>
               </Grid>
             )
