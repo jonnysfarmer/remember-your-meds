@@ -124,11 +124,12 @@ const EditReminder = (props) => {
     axios.put(`/api/reminders/${id}/`, data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then(resp => console.log(resp.data))
+      .then(props.history.push('/prescriptions/'))
       .catch(error => console.log(error.data))
   }
 
   //===== TURN OFF REMINDER
+  //can probably update this one similar to how I ahve SUBMIT, then UPDATE as two functions
   function switchReminder(e, i) {
     console.log('changeremindstate')
     //get the id as a number
@@ -149,7 +150,6 @@ const EditReminder = (props) => {
       .then(setData(newReminders))
       .catch(error => console.log(error.data))
   }
-  console.log(data)
 
   //==== SUBMIT DATA
   const handleSubmit = (e) => {
