@@ -5,11 +5,8 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import Avatar from '@material-ui/core/Avatar'
-import LocalPharmacyOutlinedIcon from '@material-ui/icons/LocalPharmacyOutlined'
 import { makeStyles } from '@material-ui/core/styles'
-
-
-// import { useStyles, theme } from '../styles/styles'
+import { PrescriptionIcon } from '../styles/icons'
 
 import axios from 'axios'
 import Auth from '../lib/auth'
@@ -73,7 +70,7 @@ const Prescriptions = (props) => {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LocalPharmacyOutlinedIcon />
+          <PrescriptionIcon />
         </Avatar>
         <Typography component="h1" variant="h4">
           My Prescriptions
@@ -86,7 +83,7 @@ const Prescriptions = (props) => {
           className={classes.submit}
           onClick = {(e)=>handleCreate(e)}
         >
-          Create new Prescription
+          New Prescription
         </Button>
         {data.map((ele, i) => {
           return (

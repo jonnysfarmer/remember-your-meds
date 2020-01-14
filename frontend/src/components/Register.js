@@ -22,15 +22,20 @@ import axios from 'axios'
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit">
+    <Box>
+      <Typography variant="body2" color="textSecondary" align="center">
+        {'Copyright © '}
+        <Link color="inherit" href='/#/'>
 
-        Takeyourmedicine
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
+          Take your medicine
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+      <Typography variant="body2" color="textSecondary" align="center">
+        Made using NHS data
+      </Typography>
+    </Box>
   )
 }
 

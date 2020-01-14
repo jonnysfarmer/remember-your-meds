@@ -6,14 +6,15 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import Avatar from '@material-ui/core/Avatar'
-import LocalPharmacyOutlinedIcon from '@material-ui/icons/LocalPharmacyOutlined'
 import { makeStyles } from '@material-ui/core/styles'
 import Link from '@material-ui/core/Link'
+import { PrescriptionIcon } from '../styles/icons'
 
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import { useHistory } from 'react-router-dom'
+
 
 
 
@@ -134,7 +135,7 @@ const Prescription = (props) => {
         const data1 = resp.data
         const specific = data1.filter(ele => ele.prescription.id === id)
         const threeReminders = specific.filter(ele => ele.reminder_type === 'take-am' || ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment')
-        console.log(threeReminders)
+        // console.log(threeReminders)
         setReminders(threeReminders)
 
       })
@@ -144,7 +145,7 @@ const Prescription = (props) => {
   // got back to original page
   const handleReturn = (e) => {
     e.preventDefault()
-    props.history.push('/prescriptions/')
+    history.goBack()
   }
 
   const editclick = () => {
@@ -162,6 +163,11 @@ const Prescription = (props) => {
       .then(() => props.history.push('/prescriptions/'))
   }
 
+  const pushEdit = () => {
+    const id = parseInt(props.match.params.id)
+    history.push(`/prescriptions/${id}/edit`)
+  }
+
   useEffect(prescriptionHook, [])
   useEffect(reminderHook, [])
 
@@ -175,14 +181,14 @@ const Prescription = (props) => {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LocalPharmacyOutlinedIcon />
+          <PrescriptionIcon />
         </Avatar>
         <Typography component="h1" variant="h4" >
           {medicine.name}
         </Typography>
-        <Typography component="h3" variant="caption" className={classes.title}>
+        <Typography component="h3" variant="subtitle1" className={classes.title}>
           <Link href={medicine.url} color="inherit">
-            More Information
+            NHS Information
           </Link>
         </Typography>
         <Button
@@ -191,6 +197,7 @@ const Prescription = (props) => {
           variant="contained"
           color="primary"
           className={classes.submit}
+          onClick={()=>pushEdit()}
         >
           Edit Prescription
         </Button>
@@ -218,14 +225,8 @@ const Prescription = (props) => {
                   <Grid container spacing={2} >
                     <Grid item xs={10} className={classes.centeralign} >
                       <Typography component="h3" variant="subtitle2" color="textSecondary" >
-                        {ele.reminder_type === 'take-am' ? 'Reminder to take Medicine' : `Reminder to ${ele.reminder_type}`}
+                        {ele.reminder_type === 'take-am' ? 'Reminder to take medicine' : `Reminder to ${ele.reminder_type}`}
                       </Typography>
-
-
-
-
-
-
                     </Grid>
                     <Grid item>
                       <Avatar className={classes.avatargrey} onClick={()=>editclick()} >

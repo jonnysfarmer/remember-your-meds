@@ -23,15 +23,20 @@ import axios from 'axios'
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit">
+    <Box>
+      <Typography variant="body2" color="textSecondary" align="center">
+        {'Copyright © '}
+        <Link color="inherit" href='/#/'>
 
-        Takeyourmedicine
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
+          Take your medicine
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+      <Typography variant="body2" color="textSecondary" align="center">
+        Made using NHS data
+      </Typography>
+    </Box>
   )
 }
 
@@ -49,7 +54,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.success.main
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     margin: theme.spacing(1)
   },
   submit: {
@@ -70,14 +75,6 @@ const theme = createMuiTheme({
   }
 })
 
-// const loginform = {
-
-//   username: '',
-//   email: '',
-//   password: '',
-//   password_confirmation: ''
-
-// }
 
 const Login = (props) => {
 
@@ -106,7 +103,7 @@ const Login = (props) => {
     axios.post('/api/login/', loginInfo)
       .then((resp) => {
         Auth.setToken(resp.data.token)
-        console.log('Logged In')
+        // console.log('Logged In')
         props.history.push('/prescriptions')
       })
       .catch((err) => {
@@ -181,31 +178,7 @@ const Login = (props) => {
                   </InputAdornment>
               }}
             />
-            {/* <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password_confirmation"
-              label="Password Confirmation"
-              type={showPassword ? 'text' : 'password'}
-              id="password_confirmation"
-              autoComplete="confirmation-password"
-              onChange={(e) => handleChange(e)}
-              InputProps={{
-                endAdornment:
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-              }}
-            /> */}
+
           </ThemeProvider>
           <Button
             type="submit"
