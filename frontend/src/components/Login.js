@@ -25,9 +25,9 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit">
+      <Link color="inherit" href='/#/'>
 
-        Takeyourmedicine
+        Take your medicine
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.success.main
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     margin: theme.spacing(1)
   },
   submit: {
@@ -173,31 +173,7 @@ const Login = (props) => {
                   </InputAdornment>
               }}
             />
-            {/* <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password_confirmation"
-              label="Password Confirmation"
-              type={showPassword ? 'text' : 'password'}
-              id="password_confirmation"
-              autoComplete="confirmation-password"
-              onChange={(e) => handleChange(e)}
-              InputProps={{
-                endAdornment:
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-              }}
-            /> */}
+
           </ThemeProvider>
           <Button
             type="submit"

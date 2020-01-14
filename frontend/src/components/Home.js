@@ -6,6 +6,10 @@ import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { PillIcon, InjectIcon } from '../styles/icons'
 import Button from '@material-ui/core/Button'
+import Link from '@material-ui/core/Link'
+import { useHistory } from 'react-router-dom'
+
+
 
 
 
@@ -43,11 +47,35 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+function Copyright() {
+  return (
+    <Box>
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href='/#/'>
+
+        Take your medicine
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+    <Typography variant="body2" color="textSecondary" align="center">
+      Made using NHS Data
+    </Typography>
+    </Box>
+  )
+}
+
 
 
 const Home = () => {
 
   const classes = useStyles()
+  const history = useHistory()
+
+  const pushLogin =(e) => {
+
+  }
 
   return (
     <Box height='100vh' >
@@ -79,6 +107,9 @@ const Home = () => {
           >
             register
           </Button>
+          <Box mt={8}>
+        <Copyright />
+      </Box>
       </Container>
     </Box>
 
