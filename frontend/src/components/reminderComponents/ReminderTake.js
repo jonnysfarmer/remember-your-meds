@@ -38,6 +38,7 @@ const ReminderTake = (props) => {
   if (reminders === []) return <div>loading</div>
   return (
     <>
+    
     </>
   )
 }

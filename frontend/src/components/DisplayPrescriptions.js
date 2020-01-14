@@ -111,7 +111,7 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
 
   const handlechangeall = (e) => {
     const newtakereminders = [...takeReminders]
-    newtakereminders.map((ele, i) =>{
+    newtakereminders.map((ele) =>{
       ele.active = e.target.checked
       axios.put(`/api/reminders/${ele.id}/`, { 'active': event.target.checked }, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
