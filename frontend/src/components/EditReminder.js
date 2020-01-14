@@ -10,6 +10,7 @@ import { useStyles, theme } from '../styles/styles'
 import { ReminderIcon } from '../styles/icons'
 
 import Auth from '../lib/auth'
+import ReminderOrder from './reminderComponents/ReminderOrder'
 
 const SwitchOnOFF = withStyles({
   switchBase: {
@@ -42,6 +43,8 @@ const EditReminder = (props) => {
   const [errors, setErrors] = useState()
   // console.log('err', errors)
 
+  const [remOrder, setRemOrder] = useState()
+
   //===== GET REMINDER INFO
   const reminderHook = () => {
     axios.get('/api/reminders/user/', {
@@ -49,6 +52,15 @@ const EditReminder = (props) => {
     })
       .then((resp) => setReminders(resp.data.filter(ele => ele.prescription.id === parseInt(props.match.params.id))))
       .catch(err => setErrors(err.response.data))
+  }
+
+  //----- Store it by reminder type
+  const reminderOrders = () => {
+    if (reminders.length === 0) {
+      console.log('waiting for data')
+    } else {
+      setRemOrder(reminders.filter(ele => ele.reminder_type === 'order prescription'))
+    }
   }
 
   //===== SET INITIAL DATA THAT IS CONSTANT
@@ -155,14 +167,17 @@ const EditReminder = (props) => {
   //==== SUBMIT DATA
   const handleSubmit = (e) => {
     e.preventDefault()
-    const data = { ...data, ['id']: e.target.id , ['edited']: true }
+    const data = { ...data, ['id']: e.target.id, ['edited']: true }
     updateReminder(e.target.id, data)
   }
 
 
   //===== USE EFFECT
   useEffect(() => reminderHook(), [])
-  useEffect(() => setInitialData(), [reminders])
+  useEffect(() => {
+    setInitialData(),
+      reminderOrders()
+  }, [reminders])
 
   // console.log(errors)
 
@@ -182,7 +197,9 @@ const EditReminder = (props) => {
           </Typography>
           <p>for {medicineName}</p>
 
-          {reminders.map((ele, i) => {
+          <ReminderOrder props={reminders} />
+
+          {/* {reminders.map((ele, i) => {
             return (
               <Grid container spacing={0} key={i}>
                 <form className={classes.form} id={ele.id} onSubmit={(e) => handleSubmit(e)}>
@@ -272,7 +289,7 @@ const EditReminder = (props) => {
                 </form>
               </Grid>
             )
-          })}
+          })} */}
 
 
         </div>
