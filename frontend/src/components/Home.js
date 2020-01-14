@@ -89,7 +89,7 @@ function Copyright() {
 
 
 
-const Home = (props) => {
+const Home = () => {
 
   const classes = useStyles()
   const history = useHistory()

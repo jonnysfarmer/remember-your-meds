@@ -12,7 +12,7 @@ class Command(BaseCommand):
         resp = resp.json()
         activereminders = list(filter(lambda ele: ele['active'], resp))
 
-        sms_list = list(map(lambda ele: {'name': ele['user']['username'], 'mobile': ele['user']['mobile'], 'medicine': ele['prescription']['medicine']['name'], 'reminder_type': ele['reminder_type']},  activereminders))
+        sms_list = list(map(lambda ele: {'name': ele['user']['username'], 'mobile': '+44' + ele['user']['mobile'], 'medicine': ele['prescription']['medicine']['name'], 'reminder_type': ele['reminder_type']}, activereminders))
 
         print(sms_list)
 
