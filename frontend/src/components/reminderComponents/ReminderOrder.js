@@ -68,7 +68,7 @@ const ReminderOrder = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     const submitData = calculateDates(e)
-    updateReminder(submitData[0].id, submitData[0])
+    updateReminder(submitData[0])
     setData(submitData)
   }
 
@@ -86,7 +86,7 @@ const ReminderOrder = (props) => {
               {ele.reminder_type}
             </Typography>
             <Typography component="div" variant="caption" color="textSecondary" key={i}>
-              <Grid component="label" container alignItems="flex-start" justify='flex-start' spacing={0}>
+              <Grid component="label" container alignItems="center" justify='flex-start' spacing={0}>
                 <Grid item>
                   <SwitchOnOFF
                     id={'switch_' + ele.id}
@@ -126,7 +126,7 @@ const ReminderOrder = (props) => {
                   color='primary'
                   className={classes.submit}
                 >
-                  Save reminder
+                  Save order reminder
                 </Button>
               </div>
             }
