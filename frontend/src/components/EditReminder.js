@@ -14,7 +14,8 @@ const EditReminder = (props) => {
 
   const classes = useStyles()
 
-  const [data, setData] = useState() //data to save to reminders in db
+  // eslint-disable-next-line no-unused-vars
+  // const [data, setData] = useState() //data to save to reminders in db
   const [reminders, setReminders] = useState([]) //place to store data retrieved from db & edit state
   const [medicineName, setMedicineName] = useState() //used to display medicine name without having to make more api calls
   // eslint-disable-next-line no-unused-vars
@@ -34,11 +35,11 @@ const EditReminder = (props) => {
     if (reminders.length === 0) {
       console.log('waiting for data')
     } else {
-      setData({
-        ['user']: reminders[0].user.id,
-        ['prescription']: reminders[0].prescription.id,
-        ['medicine']: reminders[0].prescription.medicine.id
-      })
+      // setData({
+      //   ['user']: reminders[0].user.id,
+      //   ['prescription']: reminders[0].prescription.id,
+      //   ['medicine']: reminders[0].prescription.medicine.id
+      // })
       setMedicineName(reminders[0].prescription.medicine.name)
     }
   }

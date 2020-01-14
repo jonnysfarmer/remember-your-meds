@@ -96,7 +96,7 @@ const ReminderOrder = (props) => {
                 </Grid>
                 <Grid item >
                   <Box className={classes.boxdisplay}>
-                    {`Reminder will be sent ${moment(ele.reminder_time).format('DD/MM/YYYY')}`}
+                    Reminder {ele.active === true ? ` will be sent ${moment(ele.reminder_time).format('DD/MM/YYYY')}` : 'inactive'}
                   </Box>
                 </Grid>
               </Grid>
@@ -110,7 +110,7 @@ const ReminderOrder = (props) => {
                   name={ele.reminder_type}
                   type='number'
                   required
-                  helperText={ele.reminder_type === 'order prescription' ? 'Not including today' : ''}
+                  helperText='Not including today'
                   variant='outlined'
                   fullWidth
                   margin='normal'
