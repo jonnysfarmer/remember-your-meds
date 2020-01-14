@@ -9,17 +9,12 @@ import { ReminderIcon } from '../styles/icons'
 
 import Auth from '../lib/auth'
 import ReminderOrder from './reminderComponents/ReminderOrder'
+import ReminderAppt from './reminderComponents/ReminderAppt'
 
 const EditReminder = (props) => {
 
   const classes = useStyles()
-
-  // eslint-disable-next-line no-unused-vars
-  // const [data, setData] = useState() //data to save to reminders in db
   const [reminders, setReminders] = useState([]) //place to store data retrieved from db & edit state
-  const [medicineName, setMedicineName] = useState() //used to display medicine name without having to make more api calls
-  // eslint-disable-next-line no-unused-vars
-  const [errors, setErrors] = useState()
 
   //===== GET REMINDER INFO
   const reminderHook = () => {
@@ -27,30 +22,15 @@ const EditReminder = (props) => {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then((resp) => setReminders(resp.data.filter(ele => ele.prescription.id === parseInt(props.match.params.id))))
-      .catch(err => setErrors(err.response.data))
+      .catch(err => console.log(err.response.data))
   }
-
-  //===== SET INITIAL DATA THAT IS CONSTANT
-  const setInitialData = () => {
-    if (reminders.length === 0) {
-      console.log('waiting for data')
-    } else {
-      // setData({
-      //   ['user']: reminders[0].user.id,
-      //   ['prescription']: reminders[0].prescription.id,
-      //   ['medicine']: reminders[0].prescription.medicine.id
-      // })
-      setMedicineName(reminders[0].prescription.medicine.name)
-    }
-  }
-
 
   //===== USE EFFECT
   useEffect(() => reminderHook(), [])
-  useEffect(() => setInitialData(), [reminders])
 
+  console.log(reminders)
   //===== UI
-  if (reminders === []) return <div>loading</div>
+  if (reminders.length === 0) return <div>loading</div>
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -63,9 +43,10 @@ const EditReminder = (props) => {
           <Typography component='h1' variant='h4'>
             Reminders
           </Typography>
-          <p>for {medicineName}</p>
+          <p>for {reminders[0].prescription.medicine.name}</p>
 
           <ReminderOrder props={reminders} />
+          <ReminderAppt props={reminders} />
 
         </div>
       </ThemeProvider>

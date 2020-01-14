@@ -29,7 +29,7 @@ const SwitchOnOFF = withStyles({
 })(Switch)
 
 
-const ReminderOrder = (props) => {
+const ReminderAppt = (props) => {
   const classes = useStyles()
   const [data, setData] = useState([])
   const [adjustment, setAdjustment] = useState() //for capturing the input from the form field
@@ -39,7 +39,7 @@ const ReminderOrder = (props) => {
     if (props.length === 0) {
       console.log('waiting for data')
     } else {
-      setData(props.props.filter(ele => ele.reminder_type === 'order prescription'))
+      setData(props.props.filter(ele => ele.reminder_type === 'make appointment'))
     }
   }
 
@@ -52,9 +52,10 @@ const ReminderOrder = (props) => {
   const calculateDates = () => {
     //calculate the due and reminder times
     const startdate = moment().format() //'now'
-    const daysBefore = 7 //number of days before due that we will send reminder
-    const dueTime = moment(startdate).add(adjustment, 'd').format()
-    const reminderTime = moment(startdate).add(adjustment, 'd').subtract(daysBefore, 'd').format()
+    const daysBefore = 14 //number of days before due that we will send reminder
+    const dosesOnPrescription = data[0].prescription.number_days_doses //number of doses on a normal prescription
+    const dueTime = moment(startdate).add(adjustment * dosesOnPrescription, 'd').format()
+    const reminderTime = moment(startdate).add(adjustment * dosesOnPrescription, 'd').subtract(daysBefore, 'd').format()
     
     //update our data
     const newData = [...data]
@@ -109,11 +110,10 @@ const ReminderOrder = (props) => {
               <div className={classes.reminderForm}>
                 <TextField
                   id={`input_${ele.reminder_type}`}
-                  label='How many days medicine do you have?'
+                  label='How many repeats do you have left?'
                   name={ele.reminder_type}
                   type='number'
                   required
-                  helperText='Not including today'
                   variant='outlined'
                   fullWidth
                   margin='normal'
@@ -137,4 +137,4 @@ const ReminderOrder = (props) => {
   )
 }
 
-export default ReminderOrder
+export default ReminderAppt
