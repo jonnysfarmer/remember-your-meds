@@ -110,12 +110,10 @@ const Home = (props) => {
       
       <CssBaseline />
       <Container component="main" maxWidth="xs" className={classes.paper} >
-      {/* <Typography component="h1" variant="h2" className={classes.avatar} >
-      <BackgroundIcon fontSize="inherit"/>
-      </Typography> */}
+
         <Typography component="h1" variant="h2" className={classes.avatar} >
           <PillIcon fontSize='inherit' />
-          <BackgroundIcon fontSize="inherit"/>
+          {/* <BackgroundIcon fontSize="inherit"/> */}
           <InjectIcon fontSize='inherit' />
         </Typography>
         <Typography component="h1" variant="h2" className={classes.title} >

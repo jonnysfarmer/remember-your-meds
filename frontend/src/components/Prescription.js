@@ -240,14 +240,9 @@ const Prescription = (props) => {
                         && ' reminders active' }
                       </Typography>
                     </Grid>
-<<<<<<< HEAD
                     <Grid item>
                       <IconButton className={classes.noPadding}>
                       <Avatar className={classes.avatargrey} onClick={()=>editclick()} >
-=======
-                    <Grid item> 
-                      <Avatar className={classes.avatargrey} onClick={() => editclick()} >
->>>>>>> development
                         <EditOutlinedIcon fontSize="small" />
                       </Avatar>
                       </IconButton>
