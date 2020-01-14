@@ -117,7 +117,7 @@ const Home = () => {
           <InjectIcon fontSize='inherit' />
         </Typography>
         <Typography component="h1" variant="h2" className={classes.title} >
-          Take Your Medicine
+          Take Your Meds
         </Typography>
         <Grid container spacing={2} >
           <Grid item xs={6} className={classes.centeralign} >

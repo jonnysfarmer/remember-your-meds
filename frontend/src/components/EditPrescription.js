@@ -171,8 +171,8 @@ const EditPrescription = (props) => {
                   label='Medicine name'
                   type='text'
                   required
-                  error={err.medicine && true}
-                  helperText={err.medicine}
+                  error={err.name && true}
+                  helperText={err.name}
                   variant='outlined'
                   fullWidth
                   margin='normal'

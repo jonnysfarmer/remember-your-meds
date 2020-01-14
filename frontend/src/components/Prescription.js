@@ -100,6 +100,12 @@ const useStyles = makeStyles(theme => ({
   },
   noPadding: {
     padding: 0
+  },
+  false: {
+    color: theme.palette.error.main
+  },
+  active: {
+    color: theme.palette.success.main
   }
 }))
 
@@ -150,7 +156,7 @@ const Prescription = (props) => {
   // got back to original page
   const handleReturn = (e) => {
     e.preventDefault()
-    
+
     history.push('/prescriptions/')
   }
 
@@ -229,22 +235,22 @@ const Prescription = (props) => {
                 <Paper className={classes.grid} key={i}>
                   <Grid container spacing={2} >
                     <Grid item xs={10} className={classes.centeralign} >
-                      <Typography component="h3" variant="subtitle2" color="textSecondary" >
+                      <Typography component="h3" variant="subtitle2" color="textSecondary" className={ele.active === true ? classes.active : classes.false} >
                         {(ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment') ? `${ele.reminder_type}: ` : 'take medicine: '}
                         {ele.active === false ? ' inactive' : ' '}
                         {((ele.reminder_type === 'order prescription' && ele.active === true) || (ele.reminder_type === 'make appointment' && ele.active === true)) && moment(ele.reminder_time).format('DD/MM/YYYY')}
-                        
+
                         {((ele.reminder_type === 'take-am' && ele.active === true) ||
-                        (ele.reminder_type === 'take-mid' && ele.active === true) ||
-                        (ele.reminder_type === 'take-pm' && ele.active === true))
-                        && ' reminders active' }
+                          (ele.reminder_type === 'take-mid' && ele.active === true) ||
+                          (ele.reminder_type === 'take-pm' && ele.active === true))
+                          && ' reminders active'}
                       </Typography>
                     </Grid>
                     <Grid item>
                       <IconButton className={classes.noPadding}>
-                      <Avatar className={classes.avatargrey} onClick={()=>editclick()} >
-                        <EditOutlinedIcon fontSize="small" />
-                      </Avatar>
+                        <Avatar className={classes.avatargrey} onClick={() => editclick()} >
+                          <EditOutlinedIcon fontSize="small" />
+                        </Avatar>
                       </IconButton>
                     </Grid>
                   </Grid>

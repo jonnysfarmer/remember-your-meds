@@ -144,7 +144,7 @@ const EditProfile = (props) => {
 
   // return to profile page
   const handleReturn = (e) => {
-    e.preventDefault()
+    e.preventDefault()  
     props.history.push('/profile/')
   }
 
@@ -153,6 +153,7 @@ const EditProfile = (props) => {
 
   // hook to pull data
   useEffect(userHook, [])
+  console.log(err)
 
   return (
     <Container component="main" maxWidth="xs">
@@ -180,7 +181,7 @@ const EditProfile = (props) => {
               helperText={err.username}
               autoFocus
               onChange={(e) => handleChange(e)}
-              value={user.username || 'username'}
+              value={user.username || ''}
             />
             <TextField
               error={err.email && true}
@@ -194,7 +195,7 @@ const EditProfile = (props) => {
               autoComplete="email"
               autoFocus
               onChange={(e) => handleChange(e)}
-              value={user.email || 'email'}
+              value={user.email || ''}
             />
             <TextField
               variant="outlined"
