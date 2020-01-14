@@ -34,9 +34,9 @@ function Copyright() {
         {'.'}
       </Typography>
       <Typography variant="body2" align="center" color='inherit'>
-      <Link color="inherit" href='https://developer.api.nhs.uk/'>
-      Made using NHS data
-      </Link>
+        <Link color="inherit" href='https://developer.api.nhs.uk/' target='_blank' rel='noopener'>
+          Made using NHS data
+        </Link>
       </Typography>
     </Box>
   )
@@ -119,7 +119,6 @@ const Register = (props) => {
               helperText={err.email}
               name="email"
               autoComplete="email"
-              autoFocus
               onChange={(e) => handleChange(e)}
             />
             <TextField

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import moment from 'moment'
 //Material UI
 import { Typography, Grid, Switch, Paper, TextField, Box, Button } from '@material-ui/core'
@@ -31,6 +32,7 @@ const SwitchOnOFF = withStyles({
 
 const ReminderOrder = (props) => {
   const classes = useStyles()
+  const history = useHistory()
   const [data, setData] = useState([])
   const [adjustment, setAdjustment] = useState() //for capturing the input from the form field
 
@@ -70,6 +72,7 @@ const ReminderOrder = (props) => {
     const submitData = calculateDates(e)
     updateReminder(submitData[0])
     setData(submitData)
+    history.push('/prescriptions')
   }
 
   //===== USE EFFECT

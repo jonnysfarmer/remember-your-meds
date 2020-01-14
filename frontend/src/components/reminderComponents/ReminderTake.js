@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import moment from 'moment'
 //Material UI
-import { Typography, Grid, Switch, Paper, TextField, Box, Button } from '@material-ui/core'
+import { Typography, Grid, Switch, Paper, TextField, Button } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { red, green } from '@material-ui/core/colors'
 //Material UI our styles/icons
@@ -31,6 +32,7 @@ const SwitchOnOFF = withStyles({
 
 const ReminderTake = (props) => {
   const classes = useStyles()
+  const history = useHistory()
   const [data, setData] = useState([])
 
   //===== SET DATA FOR THIS REMINDER TYPE
@@ -61,6 +63,7 @@ const ReminderTake = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     updateReminder(data)
+    history.push('/prescriptions')
   }
 
   //===== USE EFFECT
@@ -91,7 +94,7 @@ const ReminderTake = (props) => {
                     />
                   </Grid>
                   <Grid item>
-                    Reminder {ele.active === true ? ` ${i+1} at ` : ' inactive'}
+                    Reminder {ele.active === true ? ` ${i + 1} at ` : ' inactive'}
                   </Grid>
                   <Grid item>
                     {ele.active === true &&
