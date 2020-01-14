@@ -44,6 +44,7 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    color: '#000',
     backgroundColor: theme.palette.success.main,
     '&:hover': {
       backgroundColor: theme.palette.success.dark
@@ -73,6 +74,7 @@ const useStyles = makeStyles(theme => ({
   },
   altsubmit: {
     margin: theme.spacing(1, 0, 2),
+    color: '#000',
     backgroundColor: theme.palette.success.main,
     '&:hover': {
       backgroundColor: theme.palette.success.dark
