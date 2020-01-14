@@ -22,9 +22,10 @@ import axios from 'axios'
 // This basically Creates the copywrite document, need to add URL
 
 function Copyright() {
+  const classes = useStyles()
   return (
-    <Box>
-      <Typography variant="body2" color="textSecondary" align="center">
+    <Box className={classes.copyright}>
+      <Typography variant="body2" align="center" color='inherit'>
         {'Copyright © '}
         <Link color="inherit" href='/#/'>
 
@@ -33,8 +34,10 @@ function Copyright() {
         {new Date().getFullYear()}
         {'.'}
       </Typography>
-      <Typography variant="body2" color="textSecondary" align="center">
-        Made using NHS data
+      <Typography variant="body2" align="center" color='inherit'>
+      <Link color="inherit" href='https://developer.api.nhs.uk/'>
+      Made using NHS data
+      </Link>
       </Typography>
     </Box>
   )

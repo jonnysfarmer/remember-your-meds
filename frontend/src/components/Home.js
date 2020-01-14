@@ -78,7 +78,9 @@ function Copyright() {
         {'.'}
       </Typography>
       <Typography variant="body2" align="center" color='inherit'>
-        Made using NHS data
+      <Link color="inherit" href='https://developer.api.nhs.uk/'>
+      Made using NHS data
+      </Link>
       </Typography>
     </Box>
   )
