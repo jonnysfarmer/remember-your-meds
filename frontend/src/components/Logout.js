@@ -4,7 +4,7 @@ import Auth from '../lib/auth'
 import Home from './Home'
 
 function Logout(props) {
-  console.log(props)
+  // console.log(props)
   Auth.logout()
   return (
     <Home />

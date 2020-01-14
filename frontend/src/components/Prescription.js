@@ -17,6 +17,7 @@ import { useHistory } from 'react-router-dom'
 
 
 
+
 // import { useStyles, theme } from '../styles/styles'
 
 import axios from 'axios'
@@ -134,7 +135,7 @@ const Prescription = (props) => {
         const data1 = resp.data
         const specific = data1.filter(ele => ele.prescription.id === id)
         const threeReminders = specific.filter(ele => ele.reminder_type === 'take-am' || ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment')
-        console.log(threeReminders)
+        // console.log(threeReminders)
         setReminders(threeReminders)
 
       })
@@ -144,7 +145,7 @@ const Prescription = (props) => {
   // got back to original page
   const handleReturn = (e) => {
     e.preventDefault()
-    props.history.push('/prescriptions/')
+    history.goBack()
   }
 
   const editclick = () => {

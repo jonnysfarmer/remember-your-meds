@@ -142,7 +142,7 @@ const EditPrescription = (props) => {
     //the empty array below ensure this runs only at on mount
   }, [])
 
-  console.log(currentMed)
+  // console.log(currentMed)
   // console.log(data.number_days_doses)
   if (data === {} || currentMed === {}) return <div>loading</div>
   return (

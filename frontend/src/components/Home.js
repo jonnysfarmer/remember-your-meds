@@ -16,6 +16,7 @@ import { useHistory } from 'react-router-dom'
 
 
 import Box from '@material-ui/core/Box'
+import { fontWeight } from '@material-ui/system'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -28,7 +29,8 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     textAlign: 'center',
-    color: theme.palette.success.main
+    color: theme.palette.success.main,
+    fontWeight: '400'
 
   },
   submit: {
@@ -50,18 +52,18 @@ const useStyles = makeStyles(theme => ({
 function Copyright() {
   return (
     <Box>
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href='/#/'>
+      <Typography variant="body2" color="textSecondary" align="center">
+        {'Copyright © '}
+        <Link color="inherit" href='/#/'>
 
-        Take your medicine
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-    <Typography variant="body2" color="textSecondary" align="center">
-      Made using NHS Data
-    </Typography>
+          Take your medicine
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+      <Typography variant="body2" color="textSecondary" align="center">
+        Made using NHS data
+      </Typography>
     </Box>
   )
 }
@@ -73,7 +75,14 @@ const Home = () => {
   const classes = useStyles()
   const history = useHistory()
 
-  const pushLogin =(e) => {
+  const pushLogin = (e) => {
+    e.preventDefault()
+    history.push('/login/')
+
+  }
+  const pushRegister = (e) => {
+    e.preventDefault()
+    history.push('/register/')
 
   }
 
@@ -81,35 +90,38 @@ const Home = () => {
     <Box height='100vh' >
       <CssBaseline />
       <Container component="main" maxWidth="xs" className={classes.paper} >
-        
+
         <Typography component="h1" variant="h2" color="textSecondary" >
-          <PillIcon fontSize='inherit'/>
-          <InjectIcon fontSize='inherit'/>
-          </Typography>
-          <Typography component="h1" variant="h2" color="textSecondary" className={classes.title} >
-          Take your Medicine
+          <PillIcon fontSize='inherit' />
+          <InjectIcon fontSize='inherit' />
+        </Typography>
+        <Typography component="h1" variant="h2" color="textSecondary" className={classes.title} >
+          Take Your Medicine
         </Typography>
         <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Login
-          </Button>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submitgrey}
-          >
-            register
-          </Button>
-          <Box mt={8}>
-        <Copyright />
-      </Box>
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          onClick={(e)=>pushLogin(e)}
+        >
+          Login
+        </Button>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submitgrey}
+          onClick={(e)=>pushRegister(e)}
+
+        >
+          register
+        </Button>
+        <Box mt={8}>
+          <Copyright />
+        </Box>
       </Container>
     </Box>
 

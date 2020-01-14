@@ -88,7 +88,7 @@ const Profile = (props) => {
   const [prescriptions, setPrescriptions] = useState('')
 
   const [errors, setErrors] = useState([])
-  console.log(errors)
+  // console.log(errors)
 
 
 
