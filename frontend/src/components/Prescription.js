@@ -162,6 +162,11 @@ const Prescription = (props) => {
       .then(() => props.history.push('/prescriptions/'))
   }
 
+  const pushEdit = () => {
+    const id = parseInt(props.match.params.id)
+    history.push(`/prescriptions/${id}/edit`)
+  }
+
   useEffect(prescriptionHook, [])
   useEffect(reminderHook, [])
 
@@ -180,7 +185,7 @@ const Prescription = (props) => {
         <Typography component="h1" variant="h4" >
           {medicine.name}
         </Typography>
-        <Typography component="h3" variant="caption" className={classes.title}>
+        <Typography component="h3" variant="subtitle1" className={classes.title}>
           <Link href={medicine.url} color="inherit">
             More Information
           </Link>
@@ -191,6 +196,7 @@ const Prescription = (props) => {
           variant="contained"
           color="primary"
           className={classes.submit}
+          onClick={()=>pushEdit()}
         >
           Edit Prescription
         </Button>
@@ -220,20 +226,6 @@ const Prescription = (props) => {
                       <Typography component="h3" variant="subtitle2" color="textSecondary" >
                         {ele.reminder_type === 'take-am' ? 'Reminder to take Medicine' : `Reminder to ${ele.reminder_type}`}
                       </Typography>
-
-
-                      {/* TEMP */}
-                      {/* <div> */}
-                        {/* <p>{ele.id}</p> */}
-                        {/* {console.log(`/prescriptions/${ele.user.id}/add-reminder`)} */}
-                        {/* {console.log(typeof(ele.active))} */}
-                        {/* <Link to={`/prescriptions/${ele.prescription.id}/edit-reminders`}>LINK</Link> */}
-                      {/* </div> */}
-                      {/* END TEMP */}
-
-
-
-
                     </Grid>
                     <Grid item>
                       <Avatar className={classes.avatargrey} onClick={()=>editclick()} >
