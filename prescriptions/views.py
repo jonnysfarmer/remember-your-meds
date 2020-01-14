@@ -5,8 +5,7 @@ from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTIT
 from .models import Medicine, Doctor, Prescription, Reminder
 from .serializers import MedicineSerializer, ReminderSerializer, ReminderPostSerializer, PrescriptionSerializer, PopulatedPrescriptionSerializer, ReminderPutSerializer, PrescriptionPutSerializer
 
-
-from django.conf import settings                                                                                                                                                       
+from django.conf import settings                                                                                                                                           
 from django.http import HttpResponse
 from twilio.rest import Client
 
@@ -132,3 +131,10 @@ class PrescriptionUserView(APIView):
         prescriptions = Prescription.objects.filter(user=request.user.id)
         serializer = PopulatedPrescriptionSerializer(prescriptions, many=True)
         return Response(serializer.data)
+
+class NotificationsView(APIView):
+
+    def get(self, _request):
+        reminders = Reminder.objects.all()
+        serialized = ReminderSerializer(reminders, many=True)
+        return Response(serialized.data)

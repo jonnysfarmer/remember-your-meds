@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import { PillIcon, InjectIcon, BackgroundIcon } from '../styles/icons'
+import { PillIcon, InjectIcon } from '../styles/icons'
 import Button from '@material-ui/core/Button'
 import Link from '@material-ui/core/Link'
 import { useHistory } from 'react-router-dom'
@@ -110,10 +110,8 @@ const Home = () => {
       
       <CssBaseline />
       <Container component="main" maxWidth="xs" className={classes.paper} >
-
         <Typography component="h1" variant="h2" className={classes.avatar} >
           <PillIcon fontSize='inherit' />
-          {/* <BackgroundIcon fontSize="inherit"/> */}
           <InjectIcon fontSize='inherit' />
         </Typography>
         <Typography component="h1" variant="h2" className={classes.title} >
@@ -125,10 +123,8 @@ const Home = () => {
               type="submit"
               fullWidth
               variant="outlined"
-              // color="primary"
               className={classes.submitgrey}
               onClick={(e) => pushRegister(e)}
-
             >
               register
             </Button>
