@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import moment from 'moment'
 //Material UI
-import { Container, CssBaseline, Avatar, Typography, Grid, Switch, TextField, Box, Button } from '@material-ui/core'
+import { Container, CssBaseline, Avatar, Typography, Grid, Switch, Paper, TextField, Box, Button } from '@material-ui/core'
 import { withStyles, ThemeProvider } from '@material-ui/core/styles'
 import { red, green } from '@material-ui/core/colors'
 //Material UI our styles/icons
 import { useStyles } from '../../styles/styles'
 //Our functions
 import SwitchReminder from './SwitchReminder'
+import updateReminder from './UpdateReminder'
 
 
 const SwitchOnOFF = withStyles({
@@ -28,9 +29,10 @@ const SwitchOnOFF = withStyles({
 })(Switch)
 
 
-const ReminderTake = (props) => {
-
+const ReminderOrder = (props) => {
+  const classes = useStyles()
   const [data, setData] = useState([])
+  const [adjustment, setAdjustment] = useState() //for capturing the input from the form field
 
   const setInitialData = () => {
     //----- Store just the data for this components reminder type
@@ -41,36 +43,97 @@ const ReminderTake = (props) => {
     }
   }
 
+  const handleChange = (e) => {
+    setAdjustment(e.target.value)
+  }
+
+  const calculateDates = () => {
+    //calculate the due and reminder times
+    const startdate = moment().format() //'now'
+    const daysBefore = 7 //number of days before due that we will send reminder
+    const dueTime = moment(startdate).add(adjustment, 'd').format()
+    const reminderTime = moment(startdate).add(adjustment, 'd').subtract(daysBefore, 'd').format()
+    
+    //update our data
+    const newData = [...data]
+    //there is only one reminder for ordering, so it is always position 0 of array
+    newData[0].due_time = dueTime
+    newData[0].reminder_time = reminderTime
+    return newData
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const submitData = calculateDates(e)
+    updateReminder(submitData[0].id, submitData[0])
+    setData(submitData)
+  }
+  console.log(data)
 
   //===== USE EFFECT
   useEffect(() => setInitialData(), [props])
-  console.log(data)
 
   //===== UI
   if (data === []) return <div>loading</div>
   return (
-    <>
-      <div>{data.map((ele, i) => {
-        console.log(ele)
-        return (
-          <div key={i}>
+    data.map((ele, i) => {
+      return (
+        <form className={classes.form} id={ele.id} onSubmit={(e) => handleSubmit(e)} key={i}>
+          <Paper className={classes.reminderFormPaper}>
+            <Typography component='h2' variant='h6' className={classes.capitalize}>
+              {ele.reminder_type}
+            </Typography>
+            <Typography component="div" variant="caption" color="textSecondary" key={i}>
+              <Grid component="label" container alignItems="flex-start" justify='flex-start' spacing={0}>
+                <Grid item>
+                  <SwitchOnOFF
+                    id={'switch_' + ele.id}
+                    checked={ele.active}
+                    size="small"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    name='active'
+                    onChange={(e => setData(SwitchReminder(e, i, data)))}
+                  />
+                </Grid>
+                <Grid item >
+                  <Box className={classes.boxdisplay}>
+                    {`Reminder will be sent ${moment(ele.reminder_time).format('DD/MM/YYYY')}`}
+                  </Box>
+                </Grid>
+              </Grid>
+            </Typography>
 
-            <SwitchOnOFF
-              id={'switch_' + ele.id}
-              checked={ele.active}
-              size="small"
-              inputProps={{ 'aria-label': 'secondary checkbox' }}
-              name='active'
-              onChange={(e => setData(SwitchReminder(e, i, data)))}
-            />
+            {ele.active === true &&
+              <div className={classes.reminderForm}>
+                <TextField
+                  id={`input_${ele.reminder_type}`}
+                  label='How many days medicine do you have?'
+                  name={ele.reminder_type}
+                  type='number'
+                  required
+                  helperText={ele.reminder_type === 'order prescription' ? 'Not including today' : ''}
+                  variant='outlined'
+                  fullWidth
+                  margin='normal'
+                  onChange={(e) => handleChange(e)}
+                />
+                <Button
+                  type='submit'
+                  fullWidth
+                  variant='contained'
+                  color='primary'
+                  className={classes.submit}
+                >
+                  Save reminder
+                </Button>
+              </div>
+            }
 
-
-          </div>
-        )
-      })}
-      </div>
-    </>
+          </Paper>
+        </form>
+      )
+    })
   )
 }
 
-export default ReminderTake
+export default ReminderOrder

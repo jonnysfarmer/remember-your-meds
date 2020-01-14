@@ -43,7 +43,7 @@ const EditReminder = (props) => {
   const [errors, setErrors] = useState()
   // console.log('err', errors)
 
-  const [remOrder, setRemOrder] = useState()
+  // const [remOrder, setRemOrder] = useState()
 
   //===== GET REMINDER INFO
   const reminderHook = () => {
@@ -54,14 +54,14 @@ const EditReminder = (props) => {
       .catch(err => setErrors(err.response.data))
   }
 
-  //----- Store it by reminder type
-  const reminderOrders = () => {
-    if (reminders.length === 0) {
-      console.log('waiting for data')
-    } else {
-      setRemOrder(reminders.filter(ele => ele.reminder_type === 'order prescription'))
-    }
-  }
+  // //----- Store it by reminder type
+  // const reminderOrders = () => {
+  //   if (reminders.length === 0) {
+  //     console.log('waiting for data')
+  //   } else {
+  //     setRemOrder(reminders.filter(ele => ele.reminder_type === 'order prescription'))
+  //   }
+  // }
 
   //===== SET INITIAL DATA THAT IS CONSTANT
   const setInitialData = () => {
@@ -77,58 +77,58 @@ const EditReminder = (props) => {
     }
   }
 
-  //===== STORE DOSE/NUMBER VALUE AS ENTERED ON FORM
-  const handleChange = (e) => {
-    setNumber(e.target.value)
-    setErrors({})
-  }
+  // //===== STORE DOSE/NUMBER VALUE AS ENTERED ON FORM
+  // const handleChange = (e) => {
+  //   setNumber(e.target.value)
+  //   setErrors({})
+  // }
 
-  //==== CALCULATE REMINDER DUE
-  const calcReminderDue = (e) => {
-    //----- start with today's date for dates, or the time entered for time
-    const startdate = moment().format() //'now'
-    const time = e.target.value.split(':')
-    //----- set the days to work back to create reminders
-    const remOrder = 7 //days
-    const remAppt = 14 //days
-    const dosesOnPrescription = reminders[0].prescription.number_days_doses
-    //---- calculate due & reminder date/time based on type, store in moment format that works for postgres (default moment)
-    switch (e.target.name) {
-      case 'order prescription': {
-        setData({
-          ...data,
-          ['due_time']: moment(startdate).add(number, 'd').format(),
-          ['reminder_time']: moment(startdate).add(number, 'd').subtract(remOrder, 'd').format()
-        })
-      } return
-      case 'make appointment': {
-        setData({
-          ...data,
-          ['due_time']: moment(startdate).add((number * dosesOnPrescription), 'd').format(),
-          ['reminder_time']: moment(startdate).add((number * dosesOnPrescription), 'd').subtract(remAppt, 'd').format()
-        })
-      } return
-      case 'take-am': {
-        setData({
-          ...data,
-          ['reminder_time']: moment().hours(time[0]).minutes(time[1]).seconds(0).format()
-        })
-      } return
-      case 'take-mid': {
-        setData({
-          ...data,
-          ['reminder_time']: moment().hours(time[0]).minutes(time[1]).seconds(0).format()
-        })
-      } return
-      case 'take-pm': {
-        setData({
-          ...data,
-          ['reminder_time']: moment().hours(time[0]).minutes(time[1]).seconds(0).format()
-        })
-      } return
-    }
-    //----- handle if reminder_date is less than today
-  }
+  // //==== CALCULATE REMINDER DUE
+  // const calcReminderDue = (e) => {
+  //   //----- start with today's date for dates, or the time entered for time
+  //   const startdate = moment().format() //'now'
+  //   const time = e.target.value.split(':')
+  //   //----- set the days to work back to create reminders
+  //   const remOrder = 7 //days
+  //   const remAppt = 14 //days
+  //   const dosesOnPrescription = reminders[0].prescription.number_days_doses
+  //   //---- calculate due & reminder date/time based on type, store in moment format that works for postgres (default moment)
+  //   switch (e.target.name) {
+  //     case 'order prescription': {
+  //       setData({
+  //         ...data,
+  //         ['due_time']: moment(startdate).add(number, 'd').format(),
+  //         ['reminder_time']: moment(startdate).add(number, 'd').subtract(remOrder, 'd').format()
+  //       })
+  //     } return
+  //     case 'make appointment': {
+  //       setData({
+  //         ...data,
+  //         ['due_time']: moment(startdate).add((number * dosesOnPrescription), 'd').format(),
+  //         ['reminder_time']: moment(startdate).add((number * dosesOnPrescription), 'd').subtract(remAppt, 'd').format()
+  //       })
+  //     } return
+  //     case 'take-am': {
+  //       setData({
+  //         ...data,
+  //         ['reminder_time']: moment().hours(time[0]).minutes(time[1]).seconds(0).format()
+  //       })
+  //     } return
+  //     case 'take-mid': {
+  //       setData({
+  //         ...data,
+  //         ['reminder_time']: moment().hours(time[0]).minutes(time[1]).seconds(0).format()
+  //       })
+  //     } return
+  //     case 'take-pm': {
+  //       setData({
+  //         ...data,
+  //         ['reminder_time']: moment().hours(time[0]).minutes(time[1]).seconds(0).format()
+  //       })
+  //     } return
+  //   }
+  //   //----- handle if reminder_date is less than today
+  // }
 
 
 
@@ -137,46 +137,47 @@ const EditReminder = (props) => {
     axios.put(`/api/reminders/${id}/`, data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then(props.history.push('/prescriptions/'))
-      // .then(resp => console.log(resp.data))
+      // .then(props.history.push('/prescriptions/'))
+      .then(alert('saved'))
       .catch(error => setErrors(error.data))
   }
 
-  //===== TURN OFF REMINDER
-  function switchReminder(e, i) {
-    //get the id as a number
-    const split = e.target.id.split('_')
-    const id = parseInt(split[1])
-    //change the state to the opposite
-    const state = e.target.active = !e.target.active
-    //get current reminders
-    const newReminders = [...reminders]
-    //update the state for this id
-    newReminders[i].active = state
-    //put the status change tot he db
-    console.log(state)
-    axios.put(`/api/reminders/${id}/`, { 'active': state }, {
-      headers: { Authorization: `Bearer ${Auth.getToken()}` }
-    })
-      //update our reminder & data
-      .then(setReminders(newReminders))
-      .then(setData(newReminders))
-      .catch(error => setErrors(error.data))
-  }
+  // //===== TURN OFF REMINDER
+  // function switchReminder(e, i) {
+  //   //get the id as a number
+  //   const split = e.target.id.split('_')
+  //   const id = parseInt(split[1])
+  //   //change the state to the opposite
+  //   const state = e.target.active = !e.target.active
+  //   //get current reminders
+  //   const newReminders = [...reminders]
+  //   //update the state for this id
+  //   newReminders[i].active = state
+  //   //put the status change tot he db
+  //   console.log(state)
+  //   axios.put(`/api/reminders/${id}/`, { 'active': state }, {
+  //     headers: { Authorization: `Bearer ${Auth.getToken()}` }
+  //   })
+  //     //update our reminder & data
+  //     .then(setReminders(newReminders))
+  //     .then(setData(newReminders))
+  //     .catch(error => setErrors(error.data))
+  // }
 
-  //==== SUBMIT DATA
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const data = { ...data, ['id']: e.target.id, ['edited']: true }
-    updateReminder(e.target.id, data)
-  }
+  // //==== SUBMIT DATA
+  // const handleSubmit = (e) => {
+  //   // inc calc
+  //   e.preventDefault()
+  //   const data = { ...data, ['id']: e.target.id, ['edited']: true }
+  //   updateReminder(e.target.id, data)
+  // }
 
 
   //===== USE EFFECT
   useEffect(() => reminderHook(), [])
   useEffect(() => {
-    setInitialData(),
-      reminderOrders()
+    setInitialData()
+      // reminderOrders()
   }, [reminders])
 
   // console.log(errors)

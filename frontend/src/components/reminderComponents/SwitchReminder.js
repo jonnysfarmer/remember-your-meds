@@ -10,20 +10,18 @@ const SwitchReminder = (e, i, data) => {
   const id = parseInt(split[1])
 
   //change the state to the opposite
-  const state = e.target.active = !e.target.active
   const tempData = [...data]
-  tempData[i].active = state
+  tempData[i].active = e.target.checked
   
   //put the status change to the db
-  axios.put(`/api/reminders/${id}/`, { 'active': state }, {
+  axios.put(`/api/reminders/${id}/`, { 'active': e.target.checked }, {
     headers: { Authorization: `Bearer ${Auth.getToken()}` }
   })
     //return our new data
-    .then(resp => console.log(resp.data))
+    .then(console.log('updated'))
     .catch(error => console.log(error))
 
   //return the new state
-  console.log(tempData)
   return tempData
 }
 
