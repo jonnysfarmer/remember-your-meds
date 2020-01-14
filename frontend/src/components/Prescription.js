@@ -14,6 +14,8 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import { useHistory } from 'react-router-dom'
+import IconButton from '@material-ui/core/IconButton'
+
 
 
 
@@ -94,6 +96,9 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(4),
     height: theme.spacing(4),
     backgroundColor: theme.palette.success.main
+  },
+  noPadding: {
+    padding: 0
   }
 }))
 
@@ -145,7 +150,8 @@ const Prescription = (props) => {
   // got back to original page
   const handleReturn = (e) => {
     e.preventDefault()
-    history.goBack()
+    
+    history.push('/prescriptions/')
   }
 
   const editclick = () => {
@@ -171,7 +177,6 @@ const Prescription = (props) => {
   useEffect(prescriptionHook, [])
   useEffect(reminderHook, [])
 
-  // console.log(medicine)
 
   //=====NEED TO SORT OUT THE LINK, REACT ROUTER OR MATERIAL UI
 
@@ -229,9 +234,11 @@ const Prescription = (props) => {
                       </Typography>
                     </Grid>
                     <Grid item>
+                      <IconButton className={classes.noPadding}>
                       <Avatar className={classes.avatargrey} onClick={()=>editclick()} >
                         <EditOutlinedIcon fontSize="small" />
                       </Avatar>
+                      </IconButton>
                     </Grid>
                   </Grid>
                 </Paper>

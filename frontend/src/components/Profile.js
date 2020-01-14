@@ -10,6 +10,8 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import { ProfileIcon } from '../styles/icons'
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined'
+import IconButton from '@material-ui/core/IconButton'
+
 
 
 
@@ -77,6 +79,9 @@ const useStyles = makeStyles(theme => ({
     width: theme.spacing(4),
     height: theme.spacing(4),
     backgroundColor: theme.palette.success.main
+  },
+  noPadding: {
+    padding: 0
   }
 }))
 
@@ -199,9 +204,11 @@ const Profile = (props) => {
                       </Typography>
                     </Grid>
                     <Grid item>
+                      <IconButton edge="end" className={classes.noPadding}>
                       <Avatar className={classes.avatargrey} >
                         <AddOutlinedIcon fontSize="small" onClick={()=>pushDetail(ele.id)} />
                       </Avatar>
+                      </IconButton>
                     </Grid>
                   </Grid>
                 </Paper>

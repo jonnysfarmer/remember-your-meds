@@ -4,14 +4,14 @@ import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Avatar from '@material-ui/core/Avatar'
 import Switch from '@material-ui/core/Switch'
-import Link from '@material-ui/core/Link'
 import { useHistory } from 'react-router-dom'
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined'
 import Box from '@material-ui/core/Box'
 import { red, green } from '@material-ui/core/colors'
+import IconButton from '@material-ui/core/IconButton'
+
 
 
 
@@ -39,6 +39,9 @@ const useStyles = makeStyles(theme => ({
   boxdisplay: {
     marginLeft: theme.spacing(1),
     color: theme.palette.text.primary
+  },
+  noPadding: {
+    padding: 0
   }
 
 }))
@@ -208,9 +211,11 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
               </Grid>
             </Grid>
             <Grid item>
+              <IconButton className={classes.noPadding}>
               <Avatar className={classes.avatar} >
                 <AddOutlinedIcon  fontSize="small" onClick={()=>pushDetailPage()}/>
               </Avatar>
+              </IconButton>
             </Grid>
           </Grid>
         </Grid>
