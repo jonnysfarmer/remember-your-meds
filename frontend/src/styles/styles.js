@@ -82,7 +82,16 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: theme.palette.success.dark
     }
+  },
+
+    
+  //===== FOR SPECIAL FORMS =====
+  
+  reminderFormPaper: {
+    marginTop: theme.spacing(0),
+    padding: theme.spacing(2)
   }
+
 }))
 
 
