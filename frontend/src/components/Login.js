@@ -35,9 +35,9 @@ function Copyright() {
         {'.'}
       </Typography>
       <Typography variant="body2" align="center" color='inherit'>
-      <Link color="inherit" href='https://developer.api.nhs.uk/'>
-      Made using NHS data
-      </Link>
+        <Link color="inherit" href='https://developer.api.nhs.uk/'>
+          Made using NHS data
+        </Link>
       </Typography>
     </Box>
   )
@@ -62,6 +62,7 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    color: '#000',
     backgroundColor: theme.palette.success.main,
     '&:hover': {
       backgroundColor: theme.palette.success.dark
@@ -114,6 +115,7 @@ const Login = (props) => {
       })
   }
 
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -126,46 +128,33 @@ const Login = (props) => {
         </Typography>
         <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
           <ThemeProvider theme={theme}>
-            {/* <TextField
+
+            <TextField
               error={err.message && true}
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              id="username"
-              label={err.message ? 'Error' : 'Username'}
-              helperText={err.message}
-              name="username"
-              autoComplete="username"
-              autoFocus
-              onChange={(e) => handleChange(e)}
-            /> */}
-            <TextField
-              error = {err.email && true}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
               id="email"
-              label={err.email ? 'Error' : 'Email Address'}
-              helperText={err.email}
+              label={err.message ? 'Error' : 'Email Address'}
+              helperText={err.message}
               name="email"
               autoComplete="email"
               autoFocus
               onChange={(e) => handleChange(e)}
             />
             <TextField
-              error={err.password && true}
+              error={err.message && true}
               variant="outlined"
               margin="normal"
               required
               fullWidth
               name="password"
-              label={err.password ? 'Error' : 'Password'}
+              label={err.message ? 'Error' : 'Password'}
               type={showPassword ? 'text' : 'password'}
               id="password"
               autoComplete="current-password"
-              helperText={err.password}
+              helperText={err.message}
               onChange={(e) => handleChange(e)}
               InputProps={{
                 endAdornment:

@@ -136,6 +136,7 @@ const CreatePrescription2 = (props) => {
     }
   }
 
+  console.log(err)
 
   //===== LOAD MEDICINE LIST
   useEffect(() => {
@@ -167,8 +168,8 @@ const CreatePrescription2 = (props) => {
                   label='Medicine name'
                   type='text'
                   required
-                  error={err.medicine && true}
-                  helperText={err.medicine}
+                  error={err.name && true}
+                  helperText={err.name}
                   variant='outlined'
                   fullWidth
                   margin='normal'
