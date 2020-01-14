@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import moment from 'moment'
 //Material UI
-import { Container, CssBaseline, Avatar, Typography, Grid, Switch, Paper, TextField, Box, Button } from '@material-ui/core'
-import { withStyles, ThemeProvider } from '@material-ui/core/styles'
+import { Typography, Grid, Switch, Paper, TextField, Box, Button } from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
 import { red, green } from '@material-ui/core/colors'
 //Material UI our styles/icons
 import { useStyles } from '../../styles/styles'
@@ -68,7 +68,6 @@ const ReminderOrder = (props) => {
     updateReminder(submitData[0].id, submitData[0])
     setData(submitData)
   }
-  console.log(data)
 
   //===== USE EFFECT
   useEffect(() => setInitialData(), [props])

@@ -18,7 +18,7 @@ const SwitchReminder = (e, i, data) => {
     headers: { Authorization: `Bearer ${Auth.getToken()}` }
   })
     //return our new data
-    .then(console.log('updated'))
+    .then(console.log('reminder status switched'))
     .catch(error => console.log(error))
 
   //return the new state

@@ -1,10 +1,10 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
 
 //===== UPDATE REMINDER
-function updateReminder(id, data, props) {
-  console.log(data)
+function updateReminder(id, data) {
   //format data for PUT
   const putData = {
     id: data.id,
@@ -17,7 +17,6 @@ function updateReminder(id, data, props) {
     active: data.active,
     edited: true
   }
-  console.log(putData)
 
   axios.put(`/api/reminders/${id}/`, putData, {
     headers: { Authorization: `Bearer ${Auth.getToken()}` }
