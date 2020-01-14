@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-// import { Link } from 'react-router-dom'
-
+import moment from 'moment'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Typography from '@material-ui/core/Typography'
@@ -110,7 +109,7 @@ const Prescription = (props) => {
   // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState([])
 
-  
+
 
   // PULLS THE INFO, seperates out the medicine and prescription info
   const prescriptionHook = () => {
@@ -135,7 +134,6 @@ const Prescription = (props) => {
         const data1 = resp.data
         const specific = data1.filter(ele => ele.prescription.id === id)
         const threeReminders = specific.filter(ele => ele.reminder_type === 'take-am' || ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment')
-        // console.log(threeReminders)
         setReminders(threeReminders)
 
       })
@@ -197,7 +195,7 @@ const Prescription = (props) => {
           variant="contained"
           color="primary"
           className={classes.submit}
-          onClick={()=>pushEdit()}
+          onClick={() => pushEdit()}
         >
           Edit Prescription
         </Button>
@@ -225,11 +223,18 @@ const Prescription = (props) => {
                   <Grid container spacing={2} >
                     <Grid item xs={10} className={classes.centeralign} >
                       <Typography component="h3" variant="subtitle2" color="textSecondary" >
-                        {ele.reminder_type === 'take-am' ? 'Reminder to take medicine' : `Reminder to ${ele.reminder_type}`}
+                        {(ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment') ? `${ele.reminder_type}: ` : 'take medicine: '}
+                        {ele.active === false ? ' inactive' : ' '}
+                        {((ele.reminder_type === 'order prescription' && ele.active === true) || (ele.reminder_type === 'make appointment' && ele.active === true)) && moment(ele.reminder_time).format('DD/MM/YYYY')}
+                        
+                        {((ele.reminder_type === 'take-am' && ele.active === true) ||
+                        (ele.reminder_type === 'take-mid' && ele.active === true) ||
+                        (ele.reminder_type === 'take-pm' && ele.active === true))
+                        && ' reminders active' }
                       </Typography>
                     </Grid>
-                    <Grid item>
-                      <Avatar className={classes.avatargrey} onClick={()=>editclick()} >
+                    <Grid item> 
+                      <Avatar className={classes.avatargrey} onClick={() => editclick()} >
                         <EditOutlinedIcon fontSize="small" />
                       </Avatar>
                     </Grid>
