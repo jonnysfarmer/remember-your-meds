@@ -197,11 +197,11 @@ const Prescription = (props) => {
         <Typography component="h1" variant="h4" >
           {medicine.name}
         </Typography>
-        <Typography component="h3" variant="subtitle1" className={classes.title}>
+        {medicine.url && <Typography component="h3" variant="subtitle1" className={classes.title}>
           <Link href={medicine.url} color="inherit">
             NHS Information
           </Link>
-        </Typography>
+        </Typography>}
         <Button
           type="submit"
           fullWidth

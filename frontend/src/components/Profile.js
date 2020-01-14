@@ -122,7 +122,7 @@ const Profile = (props) => {
         } else {
           setPrescriptions(resp.data)
         }
-        
+
       })
       .catch(err => setErrors(err.response.data))
   }
@@ -158,7 +158,7 @@ const Profile = (props) => {
           <ProfileIcon />
         </Avatar>
         <Typography component="h1" variant="h4">
-          Profile
+          My Profile
         </Typography>
         <Button
           type="submit"
@@ -166,7 +166,7 @@ const Profile = (props) => {
           variant="contained"
           color="primary"
           className={classes.submit}
-          onClick={(e)=>handleEdit(e)}
+          onClick={(e) => handleEdit(e)}
         >
           Edit Profile
         </Button>
@@ -206,9 +206,9 @@ const Profile = (props) => {
                     </Grid>
                     <Grid item>
                       <IconButton edge="end" className={classes.noPadding}>
-                      <Avatar className={classes.avatargrey} >
-                        <AddOutlinedIcon fontSize="small" onClick={()=>pushDetail(ele.id)} />
-                      </Avatar>
+                        <Avatar className={classes.avatargrey} >
+                          <AddOutlinedIcon fontSize="small" onClick={() => pushDetail(ele.id)} />
+                        </Avatar>
                       </IconButton>
                     </Grid>
                   </Grid>
