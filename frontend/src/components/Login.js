@@ -35,9 +35,9 @@ function Copyright() {
         {'.'}
       </Typography>
       <Typography variant="body2" align="center" color='inherit'>
-      <Link color="inherit" href='https://developer.api.nhs.uk/'>
-      Made using NHS data
-      </Link>
+        <Link color="inherit" href='https://developer.api.nhs.uk/'>
+          Made using NHS data
+        </Link>
       </Typography>
     </Box>
   )
@@ -115,7 +115,6 @@ const Login = (props) => {
       })
   }
 
-  console.log(err)
 
   return (
     <Container component="main" maxWidth="xs">
@@ -131,13 +130,13 @@ const Login = (props) => {
           <ThemeProvider theme={theme}>
 
             <TextField
-              error = {err.message && true}
+              error={err.message && true}
               variant="outlined"
               margin="normal"
               required
               fullWidth
               id="email"
-              label={err.message  ? 'Error' : 'Email Address'}
+              label={err.message ? 'Error' : 'Email Address'}
               helperText={err.message}
               name="email"
               autoComplete="email"
@@ -145,7 +144,7 @@ const Login = (props) => {
               onChange={(e) => handleChange(e)}
             />
             <TextField
-              error={err.message  && true}
+              error={err.message && true}
               variant="outlined"
               margin="normal"
               required
