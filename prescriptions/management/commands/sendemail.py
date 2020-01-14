@@ -7,7 +7,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        resp = requests.get('http://localhost:4000/api/reminders')
+        resp = requests.get('http://localhost:4000/api/reminders/notifications')
         resp = resp.json()
         activereminders = list(filter(lambda ele: ele['active'], resp))
 
