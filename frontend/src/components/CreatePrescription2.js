@@ -46,19 +46,19 @@ const CreatePrescription2 = (props) => {
         'prescription': presID,
         'reminder_type': 'take-am',
         'due_time': moment().format(),
-        'reminder_time': moment().format()
+        'reminder_time': moment().hours(0).minutes(0).seconds(0).format()
       },
       {
         'prescription': presID,
         'reminder_type': 'take-mid',
         'due_time': moment().format(),
-        'reminder_time': moment().format()
+        'reminder_time': moment().hours(0).minutes(0).seconds(0).format()
       },
       {
         'prescription': presID,
         'reminder_type': 'take-pm',
         'due_time': moment().format(),
-        'reminder_time': moment().format()
+        'reminder_time': moment().hours(0).minutes(0).seconds(0).format()
       },
       {
         'prescription': presID,

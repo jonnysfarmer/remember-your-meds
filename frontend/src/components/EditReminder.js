@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 //Material UI
 import { Container, CssBaseline, Avatar, Typography } from '@material-ui/core'
@@ -56,4 +57,4 @@ const EditReminder = (props) => {
   )
 }
 
-export default EditReminder
+export default withRouter(EditReminder)

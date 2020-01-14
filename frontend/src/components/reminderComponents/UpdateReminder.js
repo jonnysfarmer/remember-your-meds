@@ -9,7 +9,6 @@ function updateReminder(data) {
   //data may come in as a single object, or as an array of objects so we have to handle both scenarios
 
   if (!Array.isArray(data)) {
-    console.log('notarray')
     const putData = {
       id: data.id,
       user: data.user.id,
@@ -24,8 +23,7 @@ function updateReminder(data) {
     axios.put(`/api/reminders/${putData.id}/`, putData, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then(alert('updated - do something here'))
-      // .then(resp => console.log(resp.data))
+      .then(resp => console.log(resp.data))
       .catch(error => console.log(error.data))
 
   } else {
@@ -45,17 +43,11 @@ function updateReminder(data) {
       axios.put(`/api/reminders/${putData.id}/`, putData, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
-        // .then(alert('updated - do something here'))
         .then(resp => console.log(resp.data))
         .catch(error => console.log(error.data))
     })
-
-    
+    return 'update done'
   }
-  //format data for PUT
-
-
-
 }
 
 export default updateReminder
