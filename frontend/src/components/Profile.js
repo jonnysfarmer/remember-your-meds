@@ -5,12 +5,14 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import Avatar from '@material-ui/core/Avatar'
-import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
 import { makeStyles } from '@material-ui/core/styles'
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Link from '@material-ui/core/Link'
+import { ProfileIcon } from '../styles/icons'
+import AddOutlinedIcon from '@material-ui/icons/AddOutlined'
+
+
 
 
 
@@ -129,6 +131,9 @@ const Profile = (props) => {
     e.preventDefault()
     props.history.push('/profile/edit/')
   }
+  const pushDetail = (id) => {
+    props.history.push(`/prescriptions/${id}`)
+  }
 
 
   useEffect(userHook, [])
@@ -145,7 +150,7 @@ const Profile = (props) => {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <AccountCircleOutlinedIcon />
+          <ProfileIcon />
         </Avatar>
         <Typography component="h1" variant="h4">
           Profile
@@ -191,14 +196,12 @@ const Profile = (props) => {
                   <Grid container spacing={2} >
                     <Grid item xs={10} className={classes.centeralign} >
                       <Typography component="h3" variant="subtitle1" color="textSecondary" >
-                        <Link href={`#/prescriptions/${ele.id}`} color="inherit">
-                          {ele.medicine.name}
-                        </Link>
+                        {ele.medicine.name}
                       </Typography>
                     </Grid>
                     <Grid item>
                       <Avatar className={classes.avatargrey} >
-                        <EditOutlinedIcon fontSize="small" />
+                        <AddOutlinedIcon fontSize="small" onClick={()=>pushDetail(ele.id)} />
                       </Avatar>
                     </Grid>
                   </Grid>

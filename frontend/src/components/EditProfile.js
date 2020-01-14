@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import Avatar from '@material-ui/core/Avatar'
-import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
+import { ProfileIcon } from '../styles/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import InputAdornment from '@material-ui/core/InputAdornment'
@@ -156,7 +156,7 @@ const EditProfile = (props) => {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <AccountCircleOutlinedIcon />
+          <ProfileIcon />
         </Avatar>
         <Typography component="h1" variant="h4">
           Edit Profile

@@ -9,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar'
 import Switch from '@material-ui/core/Switch'
 import Link from '@material-ui/core/Link'
 import { useHistory } from 'react-router-dom'
-
+import AddOutlinedIcon from '@material-ui/icons/AddOutlined'
 import Box from '@material-ui/core/Box'
 import { red, green } from '@material-ui/core/colors'
 
@@ -120,6 +120,10 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
     setTakeReminders(newtakereminders)
     
   }
+  const pushDetailPage = () => {
+    history.push(`/prescriptions/${presID}/`)
+
+  }
 
 
 
@@ -136,7 +140,7 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
-                <Typography gutterBottom variant="subtitle1">
+                <Typography gutterBottom variant="h6">
                   {medicine.name}
                 </Typography>
                 {!takeReminders[0] ?
@@ -202,17 +206,10 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
                 })}
 
               </Grid>
-              <Grid item>
-                <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                  <Link href={`#/prescriptions/${presID}`} color="inherit">
-                    More Information
-                  </Link>
-                </Typography>
-              </Grid>
             </Grid>
             <Grid item>
               <Avatar className={classes.avatar} >
-                <EditOutlinedIcon fontSize="small" onClick={()=>handleinitialredirect()}/>
+                <AddOutlinedIcon  fontSize="small" onClick={()=>pushDetailPage()}/>
               </Avatar>
             </Grid>
           </Grid>

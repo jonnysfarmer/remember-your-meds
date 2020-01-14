@@ -6,9 +6,9 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import Avatar from '@material-ui/core/Avatar'
-import LocalPharmacyOutlinedIcon from '@material-ui/icons/LocalPharmacyOutlined'
 import { makeStyles } from '@material-ui/core/styles'
 import Link from '@material-ui/core/Link'
+import { PrescriptionIcon } from '../styles/icons'
 
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import Grid from '@material-ui/core/Grid'
@@ -180,14 +180,14 @@ const Prescription = (props) => {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LocalPharmacyOutlinedIcon />
+          <PrescriptionIcon />
         </Avatar>
         <Typography component="h1" variant="h4" >
           {medicine.name}
         </Typography>
         <Typography component="h3" variant="subtitle1" className={classes.title}>
           <Link href={medicine.url} color="inherit">
-            More Information
+            NHS Information
           </Link>
         </Typography>
         <Button
@@ -224,7 +224,7 @@ const Prescription = (props) => {
                   <Grid container spacing={2} >
                     <Grid item xs={10} className={classes.centeralign} >
                       <Typography component="h3" variant="subtitle2" color="textSecondary" >
-                        {ele.reminder_type === 'take-am' ? 'Reminder to take Medicine' : `Reminder to ${ele.reminder_type}`}
+                        {ele.reminder_type === 'take-am' ? 'Reminder to take medicine' : `Reminder to ${ele.reminder_type}`}
                       </Typography>
                     </Grid>
                     <Grid item>

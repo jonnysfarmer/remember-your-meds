@@ -151,7 +151,7 @@ const CreatePrescription2 = (props) => {
           <PrescriptionIcon />
         </Avatar>
         <Typography component='h1' variant='h4'>
-          Prescription
+          New Prescription
         </Typography>
 
         <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
