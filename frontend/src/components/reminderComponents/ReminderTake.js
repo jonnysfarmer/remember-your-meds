@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import moment from 'moment'
 //Material UI
-import { Container, CssBaseline, Avatar, Typography, Grid, Switch, TextField, Box, Button } from '@material-ui/core'
-import { withStyles, ThemeProvider } from '@material-ui/core/styles'
+import { Typography, Grid, Switch, Paper, TextField, Box, Button } from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
 import { red, green } from '@material-ui/core/colors'
 //Material UI our styles/icons
-import { useStyles, theme } from '../styles/styles'
-import { ReminderIcon } from '../styles/icons'
+import { useStyles } from '../../styles/styles'
+//Our functions
+import SwitchReminder from './SwitchReminder'
+import updateReminder from './UpdateReminder'
 
-import Auth from '../lib/auth'
 
 const SwitchOnOFF = withStyles({
   switchBase: {
@@ -29,18 +29,110 @@ const SwitchOnOFF = withStyles({
 })(Switch)
 
 
-
 const ReminderTake = (props) => {
-
   const classes = useStyles()
+  const [data, setData] = useState([])
+
+  //===== SET DATA FOR THIS REMINDER TYPE
+  const setInitialData = () => {
+    if (props.length === 0) {
+      console.log('waiting for data')
+    } else {
+      setData(props.props.filter(ele => (ele.reminder_type === 'take-am' || ele.reminder_type === 'take-mid' || ele.reminder_type === 'take-pm')))
+    }
+  }
+
+  //===== ON FIELD CHANGE, CAPTURE ENTRY
+  const handleChange = (e) => {
+    //format our time
+    const time = e.target.value.split(':')
+    //get the id as a number
+    const split = e.target.id.split('_')
+    const id = parseInt(split[1])
+    //get data to change of that id
+    const tempData = [...data]
+    const i = tempData.findIndex(item => item.id === id)
+    //update the data
+    tempData[i].reminder_time = moment().hours(time[0]).minutes(time[1]).seconds(0).format()
+    setData(tempData)
+  }
+
+  //===== SUBMIT UPDATES
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    updateReminder(data)
+  }
+
+  //===== USE EFFECT
+  useEffect(() => setInitialData(), [props])
+
 
   //===== UI
-  if (reminders === []) return <div>loading</div>
+  if (data === []) return <div>loading</div>
   return (
-    <>
-    
-    </>
+    <form className={classes.form} onSubmit={(e) => handleSubmit(e)}>
+      <Paper className={classes.reminderFormPaper}>
+        <Typography component='h2' variant='h6' className={classes.capitalize}>
+          Take Medicine
+        </Typography>
+        {data.map((ele, i) => {
+          return (
+            <div key={i}>
+              <Typography component="div" variant="caption" color="textSecondary">
+                <Grid component="label" container alignItems="center" justify='flex-start' spacing={0}>
+                  <Grid item>
+                    <SwitchOnOFF
+                      id={'switch_' + ele.id}
+                      checked={ele.active}
+                      size="small"
+                      inputProps={{ 'aria-label': 'secondary checkbox' }}
+                      name='active'
+                      onChange={(e => setData(SwitchReminder(e, i, data)))}
+                    />
+                  </Grid>
+                  <Grid item>
+                    Reminder {ele.active === true ? ` ${i+1} at ` : ' inactive'}
+                  </Grid>
+                  <Grid item>
+                    {ele.active === true &&
+                      <TextField
+                        className={classes.reminderInlineField}
+                        id={`take_${ele.id}`}
+                        name={`take_${ele.id}`}
+                        type='time'
+                        variant='outlined'
+                        value={moment(ele.reminder_time).format('HH:mm')}
+                        onChange={(e) => handleChange(e)}
+                      />
+                    }
+                  </Grid>
+                </Grid>
+              </Typography>
+
+              {/* {ele.active === true &&
+                <TextField
+                  id={`input_${ele.reminder_type}`}
+                  name={ele.reminder_type}
+                  type='time'
+                  variant='outlined'
+                  margin='normal'
+                  onChange={(e) => handleChange(e)}
+                />
+              } */}
+            </div>
+          )
+        })}
+        <Button
+          type='submit'
+          fullWidth
+          variant='contained'
+          color='primary'
+          className={classes.submit}
+        >
+          Save reminders to take
+        </Button>
+      </Paper>
+    </form>
   )
 }
-
 export default ReminderTake

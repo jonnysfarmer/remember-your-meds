@@ -10,6 +10,7 @@ import { ReminderIcon } from '../styles/icons'
 import Auth from '../lib/auth'
 import ReminderOrder from './reminderComponents/ReminderOrder'
 import ReminderAppt from './reminderComponents/ReminderAppt'
+import ReminderTake from './reminderComponents/ReminderTake'
 
 const EditReminder = (props) => {
 
@@ -47,6 +48,7 @@ const EditReminder = (props) => {
 
           <ReminderOrder props={reminders} />
           <ReminderAppt props={reminders} />
+          <ReminderTake props={reminders} />
 
         </div>
       </ThemeProvider>

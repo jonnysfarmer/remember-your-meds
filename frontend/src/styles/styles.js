@@ -90,6 +90,10 @@ const useStyles = makeStyles(theme => ({
   reminderFormPaper: {
     marginTop: theme.spacing(0),
     padding: theme.spacing(2)
+  },
+  reminderInlineField: {
+    marginLeft: theme.spacing(1),
+    marginTop: theme.spacing(0.5)    
   }
 
 }))
