@@ -70,14 +70,6 @@ const theme = createMuiTheme({
   }
 })
 
-// const loginform = {
-
-//   username: '',
-//   email: '',
-//   password: '',
-//   password_confirmation: ''
-
-// }
 
 const Login = (props) => {
 
