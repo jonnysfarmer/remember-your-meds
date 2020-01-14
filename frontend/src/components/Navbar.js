@@ -10,10 +10,9 @@ import { MenuIcon, PrescriptionIcon, ProfileIcon, LogoutIcon } from '../styles/i
 import Auth from '../lib/auth'
 
 function ResponsiveDrawer(props) {
-
   // eslint-disable-next-line no-unused-vars
   const history = useHistory()
-  // const location = history.location.pathname
+  const location = history.location.pathname
   const { container } = props
   const classes = useStyles()
   const [mobileOpen, setMobileOpen] = React.useState(false)
@@ -44,6 +43,7 @@ function ResponsiveDrawer(props) {
     <div className={classes.root}>
       <CssBaseline />
       <ThemeProvider theme={theme}>
+        {location !== '/' &&
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
             {Auth.isAuthorized() &&
@@ -58,8 +58,8 @@ function ResponsiveDrawer(props) {
               </IconButton>
             }
           </Toolbar>
-
         </AppBar>
+        }
         <nav className={classes.drawer} aria-label="mailbox folders">
           <Hidden smUp implementation="css">
             <Drawer
