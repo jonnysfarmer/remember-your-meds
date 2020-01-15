@@ -3,11 +3,11 @@ import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import moment from 'moment'
 //Material UI
-import { Button, CssBaseline, Typography, Container, Avatar, Grid, Paper, Link, Box } from '@material-ui/core'
+import { Button, CssBaseline, Typography, Container, Avatar, Grid, Paper, Link, Box, ThemeProvider } from '@material-ui/core'
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
 import IconButton from '@material-ui/core/IconButton'
 //Material UI our styles/icons
-import { useStyles } from '../../styles/styles'
+import { useStyles, theme } from '../../styles/styles'
 import { PrescriptionIcon } from '../../styles/icons'
 //Our Libraries/Components
 import Auth from '../../lib/auth'
@@ -83,6 +83,7 @@ const Prescription = (props) => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+      <ThemeProvider theme={theme}>
         <Avatar className={classes.avatar}>
           <PrescriptionIcon />
         </Avatar>
@@ -180,6 +181,7 @@ const Prescription = (props) => {
             </Button>
           </Grid>
         </Grid>
+       </ThemeProvider>
       </div>
     </Container>
   )

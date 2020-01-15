@@ -170,33 +170,33 @@ const EditPrescription = (props) => {
               onChange={(e) => handleChange(e)}
               value={data.number_repeats || ''}
             />
-          </ThemeProvider>
-          <Grid container spacing={2} >
-            <Grid item xs={6} className={classes.centeralign} >
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submitgrey}
-                onClick={(e) => handleReturn(e)}
-              >
-                Back
-              </Button>
-            </Grid>
-            <Grid item xs={6}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submitsmall}
-              >
-                Save
-              </Button>
-            </Grid>
-          </Grid>
 
+            <Grid container spacing={2} >
+              <Grid item xs={6} className={classes.centeralign} >
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  // color="primary"
+                  className={classes.submitgrey}
+                  onClick={(e) => handleReturn(e)}
+                >
+                  Back
+              </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submitsmall}
+                >
+                  Save
+              </Button>
+              </Grid>
+            </Grid>
+          </ThemeProvider>
         </form>
       </div>
     </Container>

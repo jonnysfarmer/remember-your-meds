@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 //Material UI Styling
-import { Button, CssBaseline, Typography, Container, Avatar } from '@material-ui/core'
+import { Button, CssBaseline, Typography, Container, Avatar, ThemeProvider } from '@material-ui/core'
 //Material UI our styles/icons
-import { useStyles } from '../../styles/styles'
+import { useStyles, theme } from '../../styles/styles'
 import { PrescriptionIcon } from '../../styles/icons'
 //Our components
 import Auth from '../../lib/auth'
@@ -46,22 +46,23 @@ const Prescriptions = (props) => {
         <Typography component="h1" variant="h4">
           My Prescriptions
         </Typography>
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          onClick = {(e)=>handleCreate(e)}
-        >
-          New Prescription
+        <ThemeProvider theme={theme}>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={(e) => handleCreate(e)}
+          >
+            New Prescription
         </Button>
-        {data.map((ele, i) => {
-          return (
-            <DisplayPrescriptions key={i} data={ele} medicine={ele.medicine} presID={ele.id} />
-          )
-        })}
-
+          {data.map((ele, i) => {
+            return (
+              <DisplayPrescriptions key={i} data={ele} medicine={ele.medicine} presID={ele.id} />
+            )
+          })}
+        </ThemeProvider>
       </div>
     </Container>
   )

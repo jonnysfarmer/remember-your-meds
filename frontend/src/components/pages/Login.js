@@ -100,16 +100,17 @@ const Login = (props) => {
                   </InputAdornment>
               }}
             />
-          </ThemeProvider>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Login
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Login
           </Button>
+          </ThemeProvider>
         </form>
       </div>
       <Box mt={8}>
