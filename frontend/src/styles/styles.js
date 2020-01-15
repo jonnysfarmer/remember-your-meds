@@ -99,6 +99,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   menuButton: {
+    // justifyContent: 'flexEnd',
     marginRight: theme.spacing(2),
     [theme.breakpoints.up('md')]: {
       display: 'none'

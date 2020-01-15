@@ -104,8 +104,8 @@ const Prescription = (props) => {
         >
           Edit Prescription
         </Button>
-        <Typography variant="h6" className={classes.inlineTitle}>
-          Number of doses a day
+        <Typography component="h2" variant="h6" >
+          Number of days per prescription
         </Typography>
         <Typography className={classes.inlineText}>
           {prescription.number_days_doses}
@@ -150,18 +150,7 @@ const Prescription = (props) => {
               )
             }) :
             <div className={classes.altinput}>
-              <Typography component="h1" variant="subtitle1" color="textSecondary">
-                You currently have no reminderes
-              </Typography>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.altsubmit}
-              >
-                Add new reminder
-              </Button>
+
             </div>
           }
         </div>

@@ -145,7 +145,7 @@ const Profile = (props) => {
               >
                 Create new prescription
               </Button>
-            </div>
+            </>
           }
         </div>
 
