@@ -83,105 +83,105 @@ const Prescription = (props) => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-      <ThemeProvider theme={theme}>
-        <Avatar className={classes.avatar}>
-          <PrescriptionIcon />
-        </Avatar>
-        <Typography component="h1" variant="h4" >
-          {medicine.name}
-        </Typography>
-        {medicine.url && <Typography component="h3" variant="subtitle1" className={classes.inlineLink}>
-          <Link href={medicine.url} color="inherit">
-            NHS Information
+        <ThemeProvider theme={theme}>
+          <Avatar className={classes.avatar}>
+            <PrescriptionIcon />
+          </Avatar>
+          <Typography component="h1" variant="h4" >
+            {medicine.name}
+          </Typography>
+          {medicine.url && <Typography component="h3" variant="subtitle1" className={classes.inlineLink}>
+            <Link href={medicine.url} color="inherit">
+              NHS Information
           </Link>
-        </Typography>}
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          onClick={() => pushEdit()}
-        >
-          Edit Prescription
+          </Typography>}
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={() => pushEdit()}
+          >
+            Edit Prescription
         </Button>
-        <Typography component="h2" variant="h6" >
-          Number of days per prescription
+          <Typography component="h2" variant="h6" >
+            Number of days per prescription
         </Typography>
-        <Typography className={classes.inlineText}>
-          {prescription.number_days_doses}
+          <Typography className={classes.inlineText}>
+            {prescription.number_days_doses}
+          </Typography>
+          <Typography variant="h6" className={classes.inlineTitle}>
+            Repeats until appointment
         </Typography>
-        <Typography variant="h6" className={classes.inlineTitle}>
-          Repeats until appointment
+          <Typography className={classes.inlineText}>
+            {prescription.number_repeats}
+          </Typography>
+          <Typography variant="h6" className={classes.inlineTitle}>
+            Reminders
         </Typography>
-        <Typography className={classes.inlineText}>
-          {prescription.number_repeats}
-        </Typography>
-        <Typography variant="h6" className={classes.inlineTitle}>
-          Reminders
-        </Typography>
-        <div className={classes.root}>
-          {reminders ?
-            reminders.map((ele, i) => {
-              return (
+          <div className={classes.root}>
+            {reminders ?
+              reminders.map((ele, i) => {
+                return (
 
-                <Paper className={classes.paperCard} key={i}>
-                  <Grid container spacing={2} >
-                    <Grid item xs={10} className={classes.centeralign} >
-                      <Typography component="h2" variant="subtitle2" color="textSecondary"  >
-                        {(ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment') ? `${ele.reminder_type}: ` : 'take medicine: '}
-                        {ele.active === false ? <Box component="span" className={ele.active === true ? classes.active : classes.false} > inactive</Box> : ' '}
-                        {((ele.reminder_type === 'order prescription' && ele.active === true) || (ele.reminder_type === 'make appointment' && ele.active === true)) && <Box component="span" className={ele.active === true ? classes.active : classes.false} > {moment(ele.reminder_time).format('DD/MM/YYYY')} </Box>}
+                  <Paper className={classes.paperCard} key={i}>
+                    <Grid container spacing={2} >
+                      <Grid item xs={10} className={classes.centeralign} >
+                        <Typography component="h2" variant="subtitle2" color="textSecondary"  >
+                          {(ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment') ? `${ele.reminder_type}: ` : 'take medicine: '}
+                          {ele.active === false ? <Box component="span" className={ele.active === true ? classes.active : classes.false} > inactive</Box> : ' '}
+                          {((ele.reminder_type === 'order prescription' && ele.active === true) || (ele.reminder_type === 'make appointment' && ele.active === true)) && <Box component="span" className={ele.active === true ? classes.active : classes.false} > {moment(ele.reminder_time).format('DD/MM/YYYY')} </Box>}
 
-                        {((ele.reminder_type === 'take-am' && ele.active === true) ||
-                          (ele.reminder_type === 'take-mid' && ele.active === true) ||
-                          (ele.reminder_type === 'take-pm' && ele.active === true))
-                          && <Box component="span" className={ele.active === true ? classes.active : classes.false} >  reminders active </Box>}
-                      </Typography>
+                          {((ele.reminder_type === 'take-am' && ele.active === true) ||
+                            (ele.reminder_type === 'take-mid' && ele.active === true) ||
+                            (ele.reminder_type === 'take-pm' && ele.active === true))
+                            && <Box component="span" className={ele.active === true ? classes.active : classes.false} >  reminders active </Box>}
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <IconButton className={classes.noPadding} onClick={() => editclick()}>
+                          <Avatar className={classes.avatargrey} >
+                            <EditOutlinedIcon fontSize="small" color="primary"/>
+                          </Avatar>
+                        </IconButton>
+                      </Grid>
                     </Grid>
-                    <Grid item>
-                      <IconButton className={classes.noPadding} onClick={() => editclick()}>
-                        <Avatar className={classes.avatargrey} >
-                          <EditOutlinedIcon fontSize="small" />
-                        </Avatar>
-                      </IconButton>
-                    </Grid>
-                  </Grid>
-                </Paper>
-              )
-            }) :
-            <div className={classes.altinput}>
+                  </Paper>
+                )
+              }) :
+              <div className={classes.altinput}>
 
-            </div>
-          }
-        </div>
-        <Grid container spacing={2} >
-          <Grid item xs={6} className={classes.centeralign} >
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submitgrey}
-              onClick={(e) => handleReturn(e)}
-            >
-              Back
+              </div>
+            }
+          </div>
+          <Grid container spacing={2} >
+            <Grid item xs={6} className={classes.centeralign} >
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                // color="primary"
+                className={classes.submitgrey}
+                onClick={(e) => handleReturn(e)}
+              >
+                Back
             </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="secondary"
-              className={classes.submitred}
-              onClick={(e) => handleDelete(e)}
-            >
-              Delete
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classes.submitred}
+                onClick={(e) => handleDelete(e)}
+              >
+                Delete
             </Button>
+            </Grid>
           </Grid>
-        </Grid>
-       </ThemeProvider>
+        </ThemeProvider>
       </div>
     </Container>
   )
