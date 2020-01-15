@@ -90,7 +90,7 @@ const ReminderTake = (props) => {
           return (
             <div key={i}>
               <Typography component="div" variant="caption" color="textSecondary">
-                <Grid component="label" container alignItems="center" justify='flex-start' spacing={0}>
+                <Grid component="label" container alignItems="center" justify='flex-start' spacing={1}>
                   <Grid item>
                     <SwitchOnOFF
                       id={'switch_' + ele.id}
@@ -102,7 +102,7 @@ const ReminderTake = (props) => {
                     />
                   </Grid>
                   <Grid item className={classes.boxdisplay}>
-                    Reminder {ele.active === true ? ' active at ' : ' inactive'}
+                    Reminder {ele.active === true ? ' active at ' : ' inactive'}   
                   </Grid>
                   <Grid item className={classes.reminderInlineField}>
                     {ele.active === true &&
