@@ -214,7 +214,7 @@ const Prescription = (props) => {
           Edit Prescription
         </Button>
         <Typography component="h2" variant="h6" >
-          Number of doses a day
+          Number of days per prescription
         </Typography>
         <Typography component="h1" variant="subtitle1" color="textSecondary">
           {prescription.number_days_doses}
