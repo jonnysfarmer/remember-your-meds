@@ -131,7 +131,7 @@ const Profile = (props) => {
                 </Paper>
               )
             }) :
-            <div>
+            <>
               <Typography className={classes.inlineText}>
                 You currently have no prescriptions
               </Typography>
@@ -145,7 +145,7 @@ const Profile = (props) => {
               >
                 Create new prescription
               </Button>
-            </div>
+            </>
           }
         </div>
 
