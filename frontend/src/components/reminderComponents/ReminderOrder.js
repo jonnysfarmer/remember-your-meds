@@ -57,13 +57,22 @@ const ReminderOrder = (props) => {
     const daysBefore = 7 //number of days before due that we will send reminder
     const dueTime = moment(startdate).add(adjustment, 'd').format()
     const reminderTime = moment(startdate).add(adjustment, 'd').subtract(daysBefore, 'd').format()
-    
-    //update our data
-    const newData = [...data]
-    //there is only one reminder for ordering, so it is always position 0 of array
-    newData[0].due_time = dueTime
-    newData[0].reminder_time = reminderTime
-    return newData
+    //This sets a reminder for tomorrow if the reminder time is before todays date
+    if (reminderTime < startdate) {
+      console.log('before')
+      const newData = [...data]
+      newData[0].due_time = dueTime
+      newData[0].reminder_time = moment().add(1, 'd').format()
+      return newData
+    } else {
+      //update our data
+      const newData = [...data]
+      //there is only one reminder for ordering, so it is always position 0 of array
+      newData[0].due_time = dueTime
+      newData[0].reminder_time = reminderTime
+      return newData
+    }
+
   }
 
   //===== SUBMIT UPDATES
