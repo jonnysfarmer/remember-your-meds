@@ -1,129 +1,27 @@
 import React, { useState, useEffect } from 'react'
-import moment from 'moment'
-import Button from '@material-ui/core/Button'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Typography from '@material-ui/core/Typography'
-import Container from '@material-ui/core/Container'
-import Avatar from '@material-ui/core/Avatar'
-import { makeStyles } from '@material-ui/core/styles'
-import Link from '@material-ui/core/Link'
-import { PrescriptionIcon } from '../styles/icons'
-
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
 import { useHistory } from 'react-router-dom'
-import IconButton from '@material-ui/core/IconButton'
-import Box from '@material-ui/core/Box'
-
-
-
-
-
-// import { useStyles, theme } from '../styles/styles'
-
 import axios from 'axios'
-import Auth from '../lib/auth'
-
-
-
-const useStyles = makeStyles(theme => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.success.main
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    margin: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    color: '#000',
-    backgroundColor: theme.palette.success.main,
-    '&:hover': {
-      backgroundColor: theme.palette.success.dark
-    }
-  },
-  title: {
-    color: theme.palette.success.main
-  },
-  grid: {
-    padding: theme.spacing(2),
-    margin: theme.spacing(1)
-    // margin: 'auto'
-  },
-  root: {
-    flexGrow: 1,
-    margin: theme.spacing(1),
-    width: '100%'
-  },
-  centeralign: {
-    alignItems: 'center',
-    display: 'flex'
-  },
-  altinput: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  altsubmit: {
-    margin: theme.spacing(1, 0, 2),
-    color: '#000',
-    backgroundColor: theme.palette.success.main,
-    '&:hover': {
-      backgroundColor: theme.palette.success.dark
-    }
-  },
-  submitgrey: {
-    margin: theme.spacing(1, 0, 2),
-    backgroundColor: theme.palette.text.secondary,
-    '&:hover': {
-      backgroundColor: theme.palette.success.dark
-    }
-  },
-  submitred: {
-    margin: theme.spacing(1, 0, 2),
-    backgroundColor: theme.palette.error.main,
-    '&:hover': {
-      backgroundColor: theme.palette.error.secondary
-    }
-  },
-  avatargrey: {
-    width: theme.spacing(4),
-    height: theme.spacing(4),
-    backgroundColor: theme.palette.success.main
-  },
-  noPadding: {
-    padding: 0
-  },
-  false: {
-    color: theme.palette.error.main
-  },
-  active: {
-    color: theme.palette.success.main
-  }
-}))
+import moment from 'moment'
+//Material UI
+import { Button, CssBaseline, Typography, Container, Avatar, Grid, Paper, Link, Box } from '@material-ui/core'
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined'
+import IconButton from '@material-ui/core/IconButton'
+//Material UI our styles/icons
+import { useStyles } from '../../styles/styles'
+import { PrescriptionIcon } from '../../styles/icons'
+//Our Libraries/Components
+import Auth from '../../lib/auth'
 
 const Prescription = (props) => {
 
   const classes = useStyles()
   const history = useHistory()
 
-
   const [prescription, setPrescription] = useState({})
   const [medicine, setMedicine] = useState({})
   const [reminders, setReminders] = useState('')
-
   // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState([])
-
-
 
   // PULLS THE INFO, seperates out the medicine and prescription info
   const prescriptionHook = () => {
@@ -154,18 +52,15 @@ const Prescription = (props) => {
       .catch(err => setErrors(err.response.data))
   }
 
-  // got back to original page
+  //===== Send to right page
   const handleReturn = (e) => {
     e.preventDefault()
-
     history.push('/prescriptions/')
   }
-
   const editclick = () => {
     const id = parseInt(props.match.params.id)
     history.push(`/prescriptions/${id}/edit-reminders`)
   }
-
   // deletes prescription and pushes you back
   const handleDelete = (e) => {
     e.preventDefault()
@@ -175,7 +70,6 @@ const Prescription = (props) => {
     })
       .then(() => props.history.push('/prescriptions/'))
   }
-
   const pushEdit = () => {
     const id = parseInt(props.match.params.id)
     history.push(`/prescriptions/${id}/edit`)
@@ -183,9 +77,6 @@ const Prescription = (props) => {
 
   useEffect(prescriptionHook, [])
   useEffect(reminderHook, [])
-
-
-  //=====NEED TO SORT OUT THE LINK, REACT ROUTER OR MATERIAL UI
 
   if (medicine === {}) return <div>loading</div>
   return (
@@ -198,7 +89,7 @@ const Prescription = (props) => {
         <Typography component="h1" variant="h4" >
           {medicine.name}
         </Typography>
-        {medicine.url && <Typography component="h3" variant="subtitle1" className={classes.title}>
+        {medicine.url && <Typography component="h3" variant="subtitle1" className={classes.inlineLink}>
           <Link href={medicine.url} color="inherit">
             NHS Information
           </Link>
@@ -213,19 +104,19 @@ const Prescription = (props) => {
         >
           Edit Prescription
         </Button>
-        <Typography component="h2" variant="h6" >
+        <Typography variant="h6" className={classes.inlineTitle}>
           Number of doses a day
         </Typography>
-        <Typography component="h1" variant="subtitle1" color="textSecondary">
+        <Typography className={classes.inlineText}>
           {prescription.number_days_doses}
         </Typography>
-        <Typography component="h2" variant="h6">
+        <Typography variant="h6" className={classes.inlineTitle}>
           Repeats until appointment
         </Typography>
-        <Typography component="h1" variant="subtitle1" color="textSecondary">
+        <Typography className={classes.inlineText}>
           {prescription.number_repeats}
         </Typography>
-        <Typography component="h2" variant="h6">
+        <Typography variant="h6" className={classes.inlineTitle}>
           Reminders
         </Typography>
         <div className={classes.root}>
@@ -233,10 +124,10 @@ const Prescription = (props) => {
             reminders.map((ele, i) => {
               return (
 
-                <Paper className={classes.grid} key={i}>
+                <Paper className={classes.paperCard} key={i}>
                   <Grid container spacing={2} >
                     <Grid item xs={10} className={classes.centeralign} >
-                      <Typography component="h3" variant="subtitle2" color="textSecondary"  >
+                      <Typography component="h2" variant="subtitle2" color="textSecondary"  >
                         {(ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment') ? `${ele.reminder_type}: ` : 'take medicine: '}
                         {ele.active === false ? <Box component="span" className={ele.active === true ? classes.active : classes.false} > inactive</Box> : ' '}
                         {((ele.reminder_type === 'order prescription' && ele.active === true) || (ele.reminder_type === 'make appointment' && ele.active === true)) && <Box component="span" className={ele.active === true ? classes.active : classes.false} > {moment(ele.reminder_time).format('DD/MM/YYYY')} </Box>}
@@ -268,7 +159,6 @@ const Prescription = (props) => {
                 variant="contained"
                 color="primary"
                 className={classes.altsubmit}
-              // onClick here to edit page
               >
                 Add new reminder
               </Button>
@@ -284,7 +174,6 @@ const Prescription = (props) => {
               color="primary"
               className={classes.submitgrey}
               onClick={(e) => handleReturn(e)}
-
             >
               Back
             </Button>
@@ -302,7 +191,6 @@ const Prescription = (props) => {
             </Button>
           </Grid>
         </Grid>
-
       </div>
     </Container>
   )

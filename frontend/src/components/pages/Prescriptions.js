@@ -1,29 +1,23 @@
 import React, { useState, useEffect } from 'react'
-
-import Button from '@material-ui/core/Button'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Typography from '@material-ui/core/Typography'
-import Container from '@material-ui/core/Container'
-import Avatar from '@material-ui/core/Avatar'
-import { makeStyles } from '@material-ui/core/styles'
-import { PrescriptionIcon } from '../styles/icons'
-//Material UI our styles/icons
-import { useStyles, theme } from '../styles/styles'
 import axios from 'axios'
-import Auth from '../lib/auth'
-import DisplayPrescriptions from './DisplayPrescriptions'
-
-
+//Material UI Styling
+import { Button, CssBaseline, Typography, Container, Avatar } from '@material-ui/core'
+//Material UI our styles/icons
+import { useStyles } from '../../styles/styles'
+import { PrescriptionIcon } from '../../styles/icons'
+//Our components
+import Auth from '../../lib/auth'
+import DisplayPrescriptions from '../DisplayPrescriptions'
 
 const Prescriptions = (props) => {
 
   const classes = useStyles()
 
   const [data, setData] = useState([])
+  // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState([])
 
-  // api/reminders/users/
-
+  //===== API get user information
   const dataHook = () => {
     axios.get('/api/prescriptions/user/', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -33,15 +27,15 @@ const Prescriptions = (props) => {
       })
       .catch(err => setErrors(err.response.data))
   }
-  
+  //===== API create prescription
   const handleCreate = (e) => {
     e.preventDefault()
     props.history.push('/prescriptions/create/')
   }
 
+  //===== USE EFFECTS
   useEffect(dataHook, [])
 
-  // console.log(errors)
   return (
     <Container component="main" maxWidth="xs" className={classes.main}>
       <CssBaseline />
@@ -71,7 +65,6 @@ const Prescriptions = (props) => {
       </div>
     </Container>
   )
-
 }
 
 export default Prescriptions

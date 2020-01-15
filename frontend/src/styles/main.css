@@ -1,25 +1,2 @@
-/* Minimal styles to overwrite materialUI items until we can work out how to do it better*/
-/* 
-
-
-.brand {
-  font-family: 'Nunito', sans-serif;
-}
-
-
-
-.MuiListItemText-root span.MuiTypography-root.MuiListItemText-primary.MuiTypography-body1 {
-  color: black;
-  text-transform: capitalize;
-  margin-left: 0.5rem;
-}
-
-.MuiList-root a {
-  text-decoration: none;
-}
-
-.MuiTypography-h6 {
-  text-transform: capitalize;
-} */
-
 @import url('https://fonts.googleapis.com/css?family=Nunito:800&display=swap');
+

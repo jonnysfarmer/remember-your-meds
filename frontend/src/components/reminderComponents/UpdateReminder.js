@@ -5,7 +5,6 @@ import Auth from '../../lib/auth'
 
 //===== UPDATE REMINDER
 function updateReminder(data) {
-
   //data may come in as a single object, or as an array of objects so we have to handle both scenarios
 
   if (!Array.isArray(data)) {
@@ -25,9 +24,7 @@ function updateReminder(data) {
     })
       .then(resp => console.log(resp.data))
       .catch(error => console.log(error.data))
-
   } else {
-
     data.map(e => {
       const putData = {
         id: e.id,

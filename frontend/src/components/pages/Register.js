@@ -1,64 +1,25 @@
 import React, { useState } from 'react'
-import Avatar from '@material-ui/core/Avatar'
-import Button from '@material-ui/core/Button'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import TextField from '@material-ui/core/TextField'
-import Link from '@material-ui/core/Link'
-import Box from '@material-ui/core/Box'
+import axios from 'axios'
+//Material UI
+import { ThemeProvider, Avatar, Button, CssBaseline, TextField, Box, Typography, Container, InputAdornment, IconButton } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
-import Typography from '@material-ui/core/Typography'
-import Container from '@material-ui/core/Container'
-import { ThemeProvider } from '@material-ui/core/styles'
-import InputAdornment from '@material-ui/core/InputAdornment'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
-import IconButton from '@material-ui/core/IconButton'
+//Material UI our styles/icons
+import { useStyles, theme } from '../../styles/styles'
+//Our Libraries/Components
+import Copyright from '../Copyright'
 
-import { useStyles, theme } from '../styles/styles'
 
-import axios from 'axios'
-
-// This basically Creates the copywrite document, need to add URL
-
-function Copyright() {
-  const classes = useStyles()
-  return (
-    <Box className={classes.copyright}>
-      <Typography variant="body2" align="center" color='inherit'>
-        {'Copyright © '}
-        <Link color="inherit" href='/#/'>
-
-          Take your medicine
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-      <Typography variant="body2" align="center" color='inherit'>
-        <Link color="inherit" href='https://developer.api.nhs.uk/' target='_blank' rel='noopener'>
-          Made using NHS data
-        </Link>
-      </Typography>
-    </Box>
-  )
-}
-
-const registerform = {
-  username: '',
-  email: '',
-  password: '',
-  password_confirmation: '',
-  mobile: ''
-}
-
-// eslint-disable-next-line no-unused-vars
 const Register = (props) => {
 
   const classes = useStyles()
 
-  const [registerInfo, setRegisterInfo] = useState(registerform)
+  const [registerInfo, setRegisterInfo] = useState({})
   const [err, setErrors] = useState({})
   const [showPassword, setShowPassword] = useState(false)
 
+  //===== Show/Hide password text
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword)
   }
@@ -66,19 +27,19 @@ const Register = (props) => {
     event.preventDefault()
   }
 
-
+  //===== Update form info to state
   const handleChange = (e) => {
     setRegisterInfo({ ...registerInfo, [e.target.name]: e.target.value })
     setErrors({})
   }
 
+  //===== Create registration
   const handleSubmit = (e) => {
     e.preventDefault()
     axios.post('/api/register/', registerInfo)
       .then(() => props.history.push('/login'))
       .catch((err) => {
         setErrors(err.response.data)
-        // console.log(err.response.data.password)
       })
   }
 
@@ -196,9 +157,7 @@ const Register = (props) => {
             >
               Register
             </Button>
-
           </ThemeProvider>
-
         </form>
       </div>
       <Box mt={8}>

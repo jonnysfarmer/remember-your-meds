@@ -1,30 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 //Material UI
-import Avatar from '@material-ui/core/Avatar'
-import Button from '@material-ui/core/Button'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import TextField from '@material-ui/core/TextField'
+import { Avatar, Button, CssBaseline, TextField, Typography, Container, Grid } from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete'
-import Typography from '@material-ui/core/Typography'
-import Container from '@material-ui/core/Container'
 import { ThemeProvider } from '@material-ui/core/styles'
 //Material UI our styles/icons
-import { useStyles, theme } from '../styles/styles'
-import { PrescriptionIcon } from '../styles/icons'
+import { useStyles, theme } from '../../styles/styles'
+import { PrescriptionIcon } from '../../styles/icons'
 //Our Libraries/Components
-import Auth from '../lib/auth'
-import moment from 'moment'
+import Auth from '../../lib/auth'
 
-
-
-
-const CreatePrescription2 = (props) => {
+const EditPrescription = (props) => {
 
   const classes = useStyles()
 
   const [medicine, setMedicine] = useState([])
-  const [data, setData] = useState()
+  const [data, setData] = useState({})
+  const [currentMed, setCurrentMed] = useState({})
   const [err, setErrors] = useState({})
 
   //===== GET THE MEDICINE LIST TO POPULATE AUTOCOMPLETE
@@ -38,50 +30,19 @@ const CreatePrescription2 = (props) => {
       .catch(err => setErrors(err))
   }
 
-  // POST 5 reminders for a preset at this specific time
-
-  const postReminders = (presID) => {
-    const reminderArray = [
-      {
-        'prescription': presID,
-        'reminder_type': 'take-am',
-        'due_time': moment().format(),
-        'reminder_time': moment().hours(0).minutes(0).seconds(0).format()
-      },
-      {
-        'prescription': presID,
-        'reminder_type': 'take-mid',
-        'due_time': moment().format(),
-        'reminder_time': moment().hours(0).minutes(0).seconds(0).format()
-      },
-      {
-        'prescription': presID,
-        'reminder_type': 'take-pm',
-        'due_time': moment().format(),
-        'reminder_time': moment().hours(0).minutes(0).seconds(0).format()
-      },
-      {
-        'prescription': presID,
-        'reminder_type': 'order prescription',
-        'due_time': moment().format(),
-        'reminder_time': moment().format()
-      },
-      {
-        'prescription': presID,
-        'reminder_type': 'make appointment',
-        'due_time': moment().format(),
-        'reminder_time': moment().format()
-      }
-    ]
-    reminderArray.map((ele) => {
-      axios.post('/api/reminders/', ele, {
-        headers: { Authorization: `Bearer ${Auth.getToken()}` }
-      })
-        .catch(err => console.log(err.response.data))
+  //== Get current prescription info
+  const getPrescriptionInfo = () => {
+    const id = props.match.params.id
+    axios.get(`/api/prescriptions/${id}/`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-
+      .then((resp) => {
+        const data = resp.data
+        setCurrentMed(data.medicine)
+        setData(resp.data)
+      })
+      .catch(err => setErrors(err.response.data))
   }
-
 
   //===== STORE FORM FIELD VALUES
   const handleChange = (e) => {
@@ -89,21 +50,20 @@ const CreatePrescription2 = (props) => {
     setErrors({})
   }
 
-  console.log(data)
   //===== SUBMIT FORM
   const handleSubmit = (e) => {
     e.preventDefault()
+    const id = props.match.params.id
     // checks if the medicine is currently in our database
     const nhsmed = medicine.filter(ele => ele.name === data.medicine)
     // if it is, then we get the id, and add it as a prescription
     if (nhsmed.length === 1) {
       const updatedData = { 'medicine': nhsmed[0].id, 'number_days_doses': data.number_days_doses, 'number_repeats': data.number_repeats }
-      axios.post('/api/prescriptions/', updatedData, {
+      axios.put(`/api/prescriptions/${id}/`, updatedData, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
         //----- Open the prescription view page for this prescription
         .then((resp) => {
-          postReminders(resp.data.id)
           props.history.push(`/prescriptions/${resp.data.id}/`)
         })
         .catch((err) => {
@@ -118,12 +78,11 @@ const CreatePrescription2 = (props) => {
         .then((resp) => {
           //gets the resppnse, and posts this to the prescription page using new ID
           const updatedData = { 'medicine': resp.data.id, 'number_days_doses': data.number_days_doses, 'number_repeats': data.number_repeats }
-          axios.post('/api/prescriptions/', updatedData, {
+          axios.post(`/api/prescriptions/${id}/`, updatedData, {
             headers: { Authorization: `Bearer ${Auth.getToken()}` }
           })
             //----- Open the prescription view page for this prescription
             .then((resp) => {
-              postReminders(resp.data.id)
               props.history.push(`/prescriptions/${resp.data.id}/`)
             })
             .catch((err) => {
@@ -135,15 +94,20 @@ const CreatePrescription2 = (props) => {
         })
     }
   }
+  const handleReturn = (e) => {
+    e.preventDefault()
+    const id = props.match.params.id
+    props.history.push(`/prescriptions/${id}`)
+  }
 
-  console.log(err)
 
   //===== LOAD MEDICINE LIST
   useEffect(() => {
     getMedicines()
-    //the empty array below ensure this runs only at on mount
+    getPrescriptionInfo()
   }, [])
 
+  if (data === {} || currentMed === {}) return <div>loading</div>
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -152,7 +116,7 @@ const CreatePrescription2 = (props) => {
           <PrescriptionIcon />
         </Avatar>
         <Typography component='h1' variant='h4'>
-          New Prescription
+          Edit Prescription
         </Typography>
 
         <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
@@ -163,6 +127,7 @@ const CreatePrescription2 = (props) => {
               options={medicine.map(option => option.name)}
               onChange={(e) => handleChange(e)}
               onBlur={(e) => handleChange(e)}
+              value={currentMed.name || ''}
               renderInput={params => (
                 <TextField {...params}
                   label='Medicine name'
@@ -189,6 +154,7 @@ const CreatePrescription2 = (props) => {
               fullWidth
               margin='normal'
               onChange={(e) => handleChange(e)}
+              value={data.number_days_doses || ''}
             />
             <TextField
               id='number_repeats'
@@ -202,22 +168,39 @@ const CreatePrescription2 = (props) => {
               fullWidth
               margin='normal'
               onChange={(e) => handleChange(e)}
+              value={data.number_repeats || ''}
             />
-
-            <Button
-              type='submit'
-              fullWidth
-              variant='contained'
-              color='primary'
-              className={classes.submit}
-            >
-              Add prescription
-            </Button>
           </ThemeProvider>
+          <Grid container spacing={2} >
+            <Grid item xs={6} className={classes.centeralign} >
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submitgrey}
+                onClick={(e) => handleReturn(e)}
+              >
+                Back
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submitsmall}
+              >
+                Save
+              </Button>
+            </Grid>
+          </Grid>
+
         </form>
       </div>
     </Container>
   )
 }
 
-export default CreatePrescription2
+export default EditPrescription

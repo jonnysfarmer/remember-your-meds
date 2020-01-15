@@ -11,7 +11,6 @@ import { useStyles } from '../../styles/styles'
 import SwitchReminder from './SwitchReminder'
 import updateReminder from './UpdateReminder'
 
-
 const SwitchOnOFF = withStyles({
   switchBase: {
     color: red[500],
@@ -28,7 +27,6 @@ const SwitchOnOFF = withStyles({
   checked: {},
   track: {}
 })(Switch)
-
 
 const ReminderTake = (props) => {
   const classes = useStyles()
@@ -52,7 +50,6 @@ const ReminderTake = (props) => {
       setActive(data[0].active === true || data[1].active === true || data[2].active === true) ? true : false
     }
   }
-  console.log(active)
 
   //===== ON FIELD CHANGE, CAPTURE ENTRY
   const handleChange = (e) => {

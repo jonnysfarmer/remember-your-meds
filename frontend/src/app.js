@@ -4,17 +4,16 @@ import { Switch, Route, HashRouter } from 'react-router-dom'
 
 import ResponsiveDrawer from './components/Navbar'
 import Home from './components/Home'
-import Register from './components/Register'
-import Login from './components/Login'
-import Prescriptions from './components/Prescriptions'
-import Prescription from './components/Prescription'
-import Profile from './components/Profile'
+import Register from './components/pages/Register'
+import Login from './components/pages/Login'
+import Prescriptions from './components/pages/Prescriptions'
+import Prescription from './components/pages/Prescription'
+import Profile from './components/pages/Profile'
 import Logout from './components/Logout'
-import EditProfile from './components/EditProfile'
-import CreatePrescription from './components/CreatePrescription2'
-import EditPrescription from './components/EditPrescription'
-
-import EditReminder from './components/EditReminder'
+import EditProfile from './components/pages/EditProfile'
+import CreatePrescription from './components/pages/CreatePrescription2'
+import EditPrescription from './components/pages/EditPrescription'
+import EditReminder from './components/pages/EditReminder'
 
 
 //STYLES FOR OVERWRITING MATERIAL UI

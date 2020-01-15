@@ -11,7 +11,6 @@ import { useStyles } from '../../styles/styles'
 import SwitchReminder from './SwitchReminder'
 import updateReminder from './UpdateReminder'
 
-
 const SwitchOnOFF = withStyles({
   switchBase: {
     color: red[500],
@@ -28,7 +27,6 @@ const SwitchOnOFF = withStyles({
   checked: {},
   track: {}
 })(Switch)
-
 
 const ReminderOrder = (props) => {
   const classes = useStyles()
@@ -72,7 +70,6 @@ const ReminderOrder = (props) => {
       newData[0].reminder_time = reminderTime
       return newData
     }
-
   }
 
   //===== SUBMIT UPDATES

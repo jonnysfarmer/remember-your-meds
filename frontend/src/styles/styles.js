@@ -37,10 +37,19 @@ const useStyles = makeStyles(theme => ({
   },
   paperCard: {
     padding: theme.spacing(2),
-    margin: 'auto'
+    margin: theme.spacing(1)
+  },
+  centeralign: {
+    alignItems: 'center',
+    display: 'flex'
   },
   avatar: {
     margin: theme.spacing(1),
+    backgroundColor: theme.palette.success.main
+  },
+  avatargrey: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
     backgroundColor: theme.palette.success.main
   },
   boxdisplay: {
@@ -50,9 +59,29 @@ const useStyles = makeStyles(theme => ({
   noPadding: {
     padding: 0
   },
+  capitalize: {
+    textTransform: 'capitalize'
+  },
+  inlineTitle: {
+    color: '#000'
+  },
+  inlineLink: {
+    color: theme.palette.success.main,
+    '&:hover': {
+      color: theme.palette.success.dark
+    }
+  },
+  inlineText: {
+    marginBottom: theme.spacing(1)
+  },
+  false: {
+    color: theme.palette.error.main
+  },
+  active: {
+    color: theme.palette.success.main
+  },
 
   //===== NAV =====
-
   drawer: {
     [theme.breakpoints.up('md')]: {
       width: drawerWidth,
@@ -83,20 +112,16 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     padding: theme.spacing(3)
   },
+  navLink: {
+    color: '#000000',
+    textDecoration: 'none',
+    textTransform: 'capitalize'
+  },
 
   //===== FORMS =====
-
   form: {
     width: '100%', // Fix IE 11 issue.
     margin: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    color: '#000',
-    backgroundColor: theme.palette.success.main,
-    '&:hover': {
-      backgroundColor: theme.palette.success.dark
-    }
   },
   reminderFormPaper: {
     marginTop: theme.spacing(0),
@@ -106,7 +131,36 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(1),
     marginTop: theme.spacing(0.5)
   },
-
+  submitgrey: {
+    margin: theme.spacing(1, 0, 2),
+    backgroundColor: theme.palette.text.secondary,
+    '&:hover': {
+      backgroundColor: theme.palette.success.dark
+    }
+  },
+  submitred: {
+    margin: theme.spacing(1, 0, 2),
+    backgroundColor: theme.palette.error.main,
+    '&:hover': {
+      backgroundColor: theme.palette.error.secondary
+    }
+  },
+  submitsmall: {
+    margin: theme.spacing(1, 0, 2),
+    color: '#000',
+    backgroundColor: theme.palette.success.main,
+    '&:hover': {
+      backgroundColor: theme.palette.success.dark
+    }
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    color: '#000',
+    backgroundColor: theme.palette.success.main,
+    '&:hover': {
+      backgroundColor: theme.palette.success.dark
+    }
+  },
 
   //===== HOMEPAGE =====
 

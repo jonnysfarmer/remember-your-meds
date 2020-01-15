@@ -5,13 +5,13 @@ import axios from 'axios'
 import { Container, CssBaseline, Avatar, Typography } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/core/styles'
 //Material UI our styles/icons
-import { useStyles, theme } from '../styles/styles'
-import { ReminderIcon } from '../styles/icons'
-
-import Auth from '../lib/auth'
-import ReminderOrder from './reminderComponents/ReminderOrder'
-import ReminderAppt from './reminderComponents/ReminderAppt'
-import ReminderTake from './reminderComponents/ReminderTake'
+import { useStyles, theme } from '../../styles/styles'
+import { ReminderIcon } from '../../styles/icons'
+//Our components/functions
+import Auth from '../../lib/auth'
+import ReminderOrder from '../reminderComponents/ReminderOrder'
+import ReminderAppt from '../reminderComponents/ReminderAppt'
+import ReminderTake from '../reminderComponents/ReminderTake'
 
 const EditReminder = (props) => {
 
