@@ -106,7 +106,7 @@ const Prescription = (props) => {
             Edit Prescription
         </Button>
           <Typography component="h2" variant="h6" >
-            Number of days per prescription
+            Medication supply (days)
         </Typography>
           <Typography className={classes.inlineText}>
             {prescription.number_days_doses}
