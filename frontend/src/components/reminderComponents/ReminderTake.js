@@ -34,6 +34,7 @@ const ReminderTake = (props) => {
   const classes = useStyles()
   const history = useHistory()
   const [data, setData] = useState([])
+  const [active, setActive] = useState([])
 
   //===== SET DATA FOR THIS REMINDER TYPE
   const setInitialData = () => {
@@ -43,6 +44,15 @@ const ReminderTake = (props) => {
       setData(props.props.filter(ele => (ele.reminder_type === 'take-am' || ele.reminder_type === 'take-mid' || ele.reminder_type === 'take-pm')))
     }
   }
+
+  function setActiveState() {
+    if (data.length === 0) {
+      console.log('waiting for data')
+    } else {
+      setActive(data[0].active === true || data[1].active === true || data[2].active === true) ? true : false
+    }
+  }
+  console.log(active)
 
   //===== ON FIELD CHANGE, CAPTURE ENTRY
   const handleChange = (e) => {
@@ -68,7 +78,7 @@ const ReminderTake = (props) => {
 
   //===== USE EFFECT
   useEffect(() => setInitialData(), [props])
-
+  useEffect(() => setActiveState(), [data])
 
 
   //===== UI
@@ -112,29 +122,20 @@ const ReminderTake = (props) => {
                   </Grid>
                 </Grid>
               </Typography>
-
-              {/* {ele.active === true &&
-                <TextField
-                  id={`input_${ele.reminder_type}`}
-                  name={ele.reminder_type}
-                  type='time'
-                  variant='outlined'
-                  margin='normal'
-                  onChange={(e) => handleChange(e)}
-                />
-              } */}
             </div>
           )
         })}
-        <Button
-          type='submit'
-          fullWidth
-          variant='contained'
-          color='primary'
-          className={classes.submit}
-        >
-          Save reminders to take
-        </Button>
+        {active === true &&
+          <Button
+            type='submit'
+            fullWidth
+            variant='contained'
+            color='primary'
+            className={classes.submit}
+          >
+            Save reminders to take
+          </Button>
+        }
       </Paper>
     </form>
   )

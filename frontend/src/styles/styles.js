@@ -1,6 +1,6 @@
 
 import { green } from '@material-ui/core/colors'
-import { makeStyles, createMuiTheme, withTheme } from '@material-ui/core/styles'
+import { makeStyles, createMuiTheme } from '@material-ui/core/styles'
 // import { palette } from '@material-ui/system'
 // import Switch from '@material-ui/core/Switch'
 
