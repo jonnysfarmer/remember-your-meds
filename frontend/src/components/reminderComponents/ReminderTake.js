@@ -101,7 +101,7 @@ const ReminderTake = (props) => {
                       onChange={(e => setData(SwitchReminder(e, i, data)))}
                     />
                   </Grid>
-                  <Grid item>
+                  <Grid item className={classes.boxdisplay}>
                     Reminder {ele.active === true ? ' active at ' : ' inactive'}
                   </Grid>
                   <Grid item>
