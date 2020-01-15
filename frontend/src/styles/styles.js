@@ -54,13 +54,13 @@ const useStyles = makeStyles(theme => ({
   //===== NAV =====
 
   drawer: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       width: drawerWidth,
       flexShrink: 0
     }
   },
   appBar: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       // the below sets the header to be 100% width on desktop, with the menu appearing below
       zIndex: theme.zIndex.drawer + 1,
       colorPrimary: theme.palette.success.main
@@ -68,7 +68,7 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'none'
     }
   },

@@ -205,9 +205,9 @@ const Profile = (props) => {
                       </Typography>
                     </Grid>
                     <Grid item>
-                      <IconButton edge="end" className={classes.noPadding}>
+                      <IconButton edge="end" className={classes.noPadding} onClick={() => pushDetail(ele.id)}>
                         <Avatar className={classes.avatargrey} >
-                          <AddOutlinedIcon fontSize="small" onClick={() => pushDetail(ele.id)} />
+                          <AddOutlinedIcon fontSize="small"  />
                         </Avatar>
                       </IconButton>
                     </Grid>

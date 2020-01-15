@@ -70,6 +70,7 @@ const ReminderTake = (props) => {
   useEffect(() => setInitialData(), [props])
 
 
+
   //===== UI
   if (data === []) return <div>loading</div>
   return (
@@ -94,7 +95,7 @@ const ReminderTake = (props) => {
                     />
                   </Grid>
                   <Grid item>
-                    Reminder {ele.active === true ? ` ${i + 1} at ` : ' inactive'}
+                    Reminder {ele.active === true ? ' active at ' : ' inactive'}
                   </Grid>
                   <Grid item>
                     {ele.active === true &&

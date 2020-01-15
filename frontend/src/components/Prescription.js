@@ -14,6 +14,7 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import { useHistory } from 'react-router-dom'
 import IconButton from '@material-ui/core/IconButton'
+import Box from '@material-ui/core/Box'
 
 
 
@@ -235,20 +236,20 @@ const Prescription = (props) => {
                 <Paper className={classes.grid} key={i}>
                   <Grid container spacing={2} >
                     <Grid item xs={10} className={classes.centeralign} >
-                      <Typography component="h3" variant="subtitle2" color="textSecondary" className={ele.active === true ? classes.active : classes.false} >
+                      <Typography component="h3" variant="subtitle2" color="textSecondary"  >
                         {(ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment') ? `${ele.reminder_type}: ` : 'take medicine: '}
-                        {ele.active === false ? ' inactive' : ' '}
-                        {((ele.reminder_type === 'order prescription' && ele.active === true) || (ele.reminder_type === 'make appointment' && ele.active === true)) && moment(ele.reminder_time).format('DD/MM/YYYY')}
+                        {ele.active === false ? <Box component="span" className={ele.active === true ? classes.active : classes.false} > inactive</Box> : ' '}
+                        {((ele.reminder_type === 'order prescription' && ele.active === true) || (ele.reminder_type === 'make appointment' && ele.active === true)) && <Box component="span" className={ele.active === true ? classes.active : classes.false} > {moment(ele.reminder_time).format('DD/MM/YYYY')} </Box>}
 
                         {((ele.reminder_type === 'take-am' && ele.active === true) ||
                           (ele.reminder_type === 'take-mid' && ele.active === true) ||
                           (ele.reminder_type === 'take-pm' && ele.active === true))
-                          && ' reminders active'}
+                          && <Box component="span" className={ele.active === true ? classes.active : classes.false} >  reminders active </Box>}
                       </Typography>
                     </Grid>
                     <Grid item>
-                      <IconButton className={classes.noPadding}>
-                        <Avatar className={classes.avatargrey} onClick={() => editclick()} >
+                      <IconButton className={classes.noPadding} onClick={() => editclick()}>
+                        <Avatar className={classes.avatargrey} >
                           <EditOutlinedIcon fontSize="small" />
                         </Avatar>
                       </IconButton>

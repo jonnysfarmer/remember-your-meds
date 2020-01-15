@@ -58,13 +58,23 @@ const ReminderAppt = (props) => {
     const dosesOnPrescription = data[0].prescription.number_days_doses //number of doses on a normal prescription
     const dueTime = moment(startdate).add(adjustment * dosesOnPrescription, 'd').format()
     const reminderTime = moment(startdate).add(adjustment * dosesOnPrescription, 'd').subtract(daysBefore, 'd').format()
-    
-    //update our data
-    const newData = [...data]
-    //there is only one reminder for ordering, so it is always position 0 of array
-    newData[0].due_time = dueTime
-    newData[0].reminder_time = reminderTime
-    return newData
+    //This sets a reminder for tomorrow if the reminder time is before todays date
+
+    if (reminderTime < startdate) {
+      const newData = [...data]
+      newData[0].due_time = dueTime
+      newData[0].reminder_time = moment().add(1, 'd').format()
+      return newData
+    } else {
+      //update our data
+      const newData = [...data]
+      //there is only one reminder for ordering, so it is always position 0 of array
+      newData[0].due_time = dueTime
+      newData[0].reminder_time = reminderTime
+      return newData
+    }
+
+
   }
 
   //===== SUBMIT UPDATES
