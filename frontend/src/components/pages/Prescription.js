@@ -127,7 +127,7 @@ const Prescription = (props) => {
 
                   <Paper className={classes.paperCard} key={i}>
                     <Grid container spacing={2} >
-                      <Grid item xs={10} className={classes.centeralign} >
+                      <Grid item xs={9} className={classes.centeralign} >
                         <Typography component="h2" variant="subtitle2" color="textSecondary"  >
                           {(ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment') ? `${ele.reminder_type}: ` : 'take medicine: '}
                           {ele.active === false ? <Box component="span" className={ele.active === true ? classes.active : classes.false} > inactive</Box> : ' '}
@@ -141,7 +141,7 @@ const Prescription = (props) => {
                       </Grid>
                       <Grid item>
                         <IconButton className={classes.noPadding} onClick={() => editclick()}>
-                          <Avatar className={classes.avatargrey} color='primary' >
+                          <Avatar className={classes.avatargrey}  >
                             <EditOutlinedIcon fontSize="small" />
                           </Avatar>
                         </IconButton>

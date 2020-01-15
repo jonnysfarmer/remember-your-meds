@@ -45,12 +45,12 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.success.main
+    backgroundColor: green
   },
   avatargrey: {
     width: theme.spacing(4),
     height: theme.spacing(4),
-    backgroundColor: theme.palette.success.main
+    backgroundColor: green
   },
   boxdisplay: {
     marginLeft: theme.spacing(1),
