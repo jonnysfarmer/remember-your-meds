@@ -16,6 +16,9 @@ import Box from '@material-ui/core/Box'
 //Material UI our styles/icons
 import { useStyles } from '../styles/styles'
 
+
+
+
 function Copyright() {
   const classes = useStyles()
   return (
@@ -23,8 +26,7 @@ function Copyright() {
       <Typography variant="body2" align="center" color='inherit'>
         {'Copyright © '}
         <Link color="inherit" href='/#/'>
-
-          Take your medicine
+          Take Your Medicine
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}
@@ -58,48 +60,56 @@ const Home = () => {
   }
 
   return (
-    <Box height='100vh' >
-      
-      <CssBaseline />
-      <Container component="main" maxWidth="xs" className={classes.paper} >
-        <Typography component="h1" variant="h2" className={classes.avatar} >
-          <PillIcon fontSize='inherit' />
-          <InjectIcon fontSize='inherit' />
-        </Typography>
-        <Typography component="h1" variant="h2" className={classes.title} >
-          Take Your Meds
-        </Typography>
-        <Grid container spacing={2} >
-          <Grid item xs={6} className={classes.centeralign} >
-            <Button
-              type="submit"
-              fullWidth
-              variant="outlined"
-              className={classes.submitgrey}
-              onClick={(e) => pushRegister(e)}
-            >
-              register
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              // color="primary"
-              className={classes.submit}
-              onClick={(e) => pushLogin(e)}
-            >
-              Login
-            </Button>
-          </Grid>
-        </Grid>
-        <Box mt={8}>
-          <Copyright />
-        </Box>
-      </Container>
-    </Box >
+    <Box height='100vh' className={classes.backCol}>
+      <Box className={classes.backImg}>
 
+        <CssBaseline />
+        <Container component="main" maxWidth="xs" >
+
+          <Box className={classes.homeIcon}>
+            <Typography component="h1" variant="h2">
+              <PillIcon fontSize='inherit' />
+              <InjectIcon fontSize='inherit' />
+            </Typography>
+          </Box>
+          <Box>
+            <Typography component="h1" variant="h2" className={classes.title}>
+              Take Your Medicine
+            </Typography>
+          </Box>
+          <Box>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <Button
+                  className={classes.outlinedButton}
+                  type="submit"
+                  fullWidth
+                  variant="outlined"
+                  onClick={(e) => pushRegister(e)}
+                >
+                  register
+                </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  className={classes.containedButton}
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  disableElevation
+                  onClick={(e) => pushLogin(e)}
+                >
+                  Login
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+          <Box mt={8}>
+            <Copyright />
+          </Box>
+        </Container>
+      </Box>
+    </Box>
   )
 
 

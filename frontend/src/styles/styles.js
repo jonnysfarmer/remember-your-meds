@@ -1,6 +1,6 @@
 
 import { green } from '@material-ui/core/colors'
-import { makeStyles, createMuiTheme } from '@material-ui/core/styles'
+import { makeStyles, createMuiTheme, withTheme } from '@material-ui/core/styles'
 // import { palette } from '@material-ui/system'
 // import Switch from '@material-ui/core/Switch'
 
@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   //===== ROOT/BASE STYLES =====
   root: {
     flexGrow: 1,
-    margin: theme.spacing(1),
+    // margin: theme.spacing(1), //was adding a margin on my homepage, check whether it hurts other pages to not have it
     width: '100%'
   },
   paper: {
@@ -105,6 +105,45 @@ const useStyles = makeStyles(theme => ({
   reminderInlineField: {
     marginLeft: theme.spacing(1),
     marginTop: theme.spacing(0.5)
+  },
+
+
+  //===== HOMEPAGE =====
+
+  backCol: {
+    minHeight: '100%',
+    background: 'linear-gradient(45deg, #00B950 35%, #38ef7d 100%)'
+  },
+  backImg: {
+    minHeight: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundImage: 'url("https://cdn.discordapp.com/attachments/540278479363637259/666964352364183578/back1.png")'
+  },
+  title: {
+    textAlign: 'center',
+    fontFamily: 'Nunito, serif',
+    color: '#FFFFFF',
+    marginBottom: theme.spacing(6),
+    marginTop: theme.spacing(2),
+    textShadow: '2px 2px 10px #504CAF'
+  },
+  homeIcon: {
+    textAlign: 'center',
+    color: '#504CAF'
+  },
+  containedButton: {
+    backgroundColor: '#504CAF',
+    color: '#FFFFFF',
+    fontWeight: 'bold'
+  },
+  outlinedButton: {
+    color: '#504CAF',
+    borderColor: '#504CAF',
+    backgroundColor: '#00B950',
+    fontWeight: 'bold'
   }
 }))
 
