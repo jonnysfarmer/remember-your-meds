@@ -30,7 +30,7 @@ const EditReminder = (props) => {
   //===== USE EFFECT
   useEffect(() => reminderHook(), [])
 
-  console.log(reminders)
+  // console.log(reminders)
   //===== UI
   if (reminders.length === 0) return <div>loading</div>
   return (
