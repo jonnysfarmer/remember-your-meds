@@ -74,6 +74,9 @@ const useStyles = makeStyles(theme => ({
   inlineText: {
     marginBottom: theme.spacing(1)
   },
+  centerText: {
+    textAlign: 'center'
+  },
   false: {
     color: theme.palette.error.main
   },

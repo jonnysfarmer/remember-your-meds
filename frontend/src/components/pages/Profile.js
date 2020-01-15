@@ -131,7 +131,7 @@ const Profile = (props) => {
                 </Paper>
               )
             }) :
-            <div>
+            <div className={classes.centerText}>
               <Typography className={classes.inlineText}>
                 You currently have no prescriptions
               </Typography>
