@@ -104,7 +104,7 @@ const ReminderTake = (props) => {
                   <Grid item className={classes.boxdisplay}>
                     Reminder {ele.active === true ? ' active at ' : ' inactive'}
                   </Grid>
-                  <Grid item>
+                  <Grid item className={classes.reminderInlineField}>
                     {ele.active === true &&
                       <TextField
                         className={classes.reminderInlineField}
