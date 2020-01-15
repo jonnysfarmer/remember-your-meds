@@ -1,8 +1,7 @@
 
 import { green } from '@material-ui/core/colors'
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles'
-// import { palette } from '@material-ui/system'
-// import Switch from '@material-ui/core/Switch'
+import Background from './back1.png'
 
 //================================
 // SETTINGS
@@ -178,7 +177,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundImage: 'url("https://cdn.discordapp.com/attachments/540278479363637259/666964352364183578/back1.png")'
+    backgroundImage: `url("${Background}")`
   },
   title: {
     textAlign: 'center',
