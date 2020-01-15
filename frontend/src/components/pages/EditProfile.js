@@ -1,104 +1,14 @@
 import React, { useState, useEffect } from 'react'
-
-import Button from '@material-ui/core/Button'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Typography from '@material-ui/core/Typography'
-import Container from '@material-ui/core/Container'
-import Avatar from '@material-ui/core/Avatar'
-import { ProfileIcon } from '../styles/icons'
-import { makeStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
-import InputAdornment from '@material-ui/core/InputAdornment'
-
-// import CssBaseline from '@material-ui/core/CssBaseline'
-import TextField from '@material-ui/core/TextField'
-import { ThemeProvider } from '@material-ui/core/styles'
-
-
-
-import { theme } from '../styles/styles'
-
 import axios from 'axios'
-import Auth from '../lib/auth'
-
-// Styles for Material UI
-
-const useStyles = makeStyles(theme => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.success.main
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    margin: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    color: '#000',
-    backgroundColor: theme.palette.success.main,
-    '&:hover': {
-      backgroundColor: theme.palette.success.dark
-    }
-  },
-  title: {
-    // color: theme.palette.success.main
-  },
-  grid: {
-    padding: theme.spacing(2),
-    margin: theme.spacing(1)
-    // margin: 'auto'
-  },
-  root: {
-    flexGrow: 1,
-    margin: theme.spacing(1),
-    width: '100%'
-  },
-  centeralign: {
-    alignItems: 'center',
-    display: 'flex'
-  },
-  altinput: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  altsubmit: {
-    margin: theme.spacing(1, 0, 2),
-    color: '#000',
-    backgroundColor: theme.palette.success.main,
-    '&:hover': {
-      backgroundColor: theme.palette.success.dark
-    }
-  },
-  avatargrey: {
-    width: theme.spacing(4),
-    height: theme.spacing(4),
-    backgroundColor: theme.palette.success.main
-  },
-  submitgrey: {
-    margin: theme.spacing(1, 0, 2),
-    backgroundColor: theme.palette.text.secondary,
-    '&:hover': {
-      backgroundColor: theme.palette.success.dark
-    }
-  },
-  submitsmall: {
-    margin: theme.spacing(1, 0, 2),
-    color: '#000',
-    backgroundColor: theme.palette.success.main,
-    '&:hover': {
-      backgroundColor: theme.palette.success.dark
-    }
-  }
-}))
-
-
+//Material UI
+import { Button, CssBaseline, Typography, Container, Avatar, Grid, TextField } from '@material-ui/core'
+import { ThemeProvider } from '@material-ui/core/styles'
+import InputAdornment from '@material-ui/core/InputAdornment'
+//Material UI our styles/icons
+import { useStyles, theme } from '../../styles/styles'
+import { ProfileIcon } from '../../styles/icons'
+//Our Libraries/Components
+import Auth from '../../lib/auth'
 
 const EditProfile = (props) => {
 
@@ -106,8 +16,6 @@ const EditProfile = (props) => {
 
   const [user, setUser] = useState({})
   const [err, setErrors] = useState({})
-
-
 
   // logs the handle change
   const handleChange = (e) => {
@@ -144,12 +52,8 @@ const EditProfile = (props) => {
     props.history.push('/profile/')
   }
 
-
-
-
   // hook to pull data
   useEffect(userHook, [])
-  console.log(err)
 
   return (
     <Container component="main" maxWidth="xs">
@@ -161,9 +65,7 @@ const EditProfile = (props) => {
         <Typography component="h1" variant="h4">
           Edit Profile
         </Typography>
-
         <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
-
           <ThemeProvider theme={theme}>
             <TextField
               error={err.username && true}
@@ -208,10 +110,7 @@ const EditProfile = (props) => {
                 startAdornment: <InputAdornment position="start">+44</InputAdornment>
               }}
             />
-
           </ThemeProvider>
-
-
           <Grid container spacing={2} >
             <Grid item xs={6} className={classes.centeralign} >
               <Button
@@ -221,7 +120,6 @@ const EditProfile = (props) => {
                 color="primary"
                 className={classes.submitgrey}
                 onClick={(e) => handleReturn(e)}
-
               >
                 Back
               </Button>
@@ -239,8 +137,6 @@ const EditProfile = (props) => {
             </Grid>
           </Grid>
         </form>
-
-
       </div>
     </Container>
   )

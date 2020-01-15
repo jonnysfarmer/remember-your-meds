@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
-
 //Material UI Styling
-import { AppBar, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemText, Toolbar } from '@material-ui/core'
+import { AppBar, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemText, Toolbar, Typography } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/core/styles'
-
+//Material UI our styles/icons
 import { useStyles, theme } from '../styles/styles'
 import { MenuIcon, PrescriptionIcon, ProfileIcon, LogoutIcon } from '../styles/icons'
+//Our components
 import Auth from '../lib/auth'
 
 function ResponsiveDrawer(props) {
@@ -26,12 +26,16 @@ function ResponsiveDrawer(props) {
       <Divider />
       <List>
         {['prescriptions', 'profile', 'logout'].map((elem, i) => (
-          <Link to={`/${elem}`} key={i} className={classes.iconColor}>
+          <Link to={`/${elem}`} key={i} className={classes.iconColor} color='inherit'>
             <ListItem>
               {elem === 'prescriptions' && <PrescriptionIcon fontSize='large' />}
               {elem === 'profile' && <ProfileIcon fontSize='large' />}
               {elem === 'logout' && <LogoutIcon fontSize='large' />}
-              <ListItemText>{elem}</ListItemText>
+              <ListItemText className='navLink'>
+                <Typography className={classes.navLink}>
+                  {elem}
+                </Typography>
+              </ListItemText>
             </ListItem>
           </Link>
         ))}
@@ -44,21 +48,21 @@ function ResponsiveDrawer(props) {
       <CssBaseline />
       <ThemeProvider theme={theme}>
         {location !== '/' &&
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            {Auth.isAuthorized() &&
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="start"
-                onClick={handleDrawerToggle}
-                className={classes.menuButton}
-              >
-                <MenuIcon />
-              </IconButton>
-            }
-          </Toolbar>
-        </AppBar>
+          <AppBar position="fixed" className={classes.appBar}>
+            <Toolbar>
+              {Auth.isAuthorized() &&
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  onClick={handleDrawerToggle}
+                  className={classes.menuButton}
+                >
+                  <MenuIcon />
+                </IconButton>
+              }
+            </Toolbar>
+          </AppBar>
         }
         <nav className={classes.drawer} aria-label="mailbox folders">
           <Hidden mdUp implementation="css">

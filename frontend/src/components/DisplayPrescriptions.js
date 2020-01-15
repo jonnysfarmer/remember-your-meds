@@ -1,25 +1,14 @@
 import React, { useState, useEffect } from 'react'
-
-import { makeStyles, withStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import Avatar from '@material-ui/core/Avatar'
-import Switch from '@material-ui/core/Switch'
 import { useHistory } from 'react-router-dom'
-import AddOutlinedIcon from '@material-ui/icons/AddOutlined'
-import Box from '@material-ui/core/Box'
-import { red, green } from '@material-ui/core/colors'
-import IconButton from '@material-ui/core/IconButton'
-
-
-
-
-
 import axios from 'axios'
-import Auth from '../lib/auth'
-
+//Material UI
+import { withStyles, Grid, Paper, Typography, Avatar, Switch, Box, IconButton } from '@material-ui/core'
+import AddOutlinedIcon from '@material-ui/icons/AddOutlined'
+import { red, green } from '@material-ui/core/colors'
+//Material UI our styles/icons
 import { useStyles } from '../styles/styles'
+//Our components/functions
+import Auth from '../lib/auth'
 
 const SwitchonOFF = withStyles({
   switchBase: {
@@ -37,10 +26,10 @@ const SwitchonOFF = withStyles({
   checked: {},
   track: {}
 })(Switch)
-
   
 const DisplayPrescriptions = ({ medicine, presID }) => {
 
+  const classes = useStyles()
   const history = useHistory()
 
   const [reminders, setReminder] = useState([])
@@ -67,8 +56,6 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
       .catch(err => setErrors(err.response.data))
   }
 
-  // console.log(errors)
-
   const handleChange = (id, i) => (event) => {
     if (reminders[i].edited === false) {
       history.push(`/prescriptions/${presID}/edit-reminders`)
@@ -78,7 +65,6 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
       axios.put(`/api/reminders/${id}/`, { 'active': event.target.checked }, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
-
       setReminder(newreminders)
       setErrors({})
     }
@@ -101,15 +87,9 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
   }
   const pushDetailPage = () => {
     history.push(`/prescriptions/${presID}/`)
-
   }
 
-
-
   useEffect(dataHook, [])
-  // console.log(takeReminders)
-  const classes = useStyles()
-
 
   if (medicine === null || reminders === []) return <div>Loading</div>
   return (
@@ -188,9 +168,9 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
             </Grid>
             <Grid item>
               <IconButton className={classes.noPadding} onClick={()=>pushDetailPage()}>
-              <Avatar className={classes.avatar} >
-                <AddOutlinedIcon  fontSize="small" />
-              </Avatar>
+                <Avatar className={classes.avatar} >
+                  <AddOutlinedIcon  fontSize="small" />
+                </Avatar>
               </IconButton>
             </Grid>
           </Grid>
@@ -198,7 +178,6 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
       </Paper>
     </div>
   )
-
 }
 
 export default DisplayPrescriptions

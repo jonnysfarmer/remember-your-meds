@@ -1,83 +1,15 @@
 import React, { useState } from 'react'
-import Avatar from '@material-ui/core/Avatar'
-import Button from '@material-ui/core/Button'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import TextField from '@material-ui/core/TextField'
-import Link from '@material-ui/core/Link'
-import Box from '@material-ui/core/Box'
+import axios from 'axios'
+//Material UI
+import { ThemeProvider, Avatar, Button, CssBaseline, TextField, Box, Typography, Container, InputAdornment, IconButton } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
-import Typography from '@material-ui/core/Typography'
-import Container from '@material-ui/core/Container'
-import { green } from '@material-ui/core/colors'
-import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles'
-import InputAdornment from '@material-ui/core/InputAdornment'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
-import IconButton from '@material-ui/core/IconButton'
-
-
-import Auth from '../lib/auth'
-import axios from 'axios'
-
-// This basically Creates the copywrite document, need to add URL
-
-function Copyright() {
-  const classes = useStyles()
-  return (
-    <Box className={classes.copyright}>
-      <Typography variant="body2" align="center" color='inherit'>
-        {'Copyright © '}
-        <Link color="inherit" href='/#/'>
-
-          Take your medicine
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-      <Typography variant="body2" align="center" color='inherit'>
-        <Link color="inherit" href='https://developer.api.nhs.uk/'>
-          Made using NHS data
-        </Link>
-      </Typography>
-    </Box>
-  )
-}
-
-// These are the styles for the form
-
-const useStyles = makeStyles(theme => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.success.main
-  },
-  form: {
-    width: '100%',
-    margin: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    color: '#000',
-    backgroundColor: theme.palette.success.main,
-    '&:hover': {
-      backgroundColor: theme.palette.success.dark
-    }
-
-  }
-}))
-
-// this is Themse for the form palette
-
-const theme = createMuiTheme({
-  palette: {
-    primary: green
-  }
-})
+//Material UI our styles/icons
+import { useStyles, theme } from '../../styles/styles'
+//Our Libraries/Components
+import Auth from '../../lib/auth'
+import Copyright from '../Copyright'
 
 
 const Login = (props) => {
@@ -88,6 +20,7 @@ const Login = (props) => {
   const [err, setErrors] = useState({})
   const [showPassword, setShowPassword] = useState(false)
 
+  //===== Show/Hide password text
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword)
   }
@@ -95,26 +28,24 @@ const Login = (props) => {
     event.preventDefault()
   }
 
-
+  //===== Get form input data
   const handleChange = (e) => {
     setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value })
     setErrors({})
   }
 
-  // Need to add getting Auth Token
+  //===== Log user in
   const handleSubmit = (e) => {
     e.preventDefault()
     axios.post('/api/login/', loginInfo)
       .then((resp) => {
         Auth.setToken(resp.data.token)
-        // console.log('Logged In')
         props.history.push('/prescriptions')
       })
       .catch((err) => {
         setErrors(err.response.data)
       })
   }
-
 
   return (
     <Container component="main" maxWidth="xs">
@@ -128,7 +59,6 @@ const Login = (props) => {
         </Typography>
         <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)}>
           <ThemeProvider theme={theme}>
-
             <TextField
               error={err.message && true}
               variant="outlined"
@@ -170,7 +100,6 @@ const Login = (props) => {
                   </InputAdornment>
               }}
             />
-
           </ThemeProvider>
           <Button
             type="submit"
@@ -181,7 +110,6 @@ const Login = (props) => {
           >
             Login
           </Button>
-
         </form>
       </div>
       <Box mt={8}>
