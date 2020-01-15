@@ -69,7 +69,6 @@ const ReminderTake = (props) => {
   //===== USE EFFECT
   useEffect(() => setInitialData(), [props])
 
-  console.log(data)
 
 
   //===== UI

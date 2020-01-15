@@ -211,9 +211,9 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
               </Grid>
             </Grid>
             <Grid item>
-              <IconButton className={classes.noPadding}>
+              <IconButton className={classes.noPadding} onClick={()=>pushDetailPage()}>
               <Avatar className={classes.avatar} >
-                <AddOutlinedIcon  fontSize="small" onClick={()=>pushDetailPage()}/>
+                <AddOutlinedIcon  fontSize="small" />
               </Avatar>
               </IconButton>
             </Grid>

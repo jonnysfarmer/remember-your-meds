@@ -248,8 +248,8 @@ const Prescription = (props) => {
                       </Typography>
                     </Grid>
                     <Grid item>
-                      <IconButton className={classes.noPadding}>
-                        <Avatar className={classes.avatargrey} onClick={() => editclick()} >
+                      <IconButton className={classes.noPadding} onClick={() => editclick()}>
+                        <Avatar className={classes.avatargrey} >
                           <EditOutlinedIcon fontSize="small" />
                         </Avatar>
                       </IconButton>
