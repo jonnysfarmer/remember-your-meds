@@ -1,10 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
 import Auth from '../lib/auth'
-import Home from './Home'
 import { useHistory } from 'react-router-dom'
 
-function Logout(props) {
+function Logout() {
   // console.log(props)
   const history = useHistory()
   Auth.logout()
