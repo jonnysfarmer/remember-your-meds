@@ -19,32 +19,8 @@ import IconButton from '@material-ui/core/IconButton'
 import axios from 'axios'
 import Auth from '../lib/auth'
 
-// import { makeStyles } from '../styles/styles'
+import { useStyles } from '../styles/styles'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    margin: theme.spacing(1),
-    width: '100%'
-  },
-  paper: {
-    padding: theme.spacing(2),
-    margin: 'auto'
-  },
-  avatar: {
-    width: theme.spacing(4),
-    height: theme.spacing(4),
-    backgroundColor: theme.palette.success.main
-  },
-  boxdisplay: {
-    marginLeft: theme.spacing(1),
-    color: theme.palette.text.primary
-  },
-  noPadding: {
-    padding: 0
-  }
-
-}))
 const SwitchonOFF = withStyles({
   switchBase: {
     color: red[500],
@@ -138,7 +114,7 @@ const DisplayPrescriptions = ({ medicine, presID }) => {
   if (medicine === null || reminders === []) return <div>Loading</div>
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>
+      <Paper className={classes.paperCard}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>

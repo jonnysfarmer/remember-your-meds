@@ -1,5 +1,12 @@
 /* Minimal styles to overwrite materialUI items until we can work out how to do it better*/
 
+@import url('https://fonts.googleapis.com/css?family=Nunito:800&display=swap');
+
+.brand {
+  font-family: 'Nunito', sans-serif;
+}
+
+
 
 .MuiListItemText-root span.MuiTypography-root.MuiListItemText-primary.MuiTypography-body1 {
   color: black;

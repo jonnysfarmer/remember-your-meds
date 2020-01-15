@@ -1,8 +1,8 @@
 
-import { green, red } from '@material-ui/core/colors'
-import { makeStyles, createMuiTheme, withStyles } from '@material-ui/core/styles'
+import { green } from '@material-ui/core/colors'
+import { makeStyles, createMuiTheme } from '@material-ui/core/styles'
 // import { palette } from '@material-ui/system'
-import Switch from '@material-ui/core/Switch'
+// import Switch from '@material-ui/core/Switch'
 
 //================================
 // SETTINGS
@@ -22,16 +22,37 @@ const theme = createMuiTheme({
 // STYLES
 //================================
 const useStyles = makeStyles(theme => ({
-  //===== FOR NAV =====
-  iconColor: {
-    color: '#4caf50' //set to be same as theme
-  },
+
+  //===== ROOT/BASE STYLES =====
   root: {
-    display: 'flex',
-    '& > svg': {
-      margin: theme.spacing(2)
-    }
+    flexGrow: 1,
+    margin: theme.spacing(1),
+    width: '100%'
   },
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  paperCard: {
+    padding: theme.spacing(2),
+    margin: 'auto'
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.success.main
+  },
+  boxdisplay: {
+    marginLeft: theme.spacing(1),
+    color: theme.palette.text.primary
+  },
+  noPadding: {
+    padding: 0
+  },
+
+  //===== NAV =====
+
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
@@ -55,74 +76,40 @@ const useStyles = makeStyles(theme => ({
   drawerPaper: {
     width: drawerWidth
   },
+  iconColor: {
+    color: '#4caf50' //set to be same as theme
+  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3)
   },
 
-  
-  //===== FOR PAGES =====
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.success.main
-  },
+  //===== FORMS =====
+
   form: {
     width: '100%', // Fix IE 11 issue.
     margin: theme.spacing(1)
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    color: '#000',
     backgroundColor: theme.palette.success.main,
     '&:hover': {
       backgroundColor: theme.palette.success.dark
     }
   },
-
-    
-  //===== FOR SPECIAL FORMS =====
-  
   reminderFormPaper: {
     marginTop: theme.spacing(0),
     padding: theme.spacing(2)
   },
   reminderInlineField: {
     marginLeft: theme.spacing(1),
-    marginTop: theme.spacing(0.5)    
+    marginTop: theme.spacing(0.5)
   }
-
 }))
-
-
-//================================
-// SWITCH STYLES
-//================================
-const SwitchOnOFF = withStyles({
-  switchBase: {
-    color: red[500],
-    '&$checked': {
-      color: green[500]
-    },
-    '&$checked + $track': {
-      backgroundColor: green[500]
-    },
-    '& + $track': {
-      backgroundColor: red[500]
-    }
-  },
-  checked: {},
-  track: {}
-})(Switch)
-
 
 
 export {
   useStyles,
-  theme,
-  SwitchOnOFF
+  theme
 }

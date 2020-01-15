@@ -7,37 +7,13 @@ import Container from '@material-ui/core/Container'
 import Avatar from '@material-ui/core/Avatar'
 import { makeStyles } from '@material-ui/core/styles'
 import { PrescriptionIcon } from '../styles/icons'
-
+//Material UI our styles/icons
+import { useStyles, theme } from '../styles/styles'
 import axios from 'axios'
 import Auth from '../lib/auth'
 import DisplayPrescriptions from './DisplayPrescriptions'
 
 
-const useStyles = makeStyles(theme => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.success.main
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    margin: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    color: '#000',
-    backgroundColor: theme.palette.success.main,
-    '&:hover': {
-      backgroundColor: theme.palette.success.dark
-    }
-
-  }
-}))
 
 const Prescriptions = (props) => {
 
@@ -67,7 +43,7 @@ const Prescriptions = (props) => {
 
   console.log(errors)
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" className={classes.main}>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
