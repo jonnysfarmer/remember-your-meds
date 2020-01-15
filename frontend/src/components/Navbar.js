@@ -61,7 +61,7 @@ function ResponsiveDrawer(props) {
         </AppBar>
         }
         <nav className={classes.drawer} aria-label="mailbox folders">
-          <Hidden smUp implementation="css">
+          <Hidden mdUp implementation="css">
             <Drawer
               container={container}
               variant="temporary"
@@ -79,7 +79,7 @@ function ResponsiveDrawer(props) {
             </Drawer>
           </Hidden>
           {Auth.isAuthorized() &&
-            <Hidden xsDown implementation="css">
+            <Hidden smDown implementation="css">
               <Drawer
                 classes={{
                   paper: classes.drawerPaper
