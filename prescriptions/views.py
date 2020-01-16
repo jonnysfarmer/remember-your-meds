@@ -5,8 +5,6 @@ from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTIT
 from .models import Medicine, Doctor, Prescription, Reminder
 from .serializers import MedicineSerializer, ReminderSerializer, ReminderPostSerializer, PrescriptionSerializer, PopulatedPrescriptionSerializer, ReminderPutSerializer, PrescriptionPutSerializer
 
-from django.conf import settings                                                                                                                                           
-from django.http import HttpResponse
 
 class MedicineListView(APIView):
 
