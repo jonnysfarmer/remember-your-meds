@@ -36,7 +36,10 @@ const Register = (props) => {
   //===== Create registration
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('/api/register/', registerInfo)
+    const registerLower = { ...registerInfo }
+    registerLower.email = registerLower.email.toLowerCase()
+
+    axios.post('/api/register/', registerLower)
       .then(() => props.history.push('/login'))
       .catch((err) => {
         setErrors(err.response.data)
@@ -110,14 +113,16 @@ const Register = (props) => {
               }}
             />
             <TextField
+              error={err.password_confirmation && true}
               variant="outlined"
               margin="normal"
               required
               fullWidth
               name="password_confirmation"
-              label="Password Confirmation"
+              label={err.password_confirmation ? 'Error' : 'Password Confirmation'}
               type={showPassword ? 'text' : 'password'}
               id="password_confirmation"
+              helperText={err.password_confirmation}
               autoComplete="confirmation-password"
               onChange={(e) => handleChange(e)}
               InputProps={{

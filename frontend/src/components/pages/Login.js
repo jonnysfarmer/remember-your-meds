@@ -37,7 +37,9 @@ const Login = (props) => {
   //===== Log user in
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('/api/login/', loginInfo)
+    const loginLower = { ...loginInfo }
+    loginLower.email = loginLower.email.toLowerCase()
+    axios.post('/api/login/', loginLower)
       .then((resp) => {
         Auth.setToken(resp.data.token)
         props.history.push('/prescriptions')
