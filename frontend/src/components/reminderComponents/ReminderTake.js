@@ -110,7 +110,7 @@ const ReminderTake = (props) => {
                         className={classes.reminderInlineField}
                         id={`take_${ele.id}`}
                         name={`take_${ele.id}`}
-                        type='text'
+                        type='time'
                         variant='outlined'
                         value={moment(ele.reminder_time).format('HH:mm')}
                         onChange={(e) => handleChange(e)}
