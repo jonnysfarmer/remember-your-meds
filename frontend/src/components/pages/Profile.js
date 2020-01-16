@@ -88,28 +88,28 @@ const Profile = (props) => {
             onClick={(e) => handleEdit(e)}
           >
             Edit Profile
-        </Button>
+          </Button>
           <Typography variant="h6" className={classes.inlineTitle}>
             Username
-        </Typography>
+          </Typography>
           <Typography className={classes.inlineText}>
             {user.username}
           </Typography>
           <Typography variant="h6" className={classes.inlineTitle}>
             Email
-        </Typography>
+          </Typography>
           <Typography className={classes.inlineText}>
             {user.email}
           </Typography>
           <Typography variant="h6" className={classes.inlineTitle}>
             Mobile
-        </Typography>
+          </Typography>
           <Typography className={classes.inlineText}>
             {user.mobile ? user.mobile : 'No mobile entered'}
           </Typography>
           <Typography variant="h6" className={classes.inlineTitle}>
             Current Prescriptions
-        </Typography>
+          </Typography>
           <div className={classes.root}>
             {prescriptions ?
               prescriptions.map((ele, i) => {
@@ -135,7 +135,7 @@ const Profile = (props) => {
               <div className={classes.centerText}>
                 <Typography className={classes.inlineText}>
                   You currently have no prescriptions
-              </Typography>
+                </Typography>
                 <Button
                   type="submit"
                   fullWidth
@@ -145,7 +145,7 @@ const Profile = (props) => {
                   onClick={(e) => handleCreate(e)}
                 >
                   Create new prescription
-              </Button>
+                </Button>
               </div>
             }
           </div>

@@ -182,7 +182,7 @@ const EditPrescription = (props) => {
                   onClick={(e) => handleReturn(e)}
                 >
                   Back
-              </Button>
+                </Button>
               </Grid>
               <Grid item xs={6}>
                 <Button
@@ -193,7 +193,7 @@ const EditPrescription = (props) => {
                   className={classes.submitsmall}
                 >
                   Save
-              </Button>
+                </Button>
               </Grid>
             </Grid>
           </ThemeProvider>

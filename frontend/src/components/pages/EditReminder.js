@@ -36,7 +36,6 @@ const EditReminder = (props) => {
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
-
       <ThemeProvider theme={theme}>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
