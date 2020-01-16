@@ -12,6 +12,7 @@ pyjwt = "*"
 psycopg2-binary = "*"
 yagmail = "*"
 keyring = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3.7"
