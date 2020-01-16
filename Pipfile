@@ -13,6 +13,7 @@ psycopg2-binary = "*"
 yagmail = "*"
 keyring = "*"
 django-heroku = "*"
+django-dotenv = "*"
 
 [requires]
 python_version = "3.7"
