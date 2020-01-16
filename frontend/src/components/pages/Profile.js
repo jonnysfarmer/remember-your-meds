@@ -38,7 +38,6 @@ const Profile = (props) => {
       .then((resp) => {
         const data = resp.data
         if (data.length === 0) {
-          console.log('test')
           setPrescriptions('')
         } else {
           setPrescriptions(resp.data)

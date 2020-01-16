@@ -4,7 +4,6 @@ import Auth from '../lib/auth'
 import { useHistory } from 'react-router-dom'
 
 function Logout() {
-  // console.log(props)
   const history = useHistory()
   Auth.logout()
   history.push('/')

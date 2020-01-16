@@ -57,7 +57,6 @@ const ReminderOrder = (props) => {
     const reminderTime = moment(startdate).add(adjustment, 'd').subtract(daysBefore, 'd').format()
     //This sets a reminder for tomorrow if the reminder time is before todays date
     if (reminderTime < startdate) {
-      console.log('before')
       const newData = [...data]
       newData[0].due_time = dueTime
       newData[0].reminder_time = moment().add(1, 'd').format()

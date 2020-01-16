@@ -22,7 +22,6 @@ function updateReminder(data) {
     axios.put(`/api/reminders/${putData.id}/`, putData, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then(resp => console.log(resp.data))
       .catch(error => console.log(error.data))
   } else {
     data.map(e => {
@@ -40,7 +39,6 @@ function updateReminder(data) {
       axios.put(`/api/reminders/${putData.id}/`, putData, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
-        .then(resp => console.log(resp.data))
         .catch(error => console.log(error.data))
     })
     return 'update done'

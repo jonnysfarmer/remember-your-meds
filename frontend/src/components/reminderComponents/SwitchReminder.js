@@ -17,8 +17,6 @@ const SwitchReminder = (e, i, data) => {
   axios.put(`/api/reminders/${id}/`, { 'active': e.target.checked }, {
     headers: { Authorization: `Bearer ${Auth.getToken()}` }
   })
-    //return our new data
-    .then(console.log('reminder status switched'))
     .catch(error => console.log(error))
 
   //return the new state

@@ -111,6 +111,9 @@ These are other ideas that we deprioritised before we began design
 
 ### Bugs
 
+ - on the single prescription page view, we currently cannot show whether the take reminder is active or not as we need to check all 3 take types, but return only one response (ran out of time to fix this)
+ - can't work out how to remove the underline on menu links (text-decoration: none is not clearing them!)
+
 If you find any other bugs let us know!
 
 

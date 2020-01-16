@@ -93,7 +93,7 @@ const Prescription = (props) => {
           {medicine.url && <Typography component="h3" variant="subtitle1" className={classes.inlineLink}>
             <Link href={medicine.url} color="inherit">
               NHS Information
-          </Link>
+            </Link>
           </Typography>}
           <Button
             type="submit"
@@ -104,22 +104,22 @@ const Prescription = (props) => {
             onClick={() => pushEdit()}
           >
             Edit Prescription
-        </Button>
+          </Button>
           <Typography component="h2" variant="h6" >
-            Number of days per prescription
-        </Typography>
+            Medication supply (days)
+          </Typography>
           <Typography className={classes.inlineText}>
             {prescription.number_days_doses}
           </Typography>
           <Typography variant="h6" className={classes.inlineTitle}>
             Repeats until appointment
-        </Typography>
+          </Typography>
           <Typography className={classes.inlineText}>
             {prescription.number_repeats}
           </Typography>
           <Typography variant="h6" className={classes.inlineTitle}>
             Reminders
-        </Typography>
+          </Typography>
           <div className={classes.root}>
             {reminders ?
               reminders.map((ele, i) => {
@@ -166,7 +166,7 @@ const Prescription = (props) => {
                 onClick={(e) => handleReturn(e)}
               >
                 Back
-            </Button>
+              </Button>
             </Grid>
             <Grid item xs={6}>
               <Button
@@ -178,7 +178,7 @@ const Prescription = (props) => {
                 onClick={(e) => handleDelete(e)}
               >
                 Delete
-            </Button>
+              </Button>
             </Grid>
           </Grid>
         </ThemeProvider>

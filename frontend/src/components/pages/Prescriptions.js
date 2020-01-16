@@ -56,7 +56,7 @@ const Prescriptions = (props) => {
             onClick={(e) => handleCreate(e)}
           >
             New Prescription
-        </Button>
+          </Button>
           {data.map((ele, i) => {
             return (
               <DisplayPrescriptions key={i} data={ele} medicine={ele.medicine} presID={ele.id} />
