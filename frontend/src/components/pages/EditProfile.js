@@ -48,7 +48,7 @@ const EditProfile = (props) => {
 
   // return to profile page
   const handleReturn = (e) => {
-    e.preventDefault()  
+    e.preventDefault()
     props.history.push('/profile/')
   }
 
@@ -110,32 +110,34 @@ const EditProfile = (props) => {
                 startAdornment: <InputAdornment position="start">+44</InputAdornment>
               }}
             />
+
+            <Grid container spacing={2} >
+              <Grid item xs={6} className={classes.centeralign} >
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  // color="primary"
+                  className={classes.submitgrey}
+                  onClick={(e) => handleReturn(e)}
+                >
+                  Back
+                </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submitsmall}
+                >
+                  Save
+                </Button>
+
+              </Grid>
+            </Grid>
           </ThemeProvider>
-          <Grid container spacing={2} >
-            <Grid item xs={6} className={classes.centeralign} >
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submitgrey}
-                onClick={(e) => handleReturn(e)}
-              >
-                Back
-              </Button>
-            </Grid>
-            <Grid item xs={6}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submitsmall}
-              >
-                Save
-              </Button>
-            </Grid>
-          </Grid>
         </form>
       </div>
     </Container>

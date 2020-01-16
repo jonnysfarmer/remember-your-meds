@@ -20,8 +20,8 @@ const Prescription = (props) => {
   const [prescription, setPrescription] = useState({})
   const [medicine, setMedicine] = useState({})
   const [reminders, setReminders] = useState('')
-  // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState([])
+  const [takeReminder, setTakeReminder] = useState([])
 
   // PULLS THE INFO, seperates out the medicine and prescription info
   const prescriptionHook = () => {
@@ -45,6 +45,11 @@ const Prescription = (props) => {
       .then((resp) => {
         const data1 = resp.data
         const specific = data1.filter(ele => ele.prescription.id === id)
+        const takeReminderActive = specific.filter(ele => (ele.reminder_type === 'take-am' && ele.active === true) ||
+        (ele.reminder_type === 'take-mid' && ele.active === true) ||
+        (ele.reminder_type === 'take-pm' && ele.active === true))
+        console.log(takeReminderActive)
+        setTakeReminder(takeReminderActive)
         const threeReminders = specific.filter(ele => ele.reminder_type === 'take-am' || ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment')
         setReminders(threeReminders)
 
@@ -130,13 +135,15 @@ const Prescription = (props) => {
                       <Grid item xs={10} className={classes.centeralign} >
                         <Typography component="h2" variant="subtitle2" color="textSecondary"  >
                           {(ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment') ? `${ele.reminder_type}: ` : 'take medicine: '}
-                          {ele.active === false ? <Box component="span" className={ele.active === true ? classes.active : classes.false} > inactive</Box> : ' '}
+                          {((ele.reminder_type === 'order prescription' && ele.active === false) || 
+                          (ele.reminder_type === 'make appointment' && ele.active  === false ) ||
+                          (ele.reminder_type === 'take-am' && ele.active === false && takeReminder.length < 1)
+                          ) ? <Box component="span" className={classes.false} > inactive</Box> : ' '}
                           {((ele.reminder_type === 'order prescription' && ele.active === true) || (ele.reminder_type === 'make appointment' && ele.active === true)) && <Box component="span" className={ele.active === true ? classes.active : classes.false} > {moment(ele.reminder_time).format('DD/MM/YYYY')} </Box>}
 
                           {((ele.reminder_type === 'take-am' && ele.active === true) ||
-                            (ele.reminder_type === 'take-mid' && ele.active === true) ||
-                            (ele.reminder_type === 'take-pm' && ele.active === true))
-                            && <Box component="span" className={ele.active === true ? classes.active : classes.false} >  reminders active </Box>}
+                            (ele.reminder_type === 'take-am' && ele.active === false && takeReminder.length >= 1))
+                            && <Box component="span" className={classes.active} >  reminders active </Box>}
                         </Typography>
                       </Grid>
                       <Grid item>
