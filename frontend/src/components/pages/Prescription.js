@@ -137,8 +137,8 @@ const Prescription = (props) => {
                           {(ele.reminder_type === 'order prescription' || ele.reminder_type === 'make appointment') ? `${ele.reminder_type}: ` : 'take medicine: '}
                           {((ele.reminder_type === 'order prescription' && ele.active === false) || 
                           (ele.reminder_type === 'make appointment' && ele.active  === false ) ||
-                          ele.active === false ||
-                          takeReminder.length < 1 ) ? <Box component="span" className={classes.false} > inactive</Box> : ' '}
+                          (ele.reminder_type === 'take-am' && ele.active === false && takeReminder.length < 1)
+                          ) ? <Box component="span" className={classes.false} > inactive</Box> : ' '}
                           {((ele.reminder_type === 'order prescription' && ele.active === true) || (ele.reminder_type === 'make appointment' && ele.active === true)) && <Box component="span" className={ele.active === true ? classes.active : classes.false} > {moment(ele.reminder_time).format('DD/MM/YYYY')} </Box>}
 
                           {((ele.reminder_type === 'take-am' && ele.active === true) ||
