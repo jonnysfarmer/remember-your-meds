@@ -1,6 +1,5 @@
 # from django.core.management.base import BaseCommand
 # import requests
-# from twilio.rest import Client
 # from django.conf import settings
 
 
