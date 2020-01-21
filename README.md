@@ -105,16 +105,16 @@ You must:
 
 ### Management
 
-<img src="https://github.com/jennikate/remember-your-meds/blob/master/readme-images/trello-board.png?raw=true" width="200px">
+<img src="https://github.com/jonnysfarmer/remember-your-meds/blob/master/readme-images/trello-board.png?raw=true" width="200px">
 
 
 ### Flows
 
-<img src="https://github.com/jennikate/remember-your-meds/blob/master/readme-images/flow-overview.png?raw=true" width="200px"><img src="https://github.com/jennikate/remember-your-meds/blob/master/readme-images/flow-create.png?raw=true" width="200px"><img src="https://github.com/jennikate/remember-your-meds/blob/master/readme-images/flow-remind.png?raw=true" width="200px">
+<img src="https://github.com/jonnysfarmer/remember-your-meds/blob/master/readme-images/flow-overview.png?raw=true" width="200px"><img src="https://github.com/jonnysfarmer/remember-your-meds/blob/master/readme-images/flow-create.png?raw=true" width="200px"><img src="https://github.com/jonnysfarmer/remember-your-meds/blob/master/readme-images/flow-remind.png?raw=true" width="200px">
 
 
 ### Entity Relationship Diagram
-<img src="https://github.com/jennikate/remember-your-meds/blob/master/readme-images/erd.png?raw=true" width="200px">
+<img src="https://github.com/jonnysfarmer/remember-your-meds/blob/master/readme-images/erd.png?raw=true" width="200px">
 
 ----
 
