@@ -1,15 +1,10 @@
 # Take Your Medicine
-
-
-
-
 by [JenniKate Wallace](https://github.com/jennikate), [Jonny Farmer](https://github.com/jonnysfarmer)
 
 ## The product
+<img src="./readme-images/meds.gif" height='400'/>  <img src="./readme-images/meds.png" width="600" height='400'/> 
 
 [View the app](https://rememberyour-meds.herokuapp.com/) | [View the code](https://github.com/jonnysfarmer/remember-your-meds)
-
-
 
 ### Overview
 
@@ -29,6 +24,8 @@ If you'd like to install this locally you will need to
  - run `python manage.py loaddata Fixture.json` to add the medicine names for the autocomplete
 
 ----
+
+
 
 ## The brief
 
