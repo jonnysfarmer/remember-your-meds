@@ -1,4 +1,4 @@
-# App Name
+# Take Your Medicine
 
 using Twilio trial account so have to add number to verified numbers there
 not setting up cron job/tasking system like RabbitMQ which would be needed to schedule the reminders
